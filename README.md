@@ -29,6 +29,22 @@ Open **http://localhost:8501**. Configure Gemini, sign in, save a video and queu
 
 To include the original evidence demo, also run `npm ci` and use `python scripts/run_demo.py`. It requires Node.js 22.13+ and no Gemini key.
 
+## How to use
+
+1. Open **Video workspace** and create an account or sign in.
+2. In **Videos**, paste a public YouTube video or livestream URL and click **Save video**. A short MP4 upload also works.
+3. For a recorded video, choose **Ask / inspect → Ask the agent**. Set Start `10:00`, End `15:00` and Spoiler cutoff `15:00`.
+4. Ask: **“What happened between 10:00 and 15:00? Summarize the key moments.”** The time fields control the interval, even when your question includes times.
+5. Click **Queue job**, then **Jobs / results → Refresh jobs**. Read the recap, follow its timestamps, and approve or reject after checking the source.
+
+For a livestream, first use **Capture a live stream** with the current elapsed broadcast time. Once segments are processed, ask about a captured interval or select **Use the last 15 minutes of processed live coverage**. Earlier uncaptured footage is unavailable.
+
+**Expected result:** a short answer with evidence timestamps, missing-footage notices and a saved review. If there is not enough evidence or the provider cannot process the video, the app says so.
+
+**Behind the scenes:** check your request → queue work → retrieve or inspect footage → select relevant notes → write and check the recap → wait for your review.
+
+[Simple guide: prompt examples, sample output and each background step](docs/how-to-use.md). The same guide is available in the app's **How to use** panel. See [current validation limits](docs/product-status.md) if a video fails.
+
 ## Try one scenario
 
 In the optional **Evidence demo**, choose **Canyon Relay**, enter `00:00` to `15:00`, set the cutoff to `15:00`, and ask **What happened?**
@@ -67,6 +83,7 @@ The evidence workflow passed **40/40** synthetic cases versus **20/40** for the 
 | Document | Purpose |
 |---|---|
 | [Six-page brochure](docs/RaceTime-Copilot-Brochure.pdf) | Problem, audience, workflow, technology, results and next steps |
+| [How to use](docs/how-to-use.md) | Links, time ranges, prompt examples, expected output and background steps |
 | [Learning guide](docs/learning-guide.md) | What the main files do and where to start |
 | [Demo guide](docs/demo-guide.md) | Five-minute walkthrough and import examples |
 | [Week 1–5 map](docs/technology-map.md) | What is implemented and what remains |

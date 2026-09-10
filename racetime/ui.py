@@ -13,6 +13,8 @@ def render():
     svc=service();store=svc.store
     st.title('Ask your race video')
     st.caption('Choose an interval, inspect the evidence, and review the recap.')
+    with st.expander('How to use: links, example questions and what happens next'):
+        st.markdown((Path(__file__).resolve().parents[1]/'docs'/'how-to-use.md').read_text())
     if not configured():st.info('Video analysis needs GEMINI_API_KEY in the project .env file. Setup steps are in docs/setup.md. The evidence demo works without a key.')
     if os.getenv('RACETIME_PUBLIC')=='true' or os.getenv('RACETIME_AUTH_MODE')=='oidc':
         # Public access fails closed until a verified OIDC account is allow-listed.
@@ -79,7 +81,8 @@ def render():
                 start=a.text_input('Start / current live elapsed time',value='00:00')
                 end=b.text_input('End',value='05:00')
                 cutoff=c.text_input('Spoiler cutoff',value='05:00')
-                question=st.text_input('Question',value='What happened?',max_chars=1000)
+                question=st.text_input('Question',value='What happened?',max_chars=1000,help='For example: What happened between 10:00 and 15:00? Set Start and End to match; times in the question do not change those fields.')
+                if action=='Ask the agent' and not latest:st.caption('Example: What happened between 10:00 and 15:00? Set Start to 10:00, End to 15:00 and Spoiler cutoff to 15:00.')
                 if action=='Capture a live stream':st.caption('Capture starts at the current live edge for up to 15 minutes. Enter the broadcast’s current elapsed time as Start. Processing continues in the background; older unrecorded footage is not available automatically.')
                 submit=st.form_submit_button('Queue job',disabled=not configured())
             if submit:

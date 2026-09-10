@@ -1,5 +1,7 @@
 # Video product walkthrough
 
+New to the app? Start with [How to use RaceTime](how-to-use.md) for example questions, sample output and the background steps.
+
 1. Start with the README, configure Gemini and create a local account.
 2. Save a public YouTube URL or a short MP4. Begin with a one-minute interval.
 3. Queue **Ask the agent**, then refresh **Jobs / results**.
