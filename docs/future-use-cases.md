@@ -24,7 +24,7 @@ These are proposed extensions, not features already delivered. The ranking balan
 - **What to add:** connectors for benchmark results, GPU metrics and test logs; run/device identifiers; clock alignment; numerical query tools and links to exact metric samples. Video is optional supporting evidence.
 - **How to prove it:** use controlled runs with known changes and measure whether the system retrieves the correct evidence. Report correlations as hypotheses until an engineer verifies the cause.
 
-**Strongest professional extension:** connects the capstone to Siva’s NVIDIA interview focus. This would require a structured-data layer, not just a different prompt.
+**Strongest professional extension:** brings GPU performance metrics, test logs and video into one evidence timeline. This would require a structured-data layer, not just a different prompt.
 
 ## 3. Lectures, training and technical demonstrations
 
@@ -64,4 +64,3 @@ These are proposed extensions, not features already delivered. The ranking balan
 **Suggested path:** finish real-race validation first, try another endurance sport next, then build a small GPU benchmark-review proof of concept with synthetic or authorized test data.
 
 For technical context, NVIDIA’s [Video Search and Summarization blueprint](https://build.nvidia.com/nvidia/video-search-and-summarization/blueprintcard) also describes customizable video-analysis agents. It is a reference for future exploration; RaceTime currently uses its own Gemini/LangGraph implementation.
-

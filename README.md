@@ -32,7 +32,7 @@ The same idea—ask about a time window and review the evidence—could extend t
 | 4 | Incident review and shift handoffs | Recover decisions, attempted fixes and unresolved issues | Incident records, action tracking and team access |
 | 5 | Conferences, panels and public meetings | Catch up on discussion, agreement and disagreement | Speaker-labelled transcripts, agendas and attribution checks |
 
-**Closest next step:** another endurance sport. **Strongest professional extension:** GPU benchmark review, connecting the project to my NVIDIA interview focus. [Examples, required changes and validation for all five](docs/future-use-cases.md). The same section appears in Streamlit under **Beyond ultra races**.
+**Closest next step:** another endurance sport. **Strongest professional extension:** GPU benchmark review, bringing performance metrics, test logs and video into one evidence timeline. [Examples, required changes and validation for all five](docs/future-use-cases.md). The same section appears in Streamlit under **Beyond ultra races**.
 
 ## Quick start
 
