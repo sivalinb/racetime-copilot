@@ -8,6 +8,10 @@ from demo.client import RaceTimeClient, elapsed, clock
 ROOT = Path(__file__).resolve().parent
 st.set_page_config(page_title='RaceTime Copilot', page_icon='🏃', layout='wide')
 experience = st.sidebar.radio('Workspace', ['Video workspace'] if os.getenv('RACETIME_VIDEO_ONLY')=='true' or os.getenv('RACETIME_PUBLIC')=='true' else ['Evidence demo', 'Video workspace'], key='workspace_mode')
+st.subheader('How to use')
+st.caption('For video or livestream questions, choose Video workspace. Add a link, set the time range, ask your question, then review the result.')
+with st.expander('Open the step-by-step guide and example questions'):
+    st.markdown((ROOT/'docs'/'how-to-use.md').read_text())
 if experience == 'Video workspace':
     from racetime.ui import render
     render()

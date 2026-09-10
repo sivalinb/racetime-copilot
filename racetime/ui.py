@@ -13,8 +13,6 @@ def render():
     svc=service();store=svc.store
     st.title('Ask your race video')
     st.caption('Choose an interval, inspect the evidence, and review the recap.')
-    with st.expander('How to use: links, example questions and what happens next'):
-        st.markdown((Path(__file__).resolve().parents[1]/'docs'/'how-to-use.md').read_text())
     if not configured():st.info('Video analysis needs GEMINI_API_KEY in the project .env file. Setup steps are in docs/setup.md. The evidence demo works without a key.')
     if os.getenv('RACETIME_PUBLIC')=='true' or os.getenv('RACETIME_AUTH_MODE')=='oidc':
         # Public access fails closed until a verified OIDC account is allow-listed.
