@@ -6,6 +6,15 @@ import streamlit as st
 from demo.client import RaceTimeClient, elapsed, clock
 
 ROOT = Path(__file__).resolve().parent
+
+def render_expansion_footer():
+    st.divider()
+    st.subheader('Where RaceTime can go next')
+    st.image(str(ROOT/'public'/'art'/'expansion-footer.png'), caption='Five proposed extensions: sports, GPU test review, learning, incident handoffs and conferences.', width='stretch')
+    st.markdown('**New data sources → Domain tools → Evidence-linked answers → Human review.** Each extension would reuse the time-window workflow and add its own integrations and validation.')
+    st.caption('Future possibilities, not completed features. The scenes and sample screens are illustrative.')
+    st.markdown('[Explore the five use cases and what each needs](https://github.com/sivalinb/racetime-copilot/blob/main/docs/future-use-cases.md).')
+
 st.set_page_config(page_title='RaceTime Copilot', page_icon='🏃', layout='wide')
 experience = st.sidebar.radio('Workspace', ['Video workspace'] if os.getenv('RACETIME_VIDEO_ONLY')=='true' or os.getenv('RACETIME_PUBLIC')=='true' else ['Evidence demo', 'Video workspace'], key='workspace_mode')
 st.subheader('Why I’m building RaceTime')
@@ -43,6 +52,7 @@ with st.expander('Technical architecture: components, data flow and agent decisi
 if experience == 'Video workspace':
     from racetime.ui import render
     render()
+    render_expansion_footer()
     st.stop()
 if 'api' not in st.session_state:
     st.session_state.api = RaceTimeClient()
@@ -60,6 +70,7 @@ try:
 except (ValueError, RuntimeError) as exc:
     st.error(str(exc))
     st.code('python scripts/run_demo.py', language='bash')
+    render_expansion_footer()
     st.stop()
 sources = {s['id']: s for s in workspace['sources']}
 with st.sidebar:
@@ -195,3 +206,5 @@ with learning_tab:
     brochure = ROOT / 'docs/RaceTime-Copilot-Brochure.pdf'
     if brochure.exists():
         st.download_button('Download illustrated brochure', brochure.read_bytes(), brochure.name, mime='application/pdf')
+
+render_expansion_footer()

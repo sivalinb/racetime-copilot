@@ -129,3 +129,13 @@ The evidence workflow passed **40/40** synthetic cases versus **20/40** for the 
 | [Architecture](docs/architecture.md) | Time rules, storage and operating limits |
 
 Public deployment configuration is included, but a host, domain and OIDC credentials are required. Real-video quality needs human-reviewed cases. See [setup](docs/setup.md) and [status](docs/product-status.md) before treating the product as validated.
+
+---
+
+## Where RaceTime can go next
+
+![Five proposed extensions: sports, GPU test review, learning, incident handoffs and conferences](public/art/expansion-footer.png)
+
+**New data sources → Domain tools → Evidence-linked answers → Human review.** Each extension would reuse the time-window workflow and add its own integrations and validation.
+
+*Future possibilities, not completed features. The scenes and sample screens are illustrative.* [Explore all five use cases](docs/future-use-cases.md) · [Open the full-size illustration](public/art/expansion-footer.png).
