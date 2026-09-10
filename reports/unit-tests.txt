@@ -1,0 +1,29 @@
+
+> racetime-copilot@0.1.0 test
+> node --import tsx --test tests/core.test.ts
+
+✔ elapsed time accepts supported forms and rejects invalid seconds (0.517208ms)
+✔ video links reject arbitrary hosts and protocols (0.149209ms)
+✔ VTT imports timestamps, cleans tags, and preserves cue text (1.430875ms)
+✔ SRT imports comma fractions and cue numbering (0.14ms)
+✔ malformed and reversed evidence fails validation (0.942167ms)
+✔ spoiler cutoff rejects impossible requests (0.476584ms)
+✔ cache evicts by serialized bytes and refreshes recency (0.149834ms)
+✔ cache does not return shared mutable objects (0.072541ms)
+✔ expired cache records are not returned (0.082541ms)
+✔ conflicting evidence is shown together without leaking future correction (16.755042ms)
+✔ unknown runner produces insufficient evidence (3.19ms)
+✔ a transient retrieval failure is retried once (3.511375ms)
+✔ source revision invalidates cache and approval is not inherited (2.984875ms)
+✔ instructions embedded in evidence are not executed or included (2.566625ms)
+✔ events only become visible at their availability time (1.991042ms)
+✔ outside coverage fails without generating a recap (0.276792ms)
+✔ an unrelated question does not match on hashed-vector collisions (2.77975ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 463.987666

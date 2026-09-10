@@ -1,0 +1,927 @@
+{
+  "provenance": "Author-created synthetic routing requests. Test wording authored separately from training templates. No external race data.",
+  "train": [
+    {
+      "text": "Summarize what happened at the canyon checkpoint.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Summarize what happened at the ridge climb.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Summarize what happened at the forest section.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Summarize what happened at the finish area.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Summarize what happened at the aid station.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Summarize what happened at this interval.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Give me a recap of the canyon checkpoint.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Give me a recap of the ridge climb.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Give me a recap of the forest section.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Give me a recap of the finish area.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Give me a recap of the aid station.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Give me a recap of this interval.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Catch me up on the canyon checkpoint.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Catch me up on the ridge climb.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Catch me up on the forest section.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Catch me up on the finish area.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Catch me up on the aid station.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Catch me up on this interval.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "What were the key moments around the canyon checkpoint?",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "What were the key moments around the ridge climb?",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "What were the key moments around the forest section?",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "What were the key moments around the finish area?",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "What were the key moments around the aid station?",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "What were the key moments around this interval?",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Provide an overview of the canyon checkpoint.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Provide an overview of the ridge climb.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Provide an overview of the forest section.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Provide an overview of the finish area.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Provide an overview of the aid station.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Provide an overview of this interval.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Tell me the story of the canyon checkpoint.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Tell me the story of the ridge climb.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Tell me the story of the forest section.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Tell me the story of the finish area.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Tell me the story of the aid station.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Tell me the story of this interval.",
+      "label": "recap",
+      "split": "train"
+    },
+    {
+      "text": "Follow Maya Chen around the canyon checkpoint.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Follow Maya Chen around the ridge climb.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Follow Maya Chen around the forest section.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Follow Maya Chen around the finish area.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Follow Maya Chen around the aid station.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Follow Maya Chen around this interval.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Where is runner Lena Ortiz at the canyon checkpoint?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Where is runner Lena Ortiz at the ridge climb?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Where is runner Lena Ortiz at the forest section?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Where is runner Lena Ortiz at the finish area?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Where is runner Lena Ortiz at the aid station?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Where is runner Lena Ortiz at this interval?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Track bib 214 near the canyon checkpoint.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Track bib 214 near the ridge climb.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Track bib 214 near the forest section.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Track bib 214 near the finish area.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Track bib 214 near the aid station.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Track bib 214 near this interval.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Show Maya Chen observations from the canyon checkpoint.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Show Maya Chen observations from the ridge climb.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Show Maya Chen observations from the forest section.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Show Maya Chen observations from the finish area.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Show Maya Chen observations from the aid station.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Show Maya Chen observations from this interval.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Find updates for runner Lena at the canyon checkpoint.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Find updates for runner Lena at the ridge climb.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Find updates for runner Lena at the forest section.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Find updates for runner Lena at the finish area.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Find updates for runner Lena at the aid station.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Find updates for runner Lena at this interval.",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Which clips show bib 214 at the canyon checkpoint?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Which clips show bib 214 at the ridge climb?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Which clips show bib 214 at the forest section?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Which clips show bib 214 at the finish area?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Which clips show bib 214 at the aid station?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Which clips show bib 214 at this interval?",
+      "label": "runner",
+      "split": "train"
+    },
+    {
+      "text": "Verify the lead report at the canyon checkpoint.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Verify the lead report at the ridge climb.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Verify the lead report at the forest section.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Verify the lead report at the finish area.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Verify the lead report at the aid station.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Verify the lead report at this interval.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Do the reports conflict at the canyon checkpoint?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Do the reports conflict at the ridge climb?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Do the reports conflict at the forest section?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Do the reports conflict at the finish area?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Do the reports conflict at the aid station?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Do the reports conflict at this interval?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Check whether the timing claim at the canyon checkpoint is true.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Check whether the timing claim at the ridge climb is true.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Check whether the timing claim at the forest section is true.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Check whether the timing claim at the finish area is true.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Check whether the timing claim at the aid station is true.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Check whether the timing claim at this interval is true.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Can you confirm the commentary from the canyon checkpoint?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Can you confirm the commentary from the ridge climb?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Can you confirm the commentary from the forest section?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Can you confirm the commentary from the finish area?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Can you confirm the commentary from the aid station?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Can you confirm the commentary from this interval?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Is the reported gap at the canyon checkpoint supported?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Is the reported gap at the ridge climb supported?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Is the reported gap at the forest section supported?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Is the reported gap at the finish area supported?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Is the reported gap at the aid station supported?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Is the reported gap at this interval supported?",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Investigate conflicting evidence around the canyon checkpoint.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Investigate conflicting evidence around the ridge climb.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Investigate conflicting evidence around the forest section.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Investigate conflicting evidence around the finish area.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Investigate conflicting evidence around the aid station.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Investigate conflicting evidence around this interval.",
+      "label": "verify",
+      "split": "train"
+    },
+    {
+      "text": "Compare the reports from the canyon checkpoint.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare the reports from the ridge climb.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare the reports from the forest section.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare the reports from the finish area.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare the reports from the aid station.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare the reports from this interval.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "What is the difference between Maya and Lena at the canyon checkpoint?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "What is the difference between Maya and Lena at the ridge climb?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "What is the difference between Maya and Lena at the forest section?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "What is the difference between Maya and Lena at the finish area?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "What is the difference between Maya and Lena at the aid station?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "What is the difference between Maya and Lena at this interval?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Contrast the two camera reports near the canyon checkpoint.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Contrast the two camera reports near the ridge climb.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Contrast the two camera reports near the forest section.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Contrast the two camera reports near the finish area.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Contrast the two camera reports near the aid station.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Contrast the two camera reports near this interval.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare timing versus commentary at the canyon checkpoint.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare timing versus commentary at the ridge climb.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare timing versus commentary at the forest section.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare timing versus commentary at the finish area.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare timing versus commentary at the aid station.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Compare timing versus commentary at this interval.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "How do the two runners differ around the canyon checkpoint?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "How do the two runners differ around the ridge climb?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "How do the two runners differ around the forest section?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "How do the two runners differ around the finish area?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "How do the two runners differ around the aid station?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "How do the two runners differ around this interval?",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Show a side-by-side comparison of the canyon checkpoint.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Show a side-by-side comparison of the ridge climb.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Show a side-by-side comparison of the forest section.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Show a side-by-side comparison of the finish area.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Show a side-by-side comparison of the aid station.",
+      "label": "compare",
+      "split": "train"
+    },
+    {
+      "text": "Show a side-by-side comparison of this interval.",
+      "label": "compare",
+      "split": "train"
+    }
+  ],
+  "test": [
+    {
+      "text": "What happened in these fifteen minutes?",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "Give me the highlights since the broadcast returned.",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "I stepped away; what did I miss?",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "Brief me on the selected video window.",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "Explain the sequence of events in this range.",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "What should I know before rejoining the stream?",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "Make a chronological catch-up for this section.",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "List the important moments from minute ten to twenty.",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "Can I get a short race summary?",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "Recap the last part of the broadcast.",
+      "label": "recap",
+      "split": "test"
+    },
+    {
+      "text": "Any news about bib 42?",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "Find shots featuring Maya Chen.",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "Where did Lena last appear?",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "Only include updates about runner Maya.",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "Track bib 87 through the available footage.",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "I am crewing for Lena; show her sightings.",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "Tell me where runner Chen was seen.",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "Filter this clip for bib 214.",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "Follow Lena rather than the whole field.",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "Show the most recent mention of runner Maya.",
+      "label": "runner",
+      "split": "test"
+    },
+    {
+      "text": "Did that lead change actually happen?",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "The announcer and timing board disagree; which claims conflict?",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "Is the claimed arrival time backed by evidence?",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "Can we trust that gap announcement?",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "Check this claim against the visible timing.",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "Are the two position reports consistent?",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "Flag statements that cannot be confirmed.",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "Was the leader call supported at that moment?",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "Do we have corroboration for this report?",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "Verify whether the graphic contradicts the commentary.",
+      "label": "verify",
+      "split": "test"
+    },
+    {
+      "text": "How did the first half differ from the second?",
+      "label": "compare",
+      "split": "test"
+    },
+    {
+      "text": "Contrast Lena with Maya over this interval.",
+      "label": "compare",
+      "split": "test"
+    },
+    {
+      "text": "Compare the earlier checkpoint with the later one.",
+      "label": "compare",
+      "split": "test"
+    },
+    {
+      "text": "What differs between the visual and spoken accounts?",
+      "label": "compare",
+      "split": "test"
+    },
+    {
+      "text": "Put the two reports next to each other.",
+      "label": "compare",
+      "split": "test"
+    },
+    {
+      "text": "Which changes stand out across both windows?",
+      "label": "compare",
+      "split": "test"
+    },
+    {
+      "text": "Give me the differences between these runners.",
+      "label": "compare",
+      "split": "test"
+    },
+    {
+      "text": "Show timing and commentary side by side.",
+      "label": "compare",
+      "split": "test"
+    },
+    {
+      "text": "Compare those two race sections.",
+      "label": "compare",
+      "split": "test"
+    },
+    {
+      "text": "How does this segment compare with the previous one?",
+      "label": "compare",
+      "split": "test"
+    }
+  ]
+}
