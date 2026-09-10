@@ -86,6 +86,7 @@ The evidence workflow passed **40/40** synthetic cases versus **20/40** for the 
 | [How to use](docs/how-to-use.md) | Links, time ranges, prompt examples, expected output and background steps |
 | [Learning guide](docs/learning-guide.md) | What the main files do and where to start |
 | [Demo guide](docs/demo-guide.md) | Five-minute walkthrough and import examples |
+| [Week 1–5 explained](docs/capstone-learning.md) | Learning, product application, demo evidence and remaining gaps for each week |
 | [Week 1–5 map](docs/technology-map.md) | What is implemented and what remains |
 | [Architecture](docs/architecture.md) | Time rules, storage and operating limits |
 

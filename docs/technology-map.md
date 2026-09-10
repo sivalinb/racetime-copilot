@@ -1,5 +1,7 @@
 # Technology and Week 1–5 map
 
+For a plain-language explanation of each week, read [How RaceTime applies Week 1–5](capstone-learning.md), also available in the app.
+
 Each tool has a product job. The capstone applies the course themes; it does not claim every handout's exact tool sequence.
 
 | Technology | Product use and reason |

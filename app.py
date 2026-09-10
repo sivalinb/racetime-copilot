@@ -12,6 +12,8 @@ st.subheader('How to use')
 st.caption('For video or livestream questions, choose Video workspace. Add a link, set the time range, ask your question, then review the result.')
 with st.expander('Open the step-by-step guide and example questions'):
     st.markdown((ROOT/'docs'/'how-to-use.md').read_text())
+with st.expander('Week 1–5 learning map: concepts, product features and proof', expanded=False):
+    st.markdown((ROOT/'docs'/'capstone-learning.md').read_text())
 if experience == 'Video workspace':
     from racetime.ui import render
     render()
@@ -158,11 +160,7 @@ with history_tab:
             st.download_button('Download saved run', json.dumps(old, indent=2), f"racetime-{old['id']}.json", mime='application/json', key=f"download-{old['id']}")
 with learning_tab:
     st.subheader('Five weeks, one product problem')
-    st.markdown('''1. **Working product:** Streamlit local interface over the shared TypeScript API and D1 store.
-2. **Evidence retrieval:** validated cue ingestion, lexical/hashed-vector ranking, timestamps, insufficiency and freshness.
-3. **Orchestration:** LangGraph state, conditional retry, related-claim checks and stored human review.
-4. **Evaluation:** 40 synthetic evidence cases, baseline delta, local traces, latency and cache visibility.
-5. **Specialization:** a separate PyTorch/PEFT LoRA intent-routing experiment, with held-out metrics and merge/inference checks.''')
+    st.markdown((ROOT/'docs'/'capstone-learning.md').read_text())
     for filename, label in [('workflow-evaluation.json', 'Evidence evaluation'), ('router-evaluation.json', 'LoRA routing evaluation')]:
         report = json.loads((ROOT / 'reports' / filename).read_text())
         with st.expander(label):
