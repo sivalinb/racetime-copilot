@@ -2,10 +2,6 @@
 
 > Catch up on a missed race interval with timestamped evidence and no future spoilers.
 
-Built by Siva Babu, an ultrarunner, race organizer and crew member, for an agentic AI capstone.
-
-![RaceTime Copilot](public/art/overview.png)
-
 ## Why I’m building this
 
 ![Siva’s illustrated founder story: living the sport, missing a long broadcast during sleep or work, and catching up with RaceTime](public/art/founder-story.png)
