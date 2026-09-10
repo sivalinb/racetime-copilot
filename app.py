@@ -15,13 +15,18 @@ with st.expander('Open the step-by-step guide and example questions'):
 with st.expander('Week 1–5 learning map: concepts, product features and proof', expanded=False):
     st.markdown((ROOT/'docs'/'capstone-learning.md').read_text())
 with st.expander('Technical architecture: components, data flow and agent decisions', expanded=False):
-    st.caption('Blue: application rules · Amber: model operations · Green: review and results · Red: blocked or unverified. Download an SVG to zoom in without losing detail.')
-    system_tab, decision_tab = st.tabs(['System architecture', 'Question lifecycle'])
+    st.caption('Follow a race question through the illustrated overview, then explore the detailed components and decisions. Use the image fullscreen control or download a copy to zoom in.')
+    illustrated_tab, system_tab, decision_tab = st.tabs(['Illustrated overview', 'System architecture', 'Question lifecycle'])
+    with illustrated_tab:
+        illustration = ROOT/'public'/'architecture'/'racetime-illustrated-architecture.png'
+        st.image(str(illustration), caption='Illustrated architecture: input and queue → constrained agent → evidence and checks → human review. Sample race events are illustrative.', width='stretch')
+        st.download_button('Download illustrated architecture (PNG)', illustration.read_bytes(), file_name=illustration.name, mime='image/png', key='illustrated_architecture')
     for tab, filename, label in [
         (system_tab, 'racetime-system-architecture.svg', 'System architecture'),
         (decision_tab, 'racetime-decision-flow.svg', 'Question lifecycle'),
     ]:
         with tab:
+            st.caption('Engineering plate: blue = application rules; amber = model operations; green = review/results; red = blocked or unverified.')
             diagram = ROOT/'public'/'architecture'/filename
             st.image(str(diagram), caption=label, width='stretch')
             st.download_button('Download ' + label.lower() + ' (SVG)', diagram.read_bytes(), file_name=filename, mime='image/svg+xml', key=filename)

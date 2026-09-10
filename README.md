@@ -69,6 +69,10 @@ The video workspace uses a bounded Gemini planner, semantic retrieval, cited sum
 
 ## Architecture
 
+![Illustrated architecture: race video and job queue, constrained LangGraph agent, evidence retrieval and human review](public/architecture/racetime-illustrated-architecture.png)
+
+Follow a race question through this illustrated overview, inspired by [CryoWatch's illustrated workflow](https://github.com/archanajalamadugu/CryoWatch). The example race events are illustrative. [Open the full-size image](public/architecture/racetime-illustrated-architecture.png).
+
 Two technical views show the running components and the decisions behind a recap. Blue marks application rules, amber model operations, green human review and red blocked or unverified paths.
 
 ![System architecture: Streamlit, worker, LangGraph, Gemini, persistence and separate capstone components](public/architecture/racetime-system-architecture.svg)

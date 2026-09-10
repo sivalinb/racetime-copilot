@@ -1,5 +1,13 @@
 # Architecture
 
+## Illustrated overview
+
+![How a race question runs](../public/architecture/racetime-illustrated-architecture.png)
+
+[Open full-size illustration](../public/architecture/racetime-illustrated-architecture.png). Read left to right: input and queue → constrained agent → evidence and checks → human review. The laptop, decision trail, evidence store and review desk illustrate the local product. Sample race events are illustrative, not measured results. The separate lab and observability band shows supporting capstone work.
+
+This is the first tab in Streamlit's **Technical architecture** panel. The original engineering plates remain in the next two tabs. The hand-drawn presentation is inspired by [CryoWatch's illustrated workflow](https://github.com/archanajalamadugu/CryoWatch). RaceTime artwork was created with the built-in image-generation tool; [generation prompt](architecture-image-prompt.md).
+
 ## Engineering plates
 
 These diagrams describe the implementation and validation status on **10 September 2026**. Blue marks application rules, amber model operations, green human review and results, and red blocked or unverified paths. Dashed connectors indicate conditional paths; labelled dashed boxes group components.
