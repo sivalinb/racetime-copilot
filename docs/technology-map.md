@@ -1,41 +1,32 @@
 # Technology and Week 1–5 map
 
-Each technology has a job in the product. This is an adapted capstone, not a claim that every handout's exact tool sequence is finished.
+Each tool has a product job. The capstone applies the course themes; it does not claim every handout's exact tool sequence.
 
-## Technology → product job
-
-| Technology | Why RaceTime uses it |
+| Technology | Product use and reason |
 |---|---|
-| Streamlit + requests | A simple local screen with a separate backend session for each user. |
-| TypeScript + Zod | Shared data contracts and validation of time ranges and imports. |
-| VTT / SRT / JSON | Bring captions, timing records and visual observations into one evidence format. |
-| Lexical ranking + hashed vectors | Retrieve relevant observations reproducibly without a provider key. |
-| LangGraph | Named workflow steps, conditional retry and an inspectable trace. |
-| D1 / SQLite | Save imported evidence, recaps and human review decisions. |
-| Byte-weighted LRU | Reuse stable requests within a memory budget; invalidate on source updates. |
-| Node test runner + Streamlit AppTest | Check evidence rules and the complete local user flow. |
-| PyTorch + Transformers + PEFT | Run the separate BERT-tiny LoRA intent-routing experiment. |
-| scikit-learn | Measure classifier accuracy, F1 and confusion by intent. |
-| React + shadcn + WebMCP | Optional browser interface and bounded browser-agent recap action. |
-| LangSmith | Optional external tracing configuration; local traces are the verified path. |
-| Gemini | Planned video-to-observation adapter; not connected. |
+| Streamlit | Simple local account, video, question, review and evaluation screens. |
+| Gemini + Pydantic | Convert video into bounded observations; validate timestamps and citations; generate and check a readable recap. |
+| Gemini Embedding 2 | Learned vectors retrieve evidence relevant to the user's question. |
+| Python LangGraph | Bounded model decisions and actual durable human interrupt/resume. |
+| SQLite | Persistent accounts, leased jobs, observations, vectors, checkpoints and usage budgets. |
+| FFmpeg + yt-dlp | Validate uploaded media and capture ordinary public live streams into bounded segments. |
+| LangSmith | Optional external graph traces; local traces remain available when its quota is exhausted. |
+| TypeScript + Zod + D1 | Original key-free evidence API with validated imports and session-scoped persistence. |
+| VTT/SRT/JSON + lexical/hashed ranking | Reproducible evidence-demo ingestion and retrieval without an API key. |
+| Byte-weighted LRU | Bound evidence-demo memory and invalidate results when source revisions change. |
+| unittest + Node tests + Streamlit AppTest | Check isolation, restart recovery, time rules, provider contracts and user workflows. |
+| PyTorch + Transformers + PEFT + scikit-learn | Separate LoRA intent-router training, evaluation, merge and inference experiment. |
+| Docker + Caddy + OIDC | Prepared HTTPS hosting path with persistent storage and allow-listed sign-in; local scope comes first. |
+| React + shadcn + WebMCP | Optional browser interface to the original evidence API. |
 
-## Course coverage
-
-| Week | Working implementation | Remaining work |
+| Week | Applied learning | Remaining validation |
 |---|---|---|
-| 1: working app | Streamlit controls, imports, saved review and history | Real-user feedback |
-| 2: retrieval | Cue ingestion, ranking, timestamps, time boundaries and insufficient-evidence responses | Learned embeddings, LLM synthesis and real-video grounding |
-| 3: orchestration | LangGraph state, conditional retry, related-claim checks and human review | Model-driven planning and durable graph pause/resume |
-| 4: evaluation | 40 synthetic cases, baseline comparison, local traces, latency and cache visibility | Independent labels, real-race cases and external LangSmith verification |
-| 5: specialization | LoRA training, held-out comparison, adapter merge and inference check | Exact Qwen3 / LLaMA Factory workflow; current experiment uses BERT-tiny |
+| 1: app | Streamlit workflow, accounts, persistence and background processing | Race-fan usability feedback |
+| 2: retrieval | Bounded video ingestion, learned embeddings, citations and generated summaries | Provider video reliability and independent factual/timestamp labels |
+| 3: orchestration | Legal model-selected actions, retries, budgets, checkpointed human review | Real planner usefulness across reviewed cases |
+| 4: evaluation | Synthetic baseline comparison, restart/isolation tests, local traces and real-review UI | Human-reviewed race cases and external LangSmith quota |
+| 5: specialization | BERT-tiny LoRA, held-out comparison, merge and inference check | Exact optional Qwen3/LLaMA Factory exercise remains separate |
 
-## Measured results
+The original evidence evaluation is **40/40**, versus **20/40** for naive overlap. The separate LoRA lab reached **70%**, versus **52.5%** for a frozen encoder with a trained head, on 144 training and 40 held-out authored examples. These synthetic results do not establish real-video quality. The trained classifier is not deployed.
 
-- Evidence evaluation: **40/40**, versus **20/40** for the naive overlap baseline.
-- Unit tests: **17 passed**. Streamlit and API integration flows also passed.
-- LoRA experiment: **70%** held-out accuracy, versus **52.5%** for the frozen encoder with a trained head; 144 training and 40 held-out authored examples. The app keeps its rule router.
-
-All datasets above are synthetic. These scores do not measure real-video understanding. See [workflow results](../reports/workflow-evaluation.json), [router results](../reports/router-evaluation.json), [merge check](../reports/router-smoke.json) and [verification](../reports/verification.md).
-
-The race problem comes from Siva's ultramarathon and organizing experience. Time boundaries, traces, cache behavior and explicit uncertainty connect it to his observability and systems background.
+Siva's race experience motivates the problem. Time boundaries, traces, bounded memory and explicit failure connect it to his observability and systems background. Read [verification](../reports/verification.md) and [current status](product-status.md) before presenting validation claims.

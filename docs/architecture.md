@@ -2,39 +2,39 @@
 
 ```mermaid
 flowchart LR
-  UI[Streamlit app.py] --> API[Validated TypeScript API]
-  API --> Cache[Weighted LRU]
-  API --> DB[(Local D1)]
-  Cache --> Graph[LangGraph]
-  Graph --> Retrieve[Retrieve eligible evidence]
-  Retrieve --> Check[Check related claims]
-  Check --> Result[Extractive recap and trace]
-  Result --> DB
-  DB --> Review[Human review and export]
+  UI[Streamlit] --> Queue[(SQLite accounts and jobs)]
+  Queue --> Worker[Background worker]
+  Worker --> Graph[LangGraph planner]
+  Graph --> Video[Gemini video inspection]
+  Video --> Evidence[(Observations and learned vectors)]
+  Graph --> Evidence
+  Graph --> Summary[Cited summary and grounding check]
+  Summary --> Pause[(Durable review checkpoint)]
+  Pause --> UI
 ```
 
-The launcher starts Streamlit on port 8501 and reuses or starts the backend on port 3000. The optional React interface uses the same API.
+`python scripts/run_product.py` starts the video workspace and worker on localhost:8501. It needs Python and a Gemini key. `run_demo.py` also includes the original TypeScript evidence API on port 3000 and the key-free fictional demo. The optional React screen uses that API.
 
-## Time rules
+## Video workflow
 
-Times are seconds from video start. A complete observation must fit inside the requested interval, end at or before the spoiler cutoff, and have become available by that cutoff. Partial cues are excluded. Declared coverage can still contain gaps.
+A job first retrieves observations. A cold recorded source is inspected within the requested interval. Gemini then chooses from the permitted inspect, summarize or clarify actions; the graph limits iterations and records fallbacks. Learned 768-dimensional embeddings rank observations. A separate Gemini call checks generated sentences against their cited observations. Rejected generation falls back to clearly labelled extracts.
 
-Live append adds observations with unique IDs and the current revision. A successful update advances the revision and makes previous cache keys obsolete. Automatic live polling is not implemented.
+The agent pauses at a real LangGraph interrupt. SQLite checkpoints allow an account owner to approve or reject after a process restart. Approval records the user's decision; it does not prove factual accuracy.
 
-## Evidence rules
+## Time and coverage
 
-Ranking combines lexical matches with deterministic hashed vectors. These are not learned semantic embeddings. Conflicts require explicit `claimKey` and `claimValue` annotations; the app does not discover every disagreement in arbitrary prose. A related conflicting claim can be included even when it concerns another runner, but must still satisfy the time rules.
+A complete observation must fit inside the requested interval and have become available by the spoiler cutoff. Gemini receives bounded video intervals, sampled at one frame per second. Sampling can miss brief events, and provider timestamp or factual errors still require review. Processed windows, missing coverage and provider limitations are shown with results.
 
-The workflow has one bounded retry. A simple pattern filter excludes obvious source instructions; it is not a complete security classifier. No imported text is executed or sent to an LLM in this build.
+Live capture uses public YouTube access through yt-dlp and FFmpeg. It captures consecutive 60-second segments while processing completed ones. Sessions are limited to 15 minutes. The user supplies the current elapsed broadcast time; network delay affects alignment. Interrupted live jobs require a fresh time origin. Uncaptured past footage is unavailable.
 
-## Storage and review
+## Persistence and limits
 
-Local D1 stores sources and runs. A random session cookie scopes each workspace. Streamlit retains it in a per-user Python session across reruns; a full refresh or restart may lose access to that session. React and Streamlit use separate sessions. Production accounts and recovery are not implemented.
+Local accounts use salted PBKDF2 password hashes and owner-scoped queries. Jobs, observations, usage and checkpoints persist under ignored `.runtime/`. Recorded jobs have leases and bounded restart recovery; cancellation is checked between calls. Provider calls have a 120-second timeout and one retry for transient service errors. Defaults are three active jobs per account, 32 generation/embedding calls per job, 120 calls per account per day and 500 MB retained uploads per account. A single upload is limited to 100 MB. Small MP4s use inline input; larger files use Google's Files API.
 
-The cache allows 500 KB of serialized result bytes and a five-minute lifetime. Keys include the source revision and full question. A reused result gets a new run ID and pending review. The app retains 100 runs per session and shows the latest 20.
+SQLite is intended for this single-host local product. The prepared public container requires OIDC with verified, allow-listed emails. Container build, hosted sign-in and public operation still need validation.
 
-Approval records a decision on a completed recap. It is not a durable LangGraph pause/resume operation.
+## Evidence demo and specialization
 
-## Next integration
+The original TypeScript workflow uses Zod contracts, VTT/SRT/JSON imports, lexical ranking and deterministic hashed vectors. Its D1 store and byte-weighted LRU remain separate from the video workspace. The cache holds 500 KB of serialized results for five minutes and includes source revision in its key. Manual live append invalidates old revisions. Its review records are ordinary saved decisions, unlike the video workspace's graph checkpoint.
 
-Gemini would produce timestamped observations before ingestion. Validate those observations and test them against human-reviewed video intervals before adding automatic livestream analysis. Local traces work now; external LangSmith traces and public hosting have not been verified.
+The BERT-tiny LoRA lab is a separate experiment, not the production planner. Local traces work without LangSmith; external traces need an account with available quota. See [status](product-status.md) for measured validation and blockers.

@@ -1,0 +1,7 @@
+test_account_and_video_queue (__main__.VideoUI.test_account_and_video_queue) ... 2026-09-10 11:07:01.296 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.229s
+
+OK

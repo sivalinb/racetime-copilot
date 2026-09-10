@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile
+    restart: unless-stopped
+    env_file: ../.env
+    environment:
+      RACETIME_PUBLIC: 'true'
+      RACETIME_AUTH_MODE: oidc
+      RACETIME_DATA_DIR: /data
+    volumes:
+      - racetime-data:/data
+      - ../.streamlit/secrets.toml:/app/.streamlit/secrets.toml:ro
+    expose:
+      - '8501'
+  proxy:
+    image: caddy:2
+    restart: unless-stopped
+    environment:
+      RACETIME_DOMAIN: ${RACETIME_DOMAIN:?Set RACETIME_DOMAIN to your domain}
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+    depends_on:
+      - app
+volumes:
+  racetime-data:
+  caddy-data:

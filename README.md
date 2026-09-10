@@ -12,25 +12,26 @@ You miss 15 minutes of a long race broadcast. Finding the important moments mean
 
 RaceTime lets you choose an interval, ask what happened, and inspect the source observations behind the recap.
 
-**Today:** it works with imported captions and observations. Gemini is deferred; a YouTube link alone does not analyze a video. The included race is fictional.
+**Two workspaces:** the video product connects Gemini to public YouTube URLs or uploaded videos; the evidence demo works without a key using fictional race observations. See [implementation and validation status](docs/product-status.md).
 
 ## Quick start
 
-Requires Python 3.11+ and Node.js 22.13+.
+Requires Python 3.11+ for the video workspace.
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-npm ci
-python scripts/run_demo.py
+python scripts/run_product.py
 ```
 
-Open **http://localhost:8501**. No API key is needed. The launcher starts Streamlit and the local backend. Stop with Ctrl+C.
+Open **http://localhost:8501**. Configure Gemini, sign in, save a video and queue an interval question. [API key and account setup](docs/setup.md). The worker continues processing while you use the app; review results under Jobs / results.
+
+To include the original evidence demo, also run `npm ci` and use `python scripts/run_demo.py`. It requires Node.js 22.13+ and no Gemini key.
 
 ## Try one scenario
 
-Choose **Canyon Relay**, enter `00:00` to `15:00`, set the cutoff to `15:00`, and ask **What happened?**
+In the optional **Evidence demo**, choose **Canyon Relay**, enter `00:00` to `15:00`, set the cutoff to `15:00`, and ask **What happened?**
 
 Two ridge reports disagree. RaceTime shows both, flags the conflict, and excludes the later timing update. Inspect the trace, approve or reject the recap, and export it.
 
@@ -45,15 +46,16 @@ Two ridge reports disagree. RaceTime shows both, flags the conflict, and exclude
 ## How it works
 
 ```text
-Import captions/observations → choose interval → retrieve → check → recap → human review
+Video → bounded inspection → semantic retrieval → cited recap → durable human review
 ```
 
-Streamlit displays the result. A TypeScript LangGraph workflow retrieves and checks evidence. Local D1 stores sources and reviews; a byte-weighted LRU reuses matching requests. The workflow currently uses rules and extractive text, with no model-driven planning.
+The video workspace uses a bounded Gemini planner, semantic retrieval, cited summaries, SQLite jobs and a durable LangGraph review checkpoint. Continuous live capture processes completed segments with explicit coverage. The original TypeScript evidence demo remains available with its D1 store and weighted LRU.
 
 ## Check it
 
 ```bash
-npm test                     # 17 unit tests
+python -m unittest discover -s tests -p product_test.py
+npm test                     # original 17 unit tests
 npm run eval                 # 40 synthetic evidence cases
 python tests/streamlit_smoke.py  # with the local demo running
 ```
@@ -70,4 +72,4 @@ The evidence workflow passed **40/40** synthetic cases versus **20/40** for the 
 | [Week 1–5 map](docs/technology-map.md) | What is implemented and what remains |
 | [Architecture](docs/architecture.md) | Time rules, storage and operating limits |
 
-Automatic livestream ingestion and Gemini analysis remain future work. This is a local prototype; a full browser refresh may start a new session. The optional React interface is at port 3000 and has a separate session.
+Public deployment configuration is included, but a host, domain and OIDC credentials are required. Real-video quality needs human-reviewed cases. See [setup](docs/setup.md) and [status](docs/product-status.md) before treating the product as validated.

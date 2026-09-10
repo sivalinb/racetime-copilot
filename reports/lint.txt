@@ -1,3 +1,4 @@
 
-> racetime-copilot@0.1.0 lint
-> oxlint
+> racetime-copilot@0.1.0 check
+> tsc --noEmit
+

@@ -1,10 +1,20 @@
+# Video product walkthrough
+
+1. Start with the README, configure Gemini and create a local account.
+2. Save a public YouTube URL or a short MP4. Begin with a one-minute interval.
+3. Queue **Ask the agent**, then refresh **Jobs / results**.
+4. Inspect citations, coverage gaps, provider limitations and the graph trace. Approve or reject after checking the footage.
+5. In **Evaluation**, record independently watched facts and summary errors. Never treat model observations as human ground truth.
+
+If provider video processing fails, show the explicit error and use the evidence-demo walkthrough below. Generation and embeddings alone do not establish video integration.
+
 # Five-minute demo
 
 Follow the README setup, run `python scripts/run_demo.py`, and open **http://localhost:8501**. Use the Streamlit tabs: Recap, Import / live append, History & traces, and Capstone learning.
 
 1. **Problem (30 sec):** "I follow long races. If I miss a few minutes, I want the story for that interval without future spoilers."
 2. **Catch-up (60 sec):** Select the fictional demo, `00:00`–`15:00`, cutoff `15:00`, "What happened?". Show E05/E06 disagree and E09 is absent.
-3. **Evidence (45 sec):** Explain that these are fictional fixture observations. A YouTube URL on an imported source adds timestamp playback links; URL-only video understanding is deferred.
+3. **Evidence (45 sec):** Explain that these are fictional fixture observations. A YouTube URL on an imported source adds timestamp playback links; For Gemini analysis use the separate Video workspace; provider validation limits are in product-status.md.
 4. **Operations (45 sec):** Enable one simulated retrieval failure and run. Inspect retry/verification traces. Repeat the same request to show the cache. Approve or reject and inspect history.
 5. **Live update (60 sec):** Import the JSON below as a live source with duration `30:00`, available start `00:00`, end `15:00`. Append a new ID later with a larger coverage end. New recaps use the next revision.
 6. **Measured learning (60 sec):** Show 40-case evaluation and LoRA results. Explain the small synthetic dataset and why 70% held-out router accuracy does not justify deploying that classifier.

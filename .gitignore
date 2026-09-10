@@ -48,3 +48,5 @@ training/cache/
 reports/training.log
 *.tsbuildinfo
 reports/*.log
+.runtime/
+.streamlit/secrets.toml

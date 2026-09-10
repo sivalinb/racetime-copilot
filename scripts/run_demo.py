@@ -34,6 +34,7 @@ def occupied(port):
 def main():
     owned_backend = None
     frontend = None
+    worker = None
     os.chdir(ROOT)
     if occupied(8501):
         raise SystemExit('Port 8501 is already in use. Stop the existing Streamlit demo first.')
@@ -51,13 +52,16 @@ def main():
                     raise SystemExit('Backend did not start. Inspect its output above.')
                 time.sleep(0.5)
         env = {**os.environ, 'RACETIME_API_URL': BASE}
+        worker = subprocess.Popen([sys.executable, '-m', 'racetime.worker'], cwd=ROOT, env=env)
         print('RaceTime Streamlit demo: http://localhost:8501', flush=True)
         frontend = subprocess.Popen([sys.executable, '-m', 'streamlit', 'run', 'app.py', '--server.address', '127.0.0.1', '--server.port', '8501', '--server.headless', 'true', '--browser.gatherUsageStats', 'false'], cwd=ROOT, env=env)
-        frontend.wait()
+        while frontend.poll() is None:
+            if worker.poll() is not None:raise SystemExit('The video worker stopped. Restart the launcher to resume recorded jobs.')
+            time.sleep(1)
     except KeyboardInterrupt:
         pass
     finally:
-        for process in [frontend, owned_backend]:
+        for process in [frontend, worker, owned_backend]:
             if process is not None and process.poll() is None:
                 process.terminate()
                 try:

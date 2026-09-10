@@ -1,11 +1,17 @@
 """RaceTime's primary local demo. All evidence decisions use the shared API."""
 import json
+import os
 from pathlib import Path
 import streamlit as st
 from demo.client import RaceTimeClient, elapsed, clock
 
 ROOT = Path(__file__).resolve().parent
 st.set_page_config(page_title='RaceTime Copilot', page_icon='🏃', layout='wide')
+experience = st.sidebar.radio('Workspace', ['Video workspace'] if os.getenv('RACETIME_VIDEO_ONLY')=='true' or os.getenv('RACETIME_PUBLIC')=='true' else ['Evidence demo', 'Video workspace'], key='workspace_mode')
+if experience == 'Video workspace':
+    from racetime.ui import render
+    render()
+    st.stop()
 if 'api' not in st.session_state:
     st.session_state.api = RaceTimeClient()
 api = st.session_state.api
@@ -16,7 +22,7 @@ with left:
     st.write('Catch up on any available race interval. Follow the evidence, inspect conflicting reports, and keep your spoiler boundary.')
 with right:
     st.image(str(ROOT / 'public/art/overview.png'), width='stretch')
-st.info('Evidence mode: import timestamped captions or observations. Gemini video analysis is deferred. All Canyon Relay demo events are fictional.')
+st.info('Evidence mode: import timestamped captions or observations. Use Video workspace for Gemini analysis. All Canyon Relay demo events are fictional.')
 try:
     workspace = api.call('workspace')
 except (ValueError, RuntimeError) as exc:
@@ -157,7 +163,7 @@ with learning_tab:
         report = json.loads((ROOT / 'reports' / filename).read_text())
         with st.expander(label):
             st.json({k: v for k, v in report.items() if k not in {'cases', 'predictions'}})
-    st.caption('Learned semantic embeddings, Gemini video analysis, automatic live ingestion, external LangSmith verification and independently reviewed real-race tests remain future work. The LoRA lab adapts the technique using BERT-tiny, rather than the handout’s exact Qwen3/LLaMA Factory sequence.')
+    st.caption('Video workspace adds Gemini analysis, learned embeddings, live capture jobs and durable review. Real-race accuracy and active-stream validation still need reviewed cases; external tracing depends on LangSmith quota. The LoRA lab adapts the technique using BERT-tiny, rather than the handout’s exact Qwen3/LLaMA Factory sequence.')
     brochure = ROOT / 'docs/RaceTime-Copilot-Brochure.pdf'
     if brochure.exists():
         st.download_button('Download illustrated brochure', brochure.read_bytes(), brochure.name, mime='application/pdf')

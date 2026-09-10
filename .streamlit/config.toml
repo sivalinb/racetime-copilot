@@ -5,6 +5,6 @@ secondaryBackgroundColor = "#e9edf7"
 textColor = "#16223b"
 font = "sans serif"
 [server]
-maxUploadSize = 2
+maxUploadSize = 100
 [browser]
 gatherUsageStats = false

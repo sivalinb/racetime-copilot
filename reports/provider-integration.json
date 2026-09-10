@@ -1,0 +1,111 @@
+{
+  "status": "awaiting_review",
+  "error": null,
+  "result": {
+    "question": "Describe the visible colors and when they change.",
+    "start": 0,
+    "end": 6,
+    "as_of": 6,
+    "coverage": [
+      [
+        0.0,
+        6.0
+      ]
+    ],
+    "gaps": [],
+    "limitations": [
+      "No audio is present in the video."
+    ],
+    "selected": [
+      {
+        "start": 0.0,
+        "end": 3.0,
+        "text": "A solid red screen is displayed.",
+        "kind": "visual",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 3.0,
+        "provenance": "gemini_video",
+        "id": "V3517c7fa9edb4961"
+      },
+      {
+        "start": 3.0,
+        "end": 6.0,
+        "text": "A solid blue screen is displayed.",
+        "kind": "visual",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 6.0,
+        "provenance": "gemini_video",
+        "id": "Vc833eed8591a7e39"
+      }
+    ],
+    "action": "summarize",
+    "iterations": 3,
+    "retrieved": true,
+    "inspected": true,
+    "narrative": {
+      "sentences": [
+        {
+          "text": "A solid red screen is displayed from the start of the video until 3.0 seconds.",
+          "evidence_ids": [
+            "V3517c7fa9edb4961"
+          ]
+        },
+        {
+          "text": "The screen then changes to solid blue from 3.0 to 6.0 seconds.",
+          "evidence_ids": [
+            "Vc833eed8591a7e39"
+          ]
+        }
+      ]
+    },
+    "trace": [
+      {
+        "step": "plan",
+        "mode": "rule",
+        "action": "retrieve",
+        "reason": "Only legal action for the current evidence and budget."
+      },
+      {
+        "step": "retrieve",
+        "mode": "semantic",
+        "count": 0
+      },
+      {
+        "step": "plan",
+        "mode": "rule",
+        "action": "inspect",
+        "reason": "Only legal action for the current evidence and budget."
+      },
+      {
+        "step": "inspect",
+        "start": 0,
+        "end": 6
+      },
+      {
+        "step": "retrieve",
+        "mode": "semantic",
+        "count": 2
+      },
+      {
+        "step": "plan",
+        "mode": "llm",
+        "action": "summarize",
+        "reason": "The evidence shows a solid red screen from 0.0 to 3.0 seconds, which then changes to a solid blue screen from 3.0 to 6.0 seconds."
+      },
+      {
+        "step": "summarize",
+        "mode": "generated_verified"
+      }
+    ]
+  },
+  "scope": "Real inline video, extraction, embedding and planner on synthetic color video. Not race accuracy.",
+  "restart_review": {
+    "status": "completed",
+    "decision": "rejected",
+    "reason": "Integration test only; not a human factual approval."
+  }
+}

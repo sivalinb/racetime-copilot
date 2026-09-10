@@ -1,0 +1,12 @@
+.git
+.env*
+.streamlit/secrets.toml
+.runtime
+.venv
+node_modules
+.wrangler
+dist
+training/checkpoints
+training/merged
+training/cache
+reports/*.log
