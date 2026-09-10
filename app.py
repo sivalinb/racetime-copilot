@@ -15,6 +15,8 @@ with st.expander('Meet Siva: the story behind RaceTime Copilot', expanded=False)
     st.image(str(founder_art), caption='An illustrated founder story, based on Siva’s photo. Scenes and app screen are illustrative.', width='stretch')
     st.markdown((ROOT/'docs'/'founder-story.md').read_text().replace('(product-status.md)', '(https://github.com/sivalinb/racetime-copilot/blob/main/docs/product-status.md)'))
     st.download_button('Download founder story illustration', founder_art.read_bytes(), file_name='racetime-founder-story.png', mime='image/png', key='founder_story_download')
+with st.expander('Beyond ultra races: top 5 future use cases', expanded=False):
+    st.markdown((ROOT/'docs'/'future-use-cases.md').read_text())
 st.subheader('How to use')
 st.caption('For video or livestream questions, choose Video workspace. Add a link, set the time range, ask your question, then review the result.')
 with st.expander('Open the step-by-step guide and example questions'):

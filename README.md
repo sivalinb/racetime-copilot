@@ -24,6 +24,20 @@ It is being built for fans catching up, crews following athletes and organizers 
 
 **Two workspaces:** the video product connects Gemini to public YouTube URLs or uploaded videos; the evidence demo works without a key using fictional race observations. See [implementation and validation status](docs/product-status.md).
 
+## Beyond ultra races
+
+The same idea—ask about a time window and review the evidence—could extend to these five uses. **These are proposed extensions, not completed features.**
+
+| Priority | Use case | What it helps people do | Main addition needed |
+|---|---|---|---|
+| 1 | Other endurance sports and long tournaments | Catch up on missed race or match moments | Sport-specific events, rosters and timing feeds |
+| 2 | GPU benchmark and factory test review | Investigate what changed around a performance drop | Time-aligned benchmark metrics, logs and numerical tools |
+| 3 | Lectures, training and technical demos | Revisit an explanation with its original demonstration | Transcripts, slide/code extraction and course context |
+| 4 | Incident review and shift handoffs | Recover decisions, attempted fixes and unresolved issues | Incident records, action tracking and team access |
+| 5 | Conferences, panels and public meetings | Catch up on discussion, agreement and disagreement | Speaker-labelled transcripts, agendas and attribution checks |
+
+**Closest next step:** another endurance sport. **Strongest professional extension:** GPU benchmark review, connecting the project to my NVIDIA interview focus. [Examples, required changes and validation for all five](docs/future-use-cases.md). The same section appears in Streamlit under **Beyond ultra races**.
+
 ## Quick start
 
 Requires Python 3.11+ for the video workspace.
