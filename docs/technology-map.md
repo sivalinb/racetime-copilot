@@ -1,46 +1,41 @@
-# Product use cases, technology and learning coverage
+# Technology and Week 1–5 map
 
-RaceTime adapts the five course themes to an endurance-race catch-up product. It does **not** claim every handout's exact tool sequence is complete. Gemini was explicitly deferred; provider credentials and independent human review remain outstanding.
+Each technology has a job in the product. This is an adapted capstone, not a claim that every handout's exact tool sequence is finished.
 
-| Technology | Product use case | Why it belongs | Implementation evidence |
-|---|---|---|---|
-| Streamlit + Python requests | Primary local demo: recap, import, live append, review, history and learning reports | Simple Python presentation with a session-scoped client that reuses the validated API | `streamlit_app.py`, `demo/client.py`; real-backend Streamlit AppTest |
-| React, TypeScript, shadcn components | Choose source, time range, runner and question; review and import evidence | Makes the workflow usable and keeps data contracts explicit | `app/page.tsx`; browser recap, review and WebMCP checks |
-| Zod | Reject reversed intervals, invalid observations and out-of-coverage inputs | Keeps time constraints enforceable outside model prompts | `lib/contracts.ts`; unit and API checks |
-| VTT/SRT/JSON ingestion | Bring captions and structured timing/visual observations | A provider-independent way to use evidence now | `lib/importers.ts`, `/api/sources` |
-| BM25-style lexical ranking | Retrieve relevant commentary and observations | Understandable baseline for names, places and exact terms | `lib/retrieval.ts` |
-| Deterministic 128-dimensional hashed vectors | Tie-breaking similarity in retrieval | Reproducible with no key; **not learned semantic embeddings** | `embed()`; lexical evidence is required for topic matches |
-| Time and availability filtering | Ask any available interval without future leakage | Filtering before ranking protects the requested scope | Full-cue containment plus `availableAt <= asOf` |
-| LangGraph | State transitions, retrieval, bounded retry, related-claim verification | Explicit control flow and inspectable execution | `lib/workflow.ts`; injected transient failure test |
-| Human review | Approve/reject a saved recap | A human can inspect uncertain evidence before sharing | D1 run record; `/api/review`; UI controls |
-| Local D1 / SQLite | Persist imports, observations, history and review | Reproducible local storage with an eventual cloud binding path | Prepared statements and scoped queries in `lib/store.ts` |
-| Byte-weighted LRU | Repeated catch-up requests over stable evidence | Demonstrates memory bounds, recency, TTL and revision invalidation | `lib/cache.ts`; meaningful eviction and mutation tests |
-| Node test runner + tsx | Regression and evaluation workflows | Reproducible evidence beyond a happy-path demo | `tests/`, `scripts/evaluate.ts`, `reports/` |
-| Local traces + LangSmith-compatible graph configuration | Explain failures and measure latency | Keeps per-case execution visible; optional external tracing later | Local reports verified; external LangSmith export **not verified** |
-| PyTorch + Hugging Face Transformers | Train and evaluate a small intent classifier | A manageable local specialization experiment | `training/train_router.py` |
-| PEFT LoRA | Adapt query/value projections while base encoder stays frozen | Tests specialization with far fewer trainable weights | Rank 8 adapter; 8,708 trainable parameters including classifier |
-| scikit-learn | Accuracy, macro/per-class precision, recall, F1 and confusion matrix | Makes failures visible by routing intent | `reports/router-evaluation.json` |
-| Adapter merge + inference | Fold learned deltas into the base model | Confirms the trained artifact can be used for inference | `training/infer.py`; `reports/router-smoke.json` |
-| WebMCP | Let a browser agent request a bounded recap | Reuses the same validated product action | `summarize_interval` browser test passed |
-| Gemini video understanding | Future audio/visual evidence extraction from bounded video | Needed for the user's original "watch this interval" experience | **Deferred, no provider call or video analysis claimed** |
+## Technology → product job
 
-## Week-by-week mapping
+| Technology | Why RaceTime uses it |
+|---|---|
+| Streamlit + requests | A simple local screen with a separate backend session for each user. |
+| TypeScript + Zod | Shared data contracts and validation of time ranges and imports. |
+| VTT / SRT / JSON | Bring captions, timing records and visual observations into one evidence format. |
+| Lexical ranking + hashed vectors | Retrieve relevant observations reproducibly without a provider key. |
+| LangGraph | Named workflow steps, conditional retry and an inspectable trace. |
+| D1 / SQLite | Save imported evidence, recaps and human review decisions. |
+| Byte-weighted LRU | Reuse stable requests within a memory budget; invalidate on source updates. |
+| Node test runner + Streamlit AppTest | Check evidence rules and the complete local user flow. |
+| PyTorch + Transformers + PEFT | Run the separate BERT-tiny LoRA intent-routing experiment. |
+| scikit-learn | Measure classifier accuracy, F1 and confusion by intent. |
+| React + shadcn + WebMCP | Optional browser interface and bounded browser-agent recap action. |
+| LangSmith | Optional external tracing configuration; local traces are the verified path. |
+| Gemini | Planned video-to-observation adapter; not connected. |
 
-| Week | Course learning | RaceTime implementation | Remaining gap |
-|---|---|---|---|
-| 1 | Build and iterate on a working data app | Streamlit demo and optional React workbench, persistent backend, browser/API checks | Real-user usability feedback |
-| 2 | Ingest, clean, chunk, embed, retrieve, ground and refuse | Cue chunks, ranking, timestamps, insufficiency, time/availability boundaries | Learned embeddings and LLM synthesis; real-video grounding evaluation |
-| 3 | State, tools, branching, retries, human checkpoint | LangGraph state and conditional retry; corroborating-claim inspection; stored human review | Model-driven planning and durable graph pause/resume are not implemented |
-| 4 | 30–50 golden cases, traces, quality, latency/cost, measured improvements | 40 synthetic cases; naive-overlap baseline 20/40 vs bounded workflow 40/40; local per-case traces; provider calls/cost 0 | Independent label review, real race cases, verified LangSmith trace links and a demo recording |
-| 5 | Specialize a small model with LoRA, evaluate, merge and smoke-test | 144 training/40 held-out authored requests; frozen-encoder baseline vs rank-8 LoRA; full metrics and merge equivalence | Adapted BERT encoder experiment, **not** the handout's Qwen3-1.7B/LLaMA Factory implementation |
+## Course coverage
 
-## Why the choices fit Siva's background
+| Week | Working implementation | Remaining work |
+|---|---|---|
+| 1: working app | Streamlit controls, imports, saved review and history | Real-user feedback |
+| 2: retrieval | Cue ingestion, ranking, timestamps, time boundaries and insufficient-evidence responses | Learned embeddings, LLM synthesis and real-video grounding |
+| 3: orchestration | LangGraph state, conditional retry, related-claim checks and human review | Model-driven planning and durable graph pause/resume |
+| 4: evaluation | 40 synthetic cases, baseline comparison, local traces, latency and cache visibility | Independent labels, real-race cases and external LangSmith verification |
+| 5: specialization | LoRA training, held-out comparison, adapter merge and inference check | Exact Qwen3 / LLaMA Factory workflow; current experiment uses BERT-tiny |
 
-Race organizing and ultramarathon experience identify meaningful viewer questions. Observability experience informs time boundaries, visible uncertainty, traceable errors and operational metrics. The weighted LRU connects the product to the GPU benchmarking/observability interview topic: bounded memory, expiry, revision invalidation and explicit measurement. This cache is a process-local prototype, not a distributed GPU scheduling or benchmarking system.
+## Measured results
 
-## Sources
+- Evidence evaluation: **40/40**, versus **20/40** for the naive overlap baseline.
+- Unit tests: **17 passed**. Streamlit and API integration flows also passed.
+- LoRA experiment: **70%** held-out accuracy, versus **52.5%** for the frozen encoder with a trained head; 144 training and 40 held-out authored examples. The app keeps its rule router.
 
-- User-provided Week 1–5 project handouts inform the learning themes; they are references, not instructions to submit work or contact anyone.
-- [LangGraph overview](https://docs.langchain.com/oss/javascript/langgraph/overview): stateful workflow orchestration.
-- [PEFT LoRA](https://huggingface.co/docs/peft/en/developer_guides/lora): low-rank adaptation and merging.
-- [Gemini video understanding](https://ai.google.dev/gemini-api/docs/video-understanding): future multimodal video input; actual selected-video support remains untested.
+All datasets above are synthetic. These scores do not measure real-video understanding. See [workflow results](../reports/workflow-evaluation.json), [router results](../reports/router-evaluation.json), [merge check](../reports/router-smoke.json) and [verification](../reports/verification.md).
+
+The race problem comes from Siva's ultramarathon and organizing experience. Time boundaries, traces, cache behavior and explicit uncertainty connect it to his observability and systems background.

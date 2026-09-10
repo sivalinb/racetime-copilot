@@ -52,7 +52,7 @@ def main():
                 time.sleep(0.5)
         env = {**os.environ, 'RACETIME_API_URL': BASE}
         print('RaceTime Streamlit demo: http://localhost:8501', flush=True)
-        frontend = subprocess.Popen([sys.executable, '-m', 'streamlit', 'run', 'streamlit_app.py', '--server.address', '127.0.0.1', '--server.port', '8501', '--server.headless', 'true', '--browser.gatherUsageStats', 'false'], cwd=ROOT, env=env)
+        frontend = subprocess.Popen([sys.executable, '-m', 'streamlit', 'run', 'app.py', '--server.address', '127.0.0.1', '--server.port', '8501', '--server.headless', 'true', '--browser.gatherUsageStats', 'false'], cwd=ROOT, env=env)
         frontend.wait()
     except KeyboardInterrupt:
         pass

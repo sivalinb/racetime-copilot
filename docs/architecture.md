@@ -1,51 +1,40 @@
-# Architecture and operating limits
+# Architecture
 
 ```mermaid
 flowchart LR
-  UI[Streamlit local demo] --> Client[Session-scoped Python client]
-  Client --> API[Validated TypeScript API]
-  Web[Optional React workbench] --> API
-  Import[VTT / SRT / JSON] --> API
+  UI[Streamlit app.py] --> API[Validated TypeScript API]
+  API --> Cache[Weighted LRU]
   API --> DB[(Local D1)]
-  API --> Cache[Revision-aware weighted LRU]
-  Cache --> Graph[LangGraph workflow]
-  Graph --> Route[Intent tag]
-  Route --> Retrieve[Time-bounded retrieval]
-  Retrieve -->|transient failure, once| Retrieve
-  Retrieve --> Verify[Related claims and instruction filter]
-  Verify --> Recap[Extractive recap + trace]
-  Recap --> DB
-  DB --> Review[Human review + JSON export]
+  Cache --> Graph[LangGraph]
+  Graph --> Retrieve[Retrieve eligible evidence]
+  Retrieve --> Check[Check related claims]
+  Check --> Result[Extractive recap and trace]
+  Result --> DB
+  DB --> Review[Human review and export]
 ```
 
-## Local demo
+The launcher starts Streamlit on port 8501 and reuses or starts the backend on port 3000. The optional React interface uses the same API.
 
-`python scripts/run_demo.py` starts Streamlit on loopback port 8501 and reuses or starts the backend on port 3000. Streamlit holds a separate `requests.Session` in each `st.session_state`; this retains the backend cookie through UI reruns without sharing user sessions. A browser refresh or server restart may create a new session and lose access to previous imports. React and Streamlit workspaces are separate.
+## Time rules
 
-## Evidence contract
+Times are seconds from video start. A complete observation must fit inside the requested interval, end at or before the spoiler cutoff, and have become available by that cutoff. Partial cues are excluded. Declared coverage can still contain gaps.
 
-Times are elapsed seconds from the video start, not wall-clock race time. Imported cues are the retrieval chunks. A finding must be fully inside `[start, end]`, end before/equal `asOf`, and have `availableAt <= asOf`. A missing `availableAt` defaults to the cue end. Partial cues are excluded rather than trimmed or paraphrased without evidence.
+Live append adds observations with unique IDs and the current revision. A successful update advances the revision and makes previous cache keys obsolete. Automatic live polling is not implemented.
 
-Coverage is the declared imported range. It does not mean every moment has an observation. A live source's `availableEnd` can advance through an append; automatic polling and moving DVR eviction are not implemented. Updates must preserve unique evidence IDs and match the current revision. The D1 batch conditionally inserts observations and increments revision in one transaction.
+## Evidence rules
 
-Related claims can bring another runner's contradictory evidence into a runner-filtered recap. The conflicting claim must still fit the exact time boundaries. Conflict detection requires explicit `claimKey` / `claimValue` annotations; it does not infer contradictions from arbitrary prose. Earlier conflicts are retained, even when a later report appears; there is no automated truth-resolution rule.
+Ranking combines lexical matches with deterministic hashed vectors. These are not learned semantic embeddings. Conflicts require explicit `claimKey` and `claimValue` annotations; the app does not discover every disagreement in arbitrary prose. A related conflicting claim can be included even when it concerns another runner, but must still satisfy the time rules.
 
-The rule router records a coarse intent tag. It does not launch separate autonomous agents or implement two-window comparison. The current query supports one interval; cross-interval comparison is a future product extension. No learned model generates the recap.
+The workflow has one bounded retry. A simple pattern filter excludes obvious source instructions; it is not a complete security classifier. No imported text is executed or sent to an LLM in this build.
 
-## Cache and persistence
+## Storage and review
 
-The process-local LRU weighs serialized UTF-8 result bytes, has a default 500 KB budget and five-minute TTL, returns copies, and includes source ID, source revision and the entire query in its key. A cache hit receives a new run ID and pending review. Imports and run decisions persist in D1. The last 100 runs are retained per session and 20 shown in the UI.
+Local D1 stores sources and runs. A random session cookie scopes each workspace. Streamlit retains it in a per-user Python session across reruns; a full refresh or restart may lose access to that session. React and Streamlit use separate sessions. Production accounts and recovery are not implemented.
 
-An HttpOnly SameSite=Strict cookie supplies a random browser-session identifier. SQL queries scope imported sources and runs by that identifier. The public demo is shared immutable data. Clearing the cookie loses access from that browser; account recovery, administration, retention policies and production login are not implemented. Do not expose this prototype as a multi-tenant production service.
+The cache allows 500 KB of serialized result bytes and a five-minute lifetime. Keys include the source revision and full question. A reused result gets a new run ID and pending review. The app retains 100 runs per session and shows the latest 20.
 
-## Observability
+Approval records a decision on a completed recap. It is not a durable LangGraph pause/resume operation.
 
-Every recap has a run ID, source revision, timestamps, mode, cache flag, latency, warnings and trace stages. Local reports retain per-case expected/actual evidence. For optional LangSmith traces while running the Node evaluator, set `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT` in the shell and run `npm run eval`. The LangGraph invocation supplies tags and source/revision metadata. No external trace was sent or verified for this delivery.
+## Next integration
 
-The instruction filter is a simple demonstrative pattern check, not a complete security classifier. Imported text is treated as source data and never executed or passed to a model in this build. A future model integration needs stronger input isolation and adversarial evaluation.
-
-## Future Gemini connection
-
-Insert a provider adapter before ingestion: validate a public YouTube URL, request a bounded video window, obtain structured observations with timestamps, validate them, and store them under explicit model provenance. Do not reinterpret a failed provider request as a successful recap. Test timestamp offsets, nonvisible identities, stale timing graphics and missing coverage against reviewed video intervals before enabling live use.
-
-No provider key is stored in client code. `.env*`, `.dev.vars`, local databases, caches and model base weights are excluded from Git. Hosting registration was attempted once and returned an account usage limit; no live deployment URL is claimed.
+Gemini would produce timestamped observations before ingestion. Validate those observations and test them against human-reviewed video intervals before adding automatic livestream analysis. Local traces work now; external LangSmith traces and public hosting have not been verified.

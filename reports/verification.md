@@ -10,6 +10,7 @@
 - LoRA: 144 training / 40 held-out authored requests; baseline accuracy 52.5%, LoRA 70.0%; merge max absolute logit difference 9.54e-7.
 - Dependency audit: zero known advisories in the recorded npm audit.
 - Streamlit: real-backend AppTest passed initial render, recap, conflicts, spoiler exclusion, review, invalid cutoff, retry, transcript import, live import/append, revision refresh, cache and current history. Browser recap and visual review passed.
-- Brochure: personalized reference-face illustrations incorporated; all 15 revised pages rendered and visually reviewed.
+- Brochure: simplified from 15 to six pages, preserving personalized illustrations; all six pages rendered and visually reviewed.
+- Simplification: app.py and requirements.txt are the canonical demo entry points; launcher, CI and AppTest references updated. Streamlit integration passed after the rename.
 
 Not verified: real YouTube video understanding, automatic livestream ingestion, external LangSmith traces, independent human-reviewed dataset quality, public hosted deployment or real-user pilot benefit. GitHub Actions results are separate from the local checks above.

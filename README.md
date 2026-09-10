@@ -1,65 +1,73 @@
 # RaceTime Copilot
 
-**Catch up on any available race-video interval, with evidence you can inspect.**
+> Catch up on a missed race interval with timestamped evidence and no future spoilers.
 
-Pick a time range, ask what happened, and review timestamped observations. Follow a runner, see conflicting reports, and avoid evidence beyond your spoiler cutoff.
+Built by Siva Babu, an ultramarathoner and race organizer, for an agentic AI capstone.
 
-![RaceTime overview](public/art/overview.png)
+![RaceTime Copilot](public/art/overview.png)
 
-## Try it locally
+## The problem
+
+You miss 15 minutes of a long race broadcast. Finding the important moments means scrubbing through video, checking runner names and reconciling conflicting commentary and timing graphics.
+
+RaceTime lets you choose an interval, ask what happened, and inspect the source observations behind the recap.
+
+**Today:** it works with imported captions and observations. Gemini is deferred; a YouTube link alone does not analyze a video. The included race is fictional.
+
+## Quick start
 
 Requires Python 3.11+ and Node.js 22.13+.
 
 ```bash
-npm ci
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements-demo.txt
+pip install -r requirements.txt
+npm ci
 python scripts/run_demo.py
 ```
 
-Open **http://localhost:8501** for the Streamlit demo. The launcher starts the shared backend on port 3000 when needed. No API key is needed; local D1 tables initialize on first use. Stop with Ctrl+C.
+Open **http://localhost:8501**. No API key is needed. The launcher starts Streamlit and the local backend. Stop with Ctrl+C.
 
-The optional React workbench remains at `http://localhost:3000` (`npm run dev`). Each interface has its own session and imported sources. Streamlit preserves its backend session across reruns; a full browser refresh may start a new session.
+## Try one scenario
 
-1. Keep the fictional Canyon Relay source selected.
-2. Request `00:00` to `15:00` and ask **What happened?**
-3. Inspect the conflicting ridge reports and their timestamps.
-4. Approve or reject the recap, inspect its trace, and export JSON.
-5. Import your own VTT, SRT, or JSON observations to try another source.
+Choose **Canyon Relay**, enter `00:00` to `15:00`, set the cutoff to `15:00`, and ask **What happened?**
 
-## What works today
+Two ridge reports disagree. RaceTime shows both, flags the conflict, and excludes the later timing update. Inspect the trace, approve or reject the recap, and export it.
 
-- Recorded-source transcript imports and timestamp-linked YouTube playback.
-- Live **evidence append** with revision checks; no automatic livestream ingestion.
-- Strict interval and spoiler boundaries, runner filtering, insufficient-evidence responses.
-- LangGraph retrieval, bounded failure recovery, related-claim checks, and extractive recaps.
-- Persistent sources, run history and review decisions, plus a byte-weighted LRU cache.
-- Browser WebMCP `summarize_interval` tool when supported.
-- A separate, reproducible LoRA intent-routing experiment.
+| Scenario | What to look for |
+|---|---|
+| Missed interval | Only observations fully inside your time range |
+| Conflicting reports | Both claims shown; no invented winner |
+| Missing evidence | An explicit insufficient-evidence response |
+| Retrieval failure | One retry, recorded in the trace |
+| Live evidence update | Appended observations create a new source revision |
 
-**A pasted URL alone does not analyze a video.** Gemini is deferred. Recaps currently quote imported evidence; an LLM has not watched the stream. Demo names and events are fictional.
+## How it works
 
-## Check the project
-
-```bash
-npm run check
-npm test
-npm run eval
-npm run build
-# With the development server running:
-npm run test:api
-python tests/streamlit_smoke.py
+```text
+Import captions/observations → choose interval → retrieve → check → recap → human review
 ```
 
-The evaluation report includes **40 synthetic cases**. These are not independently reviewed real-race benchmarks. See [measured results](reports/workflow-evaluation.json) and [LoRA results](reports/router-evaluation.json).
+Streamlit displays the result. A TypeScript LangGraph workflow retrieves and checks evidence. Local D1 stores sources and reviews; a byte-weighted LRU reuses matching requests. The workflow currently uses rules and extractive text, with no model-driven planning.
 
-## Explore
+## Check it
 
-- [Illustrated product pitch](docs/RaceTime-Copilot-Brochure.pdf)
-- [Technology and Week 1–5 map](docs/technology-map.md)
-- [Architecture and limits](docs/architecture.md)
-- [Demo guide and import examples](docs/demo-guide.md)
-- [LoRA experiment](training/README.md)
+```bash
+npm test                     # 17 unit tests
+npm run eval                 # 40 synthetic evidence cases
+python tests/streamlit_smoke.py  # with the local demo running
+```
 
-This is a local capstone prototype. Browser-session isolation is not production account authentication. Hosting is not configured; the attempted Sites registration hit the account's hosting limit.
+The evidence workflow passed **40/40** synthetic cases versus **20/40** for the naive baseline. A separate LoRA routing experiment scored **70%** versus **52.5%** for its baseline. These results do not establish real-video quality; the trained router is not used in the app.
+
+## Read next
+
+| Document | Purpose |
+|---|---|
+| [Six-page brochure](docs/RaceTime-Copilot-Brochure.pdf) | Problem, audience, workflow, technology, results and next steps |
+| [Learning guide](docs/learning-guide.md) | What the main files do and where to start |
+| [Demo guide](docs/demo-guide.md) | Five-minute walkthrough and import examples |
+| [Week 1–5 map](docs/technology-map.md) | What is implemented and what remains |
+| [Architecture](docs/architecture.md) | Time rules, storage and operating limits |
+
+Automatic livestream ingestion and Gemini analysis remain future work. This is a local prototype; a full browser refresh may start a new session. The optional React interface is at port 3000 and has a separate session.

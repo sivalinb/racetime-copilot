@@ -4,7 +4,7 @@ from pathlib import Path
 from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
-at = AppTest.from_file(str(ROOT / 'streamlit_app.py'), default_timeout=30).run()
+at = AppTest.from_file(str(ROOT / 'app.py'), default_timeout=30).run()
 assert not at.exception, at.exception
 assert any('Pick a moment' in item.value for item in at.title)
 next(b for b in at.button if b.label == 'Create recap').click().run()
