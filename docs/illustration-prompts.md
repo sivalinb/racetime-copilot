@@ -13,3 +13,8 @@ Use case: identity-preserve. Edit target image 1 is a five-stage RaceTime brochu
 ## audience
 
 Use case: identity-preserve. Edit target image 1 is a four-panel RaceTime audience brochure illustration. Image 2 is the adult male face reference. Image 3 is the adult female face reference: the woman at the right foreground in a red/brown sari. Images 4 and 5 are reference views of the boy's face. Personalize the panels: Viewers features the recognizable adult woman's face; Families shows the recognizable adult man from image 2 and woman from image 3 watching with the boy from images 4/5, replacing the generic blonde child. Keep the boy's current child appearance and age, natural short dark hair and facial proportions. Organizers uses the referenced adult woman as volunteer and adult man as runner. Engineers uses the adult man's recognizable face and short dark hair, without invented heavy beard. Keep all poses, four-panel sequence, exact labels 'Viewers', 'Families', 'Organizers', 'Engineers', laptop, aid station and observability charts. Same white background, navy/blue/teal hand-drawn watercolor and ink style. Wide 2:1 landscape. Faces should be clearly recognizable illustrated likenesses, not pasted photos. No additional people, real endorsements, photo backgrounds, logos or new text.
+# Family illustration revision
+
+Built-in image generation edit; requested family composition: dad, boy and girl.
+
+undefined
