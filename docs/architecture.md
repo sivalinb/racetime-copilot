@@ -2,7 +2,9 @@
 
 ```mermaid
 flowchart LR
-  UI[Browser workbench] --> API[Validated API]
+  UI[Streamlit local demo] --> Client[Session-scoped Python client]
+  Client --> API[Validated TypeScript API]
+  Web[Optional React workbench] --> API
   Import[VTT / SRT / JSON] --> API
   API --> DB[(Local D1)]
   API --> Cache[Revision-aware weighted LRU]
@@ -15,6 +17,10 @@ flowchart LR
   Recap --> DB
   DB --> Review[Human review + JSON export]
 ```
+
+## Local demo
+
+`python scripts/run_demo.py` starts Streamlit on loopback port 8501 and reuses or starts the backend on port 3000. Streamlit holds a separate `requests.Session` in each `st.session_state`; this retains the backend cookie through UI reruns without sharing user sessions. A browser refresh or server restart may create a new session and lose access to previous imports. React and Streamlit workspaces are separate.
 
 ## Evidence contract
 

@@ -1,5 +1,7 @@
 # Five-minute demo
 
+Follow the README setup, run `python scripts/run_demo.py`, and open **http://localhost:8501**. Use the Streamlit tabs: Recap, Import / live append, History & traces, and Capstone learning.
+
 1. **Problem (30 sec):** "I follow long races. If I miss a few minutes, I want the story for that interval without future spoilers."
 2. **Catch-up (60 sec):** Select the fictional demo, `00:00`–`15:00`, cutoff `15:00`, "What happened?". Show E05/E06 disagree and E09 is absent.
 3. **Evidence (45 sec):** Explain that these are fictional fixture observations. A YouTube URL on an imported source adds timestamp playback links; URL-only video understanding is deferred.

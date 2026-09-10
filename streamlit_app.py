@@ -1,0 +1,163 @@
+"""RaceTime's primary local demo. All evidence decisions use the shared API."""
+import json
+from pathlib import Path
+import streamlit as st
+from demo.client import RaceTimeClient, elapsed, clock
+
+ROOT = Path(__file__).resolve().parent
+st.set_page_config(page_title='RaceTime Copilot', page_icon='🏃', layout='wide')
+if 'api' not in st.session_state:
+    st.session_state.api = RaceTimeClient()
+api = st.session_state.api
+st.caption('RACETIME COPILOT / LOCAL DEMO')
+left, right = st.columns([1.4, 1])
+with left:
+    st.title('Pick a moment.\nGet the whole story.')
+    st.write('Catch up on any available race interval. Follow the evidence, inspect conflicting reports, and keep your spoiler boundary.')
+with right:
+    st.image(str(ROOT / 'public/art/overview.png'), width='stretch')
+st.info('Evidence mode: import timestamped captions or observations. Gemini video analysis is deferred. All Canyon Relay demo events are fictional.')
+try:
+    workspace = api.call('workspace')
+except (ValueError, RuntimeError) as exc:
+    st.error(str(exc))
+    st.code('python scripts/run_demo.py', language='bash')
+    st.stop()
+sources = {s['id']: s for s in workspace['sources']}
+with st.sidebar:
+    st.header('Your race desk')
+    source_id = st.selectbox('Evidence source', list(sources), format_func=lambda i: sources[i]['title'], key='source_select')
+    source = sources[source_id]
+    st.caption(f"{source['kind'].title()} evidence · revision {source['revision']}")
+    st.write(f"Available: **{clock(source['availableStart'])}–{clock(source['availableEnd'])}**")
+    st.caption('Coverage describes imported evidence. Gaps may remain.')
+    st.link_button('Public repository', 'https://github.com/sivalinb/racetime-copilot')
+    st.caption('Imports and reviews persist across reruns in this Streamlit session. Refreshing the page may start a new session.')
+if st.session_state.get('active_source') != source_id:
+    st.session_state.active_source = source_id
+    st.session_state.pop('run', None)
+    st.session_state['range_start'] = clock(source['availableStart'])
+    st.session_state['range_end'] = clock(min(source['availableEnd'], source['availableStart'] + 900))
+    st.session_state['range_cutoff'] = st.session_state['range_end']
+if notice := st.session_state.pop('notice', None):
+    st.success(notice)
+recap_tab, import_tab, history_tab, learning_tab = st.tabs(['Recap', 'Import / live append', 'History & traces', 'Capstone learning'])
+with recap_tab:
+    controls, results = st.columns([1, 1.4], gap='large')
+    with controls:
+        st.subheader('01 / Choose your window')
+        if source['provenance'] == 'fictional_demo':
+            st.success('FICTIONAL REPLAY · Canyon Relay: two reports, one uncertain lead.')
+        elif not source['url']:
+            st.caption('IMPORTED EVIDENCE · This source has no linked video.')
+        with st.form('recap_form'):
+            start_col, end_col = st.columns(2)
+            with start_col:
+                start = st.text_input('Start', key='range_start')
+            with end_col:
+                end = st.text_input('End', key='range_end')
+            cutoff = st.text_input('Spoiler cutoff (as of)', key='range_cutoff', help='Must be at or after your interval end, within available coverage.')
+            question = st.text_input('Your question', value='What happened?', max_chars=1000, key='question')
+            runner = st.text_input('Runner filter (optional)', max_chars=120, key='runner_filter')
+            retry = st.checkbox('Simulate one retrieval failure', key='simulate_failure')
+            submit = st.form_submit_button('Create recap', type='primary', width='stretch')
+        if submit:
+            try:
+                with st.spinner('Retrieving and checking evidence…'):
+                    st.session_state.run = api.call('recap', {'sourceId': source_id, 'start': elapsed(start), 'end': elapsed(end), 'asOf': elapsed(cutoff), 'question': question, 'runner': runner, 'injectFailure': retry})['run']
+                    workspace = api.call('workspace')
+            except (ValueError, RuntimeError) as exc:
+                st.error(str(exc))
+        if source['url']:
+            st.video(source['url'], start_time=st.session_state.get('seek', 0))
+    with results:
+        st.subheader('02 / Follow the evidence')
+        run = st.session_state.get('run')
+        if not run:
+            st.image(str(ROOT / 'public/art/workflow.png'), width='stretch')
+            st.write('Your recap will show timestamped source reports, uncertainty and the execution trace.')
+        else:
+            st.markdown(f"### {clock(run['start'])}–{clock(run['end'])}")
+            st.caption(f"{run['sourceTitle']} · revision {run['sourceRevision']}")
+            st.write('**Status:** ' + run['status'].replace('_', ' '))
+            metrics = st.columns(2)
+            metrics[0].metric('Workflow time', f"{run['latencyMs']:.1f} ms")
+            metrics[1].metric('Cache', 'Hit' if run['cacheHit'] else 'Fresh')
+            for warning in run['warnings']:
+                st.caption(warning)
+            for conflict in run['conflicts']:
+                st.warning('Reports disagree: ' + ' / '.join(conflict['values']) + ' · ' + ', '.join(conflict['ids']))
+            for finding in run['findings']:
+                with st.container(border=True):
+                    st.caption(f"{clock(finding['start'])} · {finding['kind']} · {finding['id']}")
+                    st.write(finding['text'])
+                    if finding['url']:
+                        st.link_button('Open source at timestamp', finding['url'])
+            st.write(f"**Human review:** {run['review']}")
+            approve, reject, export = st.columns(3)
+            for column, decision, label in [(approve, 'approved', 'Approve recap'), (reject, 'rejected', 'Reject recap')]:
+                if column.button(label, key=decision, width='stretch'):
+                    try:
+                        st.session_state.run = api.call('review', {'id': run['id'], 'decision': decision})['run']
+                        st.rerun()
+                    except (ValueError, RuntimeError) as exc:
+                        st.error(str(exc))
+            export.download_button('Export JSON', json.dumps(run, indent=2), f"racetime-{run['id']}.json", mime='application/json', width='stretch')
+            with st.expander('Inspect this run’s trace'):
+                st.dataframe(run['trace'], hide_index=True, width='stretch')
+with import_tab:
+    st.subheader('Bring timestamped evidence')
+    st.write('A YouTube URL links to playback. It does not analyze a video by itself.')
+    append = st.checkbox('Append to the selected live source', key='append_mode')
+    with st.form('import_form'):
+        if not append:
+            title = st.text_input('Source title', value='My race broadcast', key='import_title')
+            url = st.text_input('YouTube URL (optional)', key='import_url')
+            kind = st.selectbox('Source type', ['recorded', 'live'], key='import_kind')
+            duration = st.text_input('Total duration / maximum live horizon', value='01:00:00', key='import_duration')
+            available_start = st.text_input('Available start', value='00:00', key='import_start')
+        else:
+            st.caption(f"Append to: {source['title']} · current revision {source['revision']}. Use new JSON evidence IDs.")
+        available_end = st.text_input('Available end', value=clock(source['availableEnd']) if append else '15:00', key='import_end')
+        fmt = st.selectbox('Evidence format', ['vtt', 'srt', 'json'], key='import_format')
+        upload = st.file_uploader('Transcript file', type=['vtt', 'srt', 'json', 'txt'])
+        pasted = st.text_area('Or paste evidence', height=180, key='import_text', placeholder='WEBVTT\n\n00:00:10.000 --> 00:00:20.000\nCommentary describes the checkpoint.')
+        import_submit = st.form_submit_button('Append observations' if append else 'Import source', type='primary')
+    if import_submit:
+        try:
+            content = upload.getvalue().decode('utf-8-sig') if upload is not None else pasted
+            if len(content.encode()) > 1_500_000:
+                raise ValueError('Import limit is 1.5 MB.')
+            if append:
+                body = {'appendTo': source_id, 'revision': source['revision'], 'availableEnd': elapsed(available_end), 'format': fmt, 'text': content}
+            else:
+                body = {'source': {'title': title, 'url': url, 'kind': kind, 'duration': elapsed(duration), 'availableStart': elapsed(available_start), 'availableEnd': elapsed(available_end)}, 'format': fmt, 'text': content}
+            imported = api.call('sources', body)['source']
+            st.session_state.notice = f"Saved {imported['title']} (revision {imported['revision']}). Choose it from the sidebar to create a recap."
+            st.rerun()
+        except (ValueError, RuntimeError, UnicodeError) as exc:
+            st.error(str(exc))
+with history_tab:
+    st.subheader('Recent saved runs')
+    if not workspace['history']:
+        st.write('Create a recap to see its saved trace here.')
+    for old in workspace['history']:
+        with st.expander(f"{old['sourceTitle']} · {clock(old['start'])}–{clock(old['end'])} · {old['review']}"):
+            st.write(old['question'])
+            st.dataframe(old['trace'], hide_index=True, width='stretch')
+            st.download_button('Download saved run', json.dumps(old, indent=2), f"racetime-{old['id']}.json", mime='application/json', key=f"download-{old['id']}")
+with learning_tab:
+    st.subheader('Five weeks, one product problem')
+    st.markdown('''1. **Working product:** Streamlit local interface over the shared TypeScript API and D1 store.
+2. **Evidence retrieval:** validated cue ingestion, lexical/hashed-vector ranking, timestamps, insufficiency and freshness.
+3. **Orchestration:** LangGraph state, conditional retry, related-claim checks and stored human review.
+4. **Evaluation:** 40 synthetic evidence cases, baseline delta, local traces, latency and cache visibility.
+5. **Specialization:** a separate PyTorch/PEFT LoRA intent-routing experiment, with held-out metrics and merge/inference checks.''')
+    for filename, label in [('workflow-evaluation.json', 'Evidence evaluation'), ('router-evaluation.json', 'LoRA routing evaluation')]:
+        report = json.loads((ROOT / 'reports' / filename).read_text())
+        with st.expander(label):
+            st.json({k: v for k, v in report.items() if k not in {'cases', 'predictions'}})
+    st.caption('Learned semantic embeddings, Gemini video analysis, automatic live ingestion, external LangSmith verification and independently reviewed real-race tests remain future work. The LoRA lab adapts the technique using BERT-tiny, rather than the handout’s exact Qwen3/LLaMA Factory sequence.')
+    brochure = ROOT / 'docs/RaceTime-Copilot-Brochure.pdf'
+    if brochure.exists():
+        st.download_button('Download illustrated brochure', brochure.read_bytes(), brochure.name, mime='application/pdf')

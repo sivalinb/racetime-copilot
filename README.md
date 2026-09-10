@@ -8,14 +8,19 @@ Pick a time range, ask what happened, and review timestamped observations. Follo
 
 ## Try it locally
 
-Requires Node.js 22.13+ and npm.
+Requires Python 3.11+ and Node.js 22.13+.
 
 ```bash
 npm ci
-npm run dev
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-demo.txt
+python scripts/run_demo.py
 ```
 
-Open **http://localhost:3000**. No API key is needed. Local D1 tables initialize on first use.
+Open **http://localhost:8501** for the Streamlit demo. The launcher starts the shared backend on port 3000 when needed. No API key is needed; local D1 tables initialize on first use. Stop with Ctrl+C.
+
+The optional React workbench remains at `http://localhost:3000` (`npm run dev`). Each interface has its own session and imported sources. Streamlit preserves its backend session across reruns; a full browser refresh may start a new session.
 
 1. Keep the fictional Canyon Relay source selected.
 2. Request `00:00` to `15:00` and ask **What happened?**
@@ -44,6 +49,7 @@ npm run eval
 npm run build
 # With the development server running:
 npm run test:api
+python tests/streamlit_smoke.py
 ```
 
 The evaluation report includes **40 synthetic cases**. These are not independently reviewed real-race benchmarks. See [measured results](reports/workflow-evaluation.json) and [LoRA results](reports/router-evaluation.json).

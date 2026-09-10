@@ -62,7 +62,7 @@ start('Data / provenance','The source must tell its own story.','Every observati
 ('Live evidence','Append new observations to an imported live source.','Optimistic revision checks prevent stale writes. A new revision invalidates old recap-cache keys.'),
 ('Deferred video','Gemini may extract bounded audio/visual observations.','Not connected or tested here. A pasted YouTube URL alone currently provides no evidence.')],175,rh=79);end()
 start('Technology / purpose','Every technology earns a product job.','The architecture favors inspectable evidence and a small, reproducible local demo.');rows([
-('React + TypeScript','Source picker, interval controls, import, recap and review.','Typed contracts keep client/server expectations aligned. shadcn primitives supply accessible UI controls.'),
+('Streamlit + TypeScript','Python local demo: source, interval, import, recap and review.','Streamlit reuses the validated TypeScript API through a session-scoped client. React remains an optional workbench.'),
 ('Zod + D1','Validate timestamps and persist sources, evidence and runs.','Parameterized SQL and browser-session scoping separate local workspaces; this is not production account auth.'),
 ('Retrieval + cache','BM25-style scores + hashed vectors; byte-weighted LRU.','Time/cutoff filters precede ranking. Cache keys include source revision and exact query.'),
 ('LangGraph','State, conditional retry and corroborating-claim inspection.','Visible trace stages explain what ran. The current orchestration is deterministic, not autonomous LLM reasoning.'),
@@ -88,7 +88,7 @@ start('Roadmap','From catch-up tool to race intelligence.','Sequence the expansi
 ('Personal channels','Runner watchlists and accessible catch-up formats.','Multilingual narration, audio-only recaps and topic-specific updates need quality evaluation.'),
 ('Broadcast platform','Multi-camera moments and editor review queues.','Rights-aware clip suggestions, source-linked stories and a measurable production pilot.')],178,rh=78);end()
 start('Explore / reproduce','One repository. A simple starting point.','Run the supported workflow without an API key. Reproduce the tests and inspect the reports.');
-box(42,180,708,95);text('github.com/sivalinb/racetime-copilot',60,201,670,20,BLUE,True);text('npm ci  |  npm run dev  |  open localhost:3000',60,239,670,12)
+box(42,180,708,95);text('github.com/sivalinb/racetime-copilot',60,201,670,20,BLUE,True);text('README setup  |  python scripts/run_demo.py  |  localhost:8501',60,239,670,12)
 c.linkURL('https://github.com/sivalinb/racetime-copilot',(42,H-275,750,H-180),relative=0)
 rows([('README','Short setup + demo walkthrough.','Import supported evidence, select a range, review the result.'),('docs/','Technology map, architecture and demo guide.','Clear implementation status and remaining course-tool gaps.'),('reports/ + training/','40-case evaluation, LoRA comparison and merge smoke test.','Runnable scripts and authored datasets support the reported numbers.')],299,rh=79);end()
 start('Sources / attribution','Keep the claims traceable.','Course handouts informed the learning map. Official documentation informed the architecture and future integration plan.');
@@ -96,7 +96,7 @@ refs=[('Course learning scope','User-provided Week 1-5 Project Handouts (August 
 for i,(a,b) in enumerate(refs):text(a,42,174+i*61,190,11,BLUE,True);text(b,234,174+i*61,516,10)
 end()
 start('Readiness / learning coverage','A working foundation. Visible gaps.','The project spans all five themes. Several provider-specific and human-review requirements still need completion.');rows([
-('Week 1','Working data app and iterative implementation.','Verified: browser controls, API workflows, persistence and review.'),
+('Week 1','Working data app and iterative implementation.','Verified: Streamlit and browser controls, API workflows, persistence and review.'),
 ('Week 2','Ingestion, chunk-level retrieval, citations, refusal and freshness.','Verified locally. Hashed vectors are not learned embeddings; multimodal/LLM synthesis is deferred.'),
 ('Week 3','State, tools, branching, retry and human checkpoint.','Verified LangGraph execution and stored review; model-driven planning and durable graph resumption are future work.'),
 ('Week 4','40 cases, baseline delta, local traces and latency.','Verified synthetic suite. Independent labels and external LangSmith trace evidence remain pending.'),
@@ -104,7 +104,7 @@ start('Readiness / learning coverage','A working foundation. Visible gaps.','The
 start('A concrete case','Two reports disagree. The recap says so.','Illustrative Canyon Relay replay only. These are not claims about a real athlete or race.');
 rows([('08:00 / E05','Commentary reports Lena Ortiz took the lead.','This is explicitly an unconfirmed broadcast claim.'),('08:10 / E06','The visible ridge graphic still lists Maya Chen first.','No visible update timestamp; this could be a stale graphic.'),('15:30 / E09','A later timing update confirms Maya at the checkpoint.','Excluded from a 00:00-15:00 recap. It is available in the later interval.')],179,rh=85)
 cards([('What the user sees','Both early reports, their evidence IDs and a needs-review status. No inferred official position.'),('Why it matters','The system preserves uncertainty and the requested time boundary instead of silently using future knowledge.')],460,87);end()
-start('The workbench','A product you can walk through.','Interface map for the implemented app. This diagram is an explanation of the UI, not a screenshot.');
+start('The Streamlit demo','A product you can walk through.','Interface map for the implemented app. This diagram is an explanation of the UI, not a screenshot.');
 box(42,176,300,352,'#f1f4fa');box(356,176,394,352,'#eef7f4')
 text('01 / CHOOSE YOUR WINDOW',60,194,266,12,BLUE,True)
 for i,(a,b) in enumerate([('Source','Canyon Relay / fictional replay'),('Interval','00:00 -> 15:00'),('Spoiler cutoff','15:00'),('Question','What happened?'),('Runner','Optional filter')]):

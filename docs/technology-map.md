@@ -4,6 +4,7 @@ RaceTime adapts the five course themes to an endurance-race catch-up product. It
 
 | Technology | Product use case | Why it belongs | Implementation evidence |
 |---|---|---|---|
+| Streamlit + Python requests | Primary local demo: recap, import, live append, review, history and learning reports | Simple Python presentation with a session-scoped client that reuses the validated API | `streamlit_app.py`, `demo/client.py`; real-backend Streamlit AppTest |
 | React, TypeScript, shadcn components | Choose source, time range, runner and question; review and import evidence | Makes the workflow usable and keeps data contracts explicit | `app/page.tsx`; browser recap, review and WebMCP checks |
 | Zod | Reject reversed intervals, invalid observations and out-of-coverage inputs | Keeps time constraints enforceable outside model prompts | `lib/contracts.ts`; unit and API checks |
 | VTT/SRT/JSON ingestion | Bring captions and structured timing/visual observations | A provider-independent way to use evidence now | `lib/importers.ts`, `/api/sources` |
@@ -27,7 +28,7 @@ RaceTime adapts the five course themes to an endurance-race catch-up product. It
 
 | Week | Course learning | RaceTime implementation | Remaining gap |
 |---|---|---|---|
-| 1 | Build and iterate on a working data app | Usable workbench, persistent backend, browser/API checks | Real-user usability feedback |
+| 1 | Build and iterate on a working data app | Streamlit demo and optional React workbench, persistent backend, browser/API checks | Real-user usability feedback |
 | 2 | Ingest, clean, chunk, embed, retrieve, ground and refuse | Cue chunks, ranking, timestamps, insufficiency, time/availability boundaries | Learned embeddings and LLM synthesis; real-video grounding evaluation |
 | 3 | State, tools, branching, retries, human checkpoint | LangGraph state and conditional retry; corroborating-claim inspection; stored human review | Model-driven planning and durable graph pause/resume are not implemented |
 | 4 | 30–50 golden cases, traces, quality, latency/cost, measured improvements | 40 synthetic cases; naive-overlap baseline 20/40 vs bounded workflow 40/40; local per-case traces; provider calls/cost 0 | Independent label review, real race cases, verified LangSmith trace links and a demo recording |

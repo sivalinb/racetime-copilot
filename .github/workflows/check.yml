@@ -14,3 +14,17 @@ jobs:
       - run: npm test
       - run: npm run eval
       - run: npm run build
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements-demo.txt
+      - name: Streamlit integration
+        run: |
+          npm run dev > /tmp/racetime-api.log 2>&1 &
+          backend_pid=$!
+          trap 'kill "$backend_pid"' EXIT
+          for attempt in $(seq 1 60); do
+            if curl -fsS http://localhost:3000/api/workspace > /dev/null; then break; fi
+            sleep 1
+          done
+          python tests/streamlit_smoke.py
