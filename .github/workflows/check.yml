@@ -13,6 +13,18 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run eval
+      - name: Frozen evidence benchmark
+        run: |
+          rm -f evals-observability/benchmarks/evidence-latest.json evals-observability/observability/examples/evidence-demo.json
+          npm run eval:benchmark
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-benchmark
+          path: |
+            evals-observability/benchmarks/evidence-latest.json
+            evals-observability/observability/examples/evidence-demo.json
+            evals-observability/datasets/manifest.json
       - run: npm run build
       - uses: actions/setup-python@v5
         with:

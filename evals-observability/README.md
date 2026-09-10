@@ -1,0 +1,50 @@
+# Evals and observability
+
+Start here to see **what we test, what the data contains, what passed, and how a run can be inspected**.
+
+## What is demonstrated
+
+| Evidence | Benchmark / status | Scope |
+|---|---|---|
+| [Frozen evidence benchmark](benchmarks/evidence-latest.json) | 40/40 cases; naive baseline 20/40 | Exact evidence selection on authored synthetic cases |
+| [Routing experiment](benchmarks/router-recorded.json) | Accuracy 52.5% → 70%; macro F1 0.522 → 0.709 | Separate BERT-tiny LoRA classifier; not deployed |
+| [Trace examples](observability/examples/evidence-demo.json) | Conflict, failed retrieval, recovery and cache hit | Actual local runs using fictional race observations |
+| [Video integration record](observability/examples/video-integration-recorded.json) | Six-second red/blue clip, cited recap and review after restart | Real Gemini integration on synthetic video; not race accuracy |
+| [Real-video evaluation process](datasets/README.md#real-video-ground-truth) | Annotation UI and aggregation implemented | No independently reviewed real-race benchmark published |
+| [External observability](observability/README.md#langsmith) | LangSmith configured; last test returned quota HTTP 429 | Local traces work; external ingestion still needs rechecking |
+
+## Run the golden benchmark
+
+From the repository root, after installing Node.js 22.13+:
+
+```bash
+npm ci
+npm run eval:benchmark
+```
+
+No API key is needed. The command reads the **fixed** [golden dataset](datasets/evidence-golden-v1.json), checks its checksum, runs the current workflow and compares every result with the saved expected evidence IDs. It writes per-case results, latency percentiles, code hashes and trace examples. It exits nonzero if a case or observability check fails. GitHub Actions runs the same command and uploads the reports as the **evidence-benchmark** artifact.
+
+The original `npm run eval` remains available. It generates its cases from the original script; this new command consumes the frozen v1 file instead. A benchmark run never regenerates its golden answers.
+
+## Folder guide
+
+| Folder | Contents |
+|---|---|
+| [datasets](datasets/README.md) | Golden inputs/expected IDs, routing train/test data, provenance, checksums and a blank human-review template |
+| [benchmarks](benchmarks/README.md) | Per-case evidence results, baseline comparison, recorded routing metrics and limitations |
+| [observability](observability/README.md) | Trace fields, demo steps, usage tracking, LangSmith status and sample runs |
+| [run.ts](run.ts) | Reproducible evidence benchmark and conflict/retry/cache checks |
+
+## Five-minute demonstration
+
+1. Run `npm run eval:benchmark`; show 40/40 versus 20/40 and the four trace checks.
+2. Open `datasets/evidence-golden-v1.json`. Compare one `contained-*` case with its `clipped-*` case: crossing the boundary changes the expected result to empty.
+3. Open `benchmarks/evidence-latest.json`; match that case's `expected`, `actual`, `baseline` and `pass` fields.
+4. In Streamlit **Evidence demo**, request Canyon Relay `00:00–15:00`. Open **Inspect this run’s trace**, show the conflicting claims, simulate one retrieval failure, then repeat the same request to show a cache hit.
+5. Open **Capstone learning** for the original evaluation summaries. In **Video workspace**, an existing result's JSON shows the model/rule decisions; **Evaluation** lets a reviewer score it after watching the source.
+
+## What the scores do not establish
+
+The 40 cases test deterministic evidence handling, not generated-summary factual accuracy. The routing lab uses one small synthetic split and one seed. Local millisecond timings exclude video processing and network calls. The last YouTube/Files tests failed, active livestream validation is pending, and LangSmith quota was exhausted. See [current product status](../docs/product-status.md).
+
+Private videos, accounts, credentials and runtime traces stay outside this folder. Only fictional data and already-public integration examples are committed.

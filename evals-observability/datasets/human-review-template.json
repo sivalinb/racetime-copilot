@@ -1,0 +1,11 @@
+{
+  "job": "",
+  "reviewer": "",
+  "independently_reviewed": false,
+  "expected_facts": [],
+  "supported_percent": null,
+  "missed_events": null,
+  "spoiler_leaks": null,
+  "max_timestamp_error_s": null,
+  "query": {"media": "", "question": "", "start": null, "end": null, "as_of": null}
+}

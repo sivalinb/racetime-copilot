@@ -1,0 +1,22 @@
+{
+  "merge_max_abs_logit_difference": 9.5367431640625e-07,
+  "merge_equivalent_atol": 1e-05,
+  "examples": [
+    {
+      "question": "Recap the last part of the broadcast.",
+      "predicted": "recap"
+    },
+    {
+      "question": "Compare those two race sections.",
+      "predicted": "compare"
+    },
+    {
+      "question": "Verify whether the graphic contradicts the commentary.",
+      "predicted": "verify"
+    },
+    {
+      "question": "Any news about bib 42?",
+      "predicted": "runner"
+    }
+  ]
+}

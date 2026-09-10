@@ -103,10 +103,13 @@ Open the [system diagram](public/architecture/racetime-system-architecture.svg) 
 
 ## Check it
 
+See [Evals and observability](evals-observability/README.md) for frozen golden datasets, per-case benchmarks, baseline comparisons, trace examples and a five-minute demonstration.
+
 ```bash
 python -m unittest discover -s tests -p product_test.py
 npm test                     # original 17 unit tests
 npm run eval                 # 40 synthetic evidence cases
+npm run eval:benchmark       # frozen golden cases + observable retry/cache checks
 python tests/streamlit_smoke.py  # with the local demo running
 ```
 

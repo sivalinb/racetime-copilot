@@ -1,0 +1,535 @@
+{
+  "model": "prajjwal1/bert-tiny",
+  "base_revision": "6f75de8b60a9f8a2fdf7b69cbd86d9e64bcb3837",
+  "seed": 42,
+  "labels": [
+    "recap",
+    "runner",
+    "verify",
+    "compare"
+  ],
+  "train_count": 144,
+  "test_count": 40,
+  "comparison": "Identical frozen pretrained encoder and classifier initialization; classifier trained in both arms. LoRA arm additionally trains rank-8 query/value adapters. Same data, batches, epochs and optimizer learning rate.",
+  "limitations": [
+    "Small authored synthetic dataset; no independent human review.",
+    "One seed, one split; no significance or real-user generalization claim.",
+    "Encoder classifier experiment, not a generative LLM or video model.",
+    "No deployment decision was made using training accuracy."
+  ],
+  "results": {
+    "frozen_encoder": {
+      "accuracy": 0.525,
+      "macro_f1": 0.521664609899904,
+      "precision_by_label": {
+        "recap": 0.34782608695652173,
+        "runner": 0.7142857142857143,
+        "verify": 0.8571428571428571,
+        "compare": 0.6666666666666666
+      },
+      "recall_by_label": {
+        "recap": 0.8,
+        "runner": 0.5,
+        "verify": 0.6,
+        "compare": 0.2
+      },
+      "f1_by_label": {
+        "recap": 0.48484848484848486,
+        "runner": 0.5882352941176471,
+        "verify": 0.7058823529411765,
+        "compare": 0.3076923076923077
+      },
+      "confusion_matrix": [
+        [
+          8,
+          1,
+          1,
+          0
+        ],
+        [
+          5,
+          5,
+          0,
+          0
+        ],
+        [
+          3,
+          0,
+          6,
+          1
+        ],
+        [
+          7,
+          1,
+          0,
+          2
+        ]
+      ],
+      "trainable_parameters": 516,
+      "train_seconds": 0.523,
+      "initial_loss": 1.3855624198913574,
+      "final_loss": 1.2514368295669556,
+      "steps": 96
+    },
+    "lora": {
+      "accuracy": 0.7,
+      "macro_f1": 0.7093253968253967,
+      "precision_by_label": {
+        "recap": 0.5,
+        "runner": 1.0,
+        "verify": 0.75,
+        "compare": 0.875
+      },
+      "recall_by_label": {
+        "recap": 0.9,
+        "runner": 0.6,
+        "verify": 0.6,
+        "compare": 0.7
+      },
+      "f1_by_label": {
+        "recap": 0.6428571428571429,
+        "runner": 0.75,
+        "verify": 0.6666666666666666,
+        "compare": 0.7777777777777778
+      },
+      "confusion_matrix": [
+        [
+          9,
+          0,
+          1,
+          0
+        ],
+        [
+          3,
+          6,
+          0,
+          1
+        ],
+        [
+          4,
+          0,
+          6,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          7
+        ]
+      ],
+      "trainable_parameters": 8708,
+      "train_seconds": 1.112,
+      "initial_loss": 1.4153538942337036,
+      "final_loss": 0.023934198543429375,
+      "steps": 96
+    }
+  },
+  "predictions": {
+    "frozen_encoder": [
+      {
+        "text": "What happened in these fifteen minutes?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Give me the highlights since the broadcast returned.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "I stepped away; what did I miss?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Brief me on the selected video window.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Explain the sequence of events in this range.",
+        "expected": "recap",
+        "predicted": "runner"
+      },
+      {
+        "text": "What should I know before rejoining the stream?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Make a chronological catch-up for this section.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "List the important moments from minute ten to twenty.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Can I get a short race summary?",
+        "expected": "recap",
+        "predicted": "verify"
+      },
+      {
+        "text": "Recap the last part of the broadcast.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Any news about bib 42?",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Find shots featuring Maya Chen.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Where did Lena last appear?",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Only include updates about runner Maya.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Track bib 87 through the available footage.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "I am crewing for Lena; show her sightings.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Tell me where runner Chen was seen.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Filter this clip for bib 214.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Follow Lena rather than the whole field.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Show the most recent mention of runner Maya.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Did that lead change actually happen?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "The announcer and timing board disagree; which claims conflict?",
+        "expected": "verify",
+        "predicted": "compare"
+      },
+      {
+        "text": "Is the claimed arrival time backed by evidence?",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Can we trust that gap announcement?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Check this claim against the visible timing.",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Are the two position reports consistent?",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Flag statements that cannot be confirmed.",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Was the leader call supported at that moment?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Do we have corroboration for this report?",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Verify whether the graphic contradicts the commentary.",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "How did the first half differ from the second?",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Contrast Lena with Maya over this interval.",
+        "expected": "compare",
+        "predicted": "compare"
+      },
+      {
+        "text": "Compare the earlier checkpoint with the later one.",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "What differs between the visual and spoken accounts?",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Put the two reports next to each other.",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Which changes stand out across both windows?",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Give me the differences between these runners.",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Show timing and commentary side by side.",
+        "expected": "compare",
+        "predicted": "runner"
+      },
+      {
+        "text": "Compare those two race sections.",
+        "expected": "compare",
+        "predicted": "compare"
+      },
+      {
+        "text": "How does this segment compare with the previous one?",
+        "expected": "compare",
+        "predicted": "recap"
+      }
+    ],
+    "lora": [
+      {
+        "text": "What happened in these fifteen minutes?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Give me the highlights since the broadcast returned.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "I stepped away; what did I miss?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Brief me on the selected video window.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Explain the sequence of events in this range.",
+        "expected": "recap",
+        "predicted": "verify"
+      },
+      {
+        "text": "What should I know before rejoining the stream?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Make a chronological catch-up for this section.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "List the important moments from minute ten to twenty.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Can I get a short race summary?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Recap the last part of the broadcast.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Any news about bib 42?",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Find shots featuring Maya Chen.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Where did Lena last appear?",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Only include updates about runner Maya.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Track bib 87 through the available footage.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "I am crewing for Lena; show her sightings.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Tell me where runner Chen was seen.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Filter this clip for bib 214.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Follow Lena rather than the whole field.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Show the most recent mention of runner Maya.",
+        "expected": "runner",
+        "predicted": "compare"
+      },
+      {
+        "text": "Did that lead change actually happen?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "The announcer and timing board disagree; which claims conflict?",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Is the claimed arrival time backed by evidence?",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Can we trust that gap announcement?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Check this claim against the visible timing.",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Are the two position reports consistent?",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Flag statements that cannot be confirmed.",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Was the leader call supported at that moment?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Do we have corroboration for this report?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Verify whether the graphic contradicts the commentary.",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "How did the first half differ from the second?",
+        "expected": "compare",
+        "predicted": "compare"
+      },
+      {
+        "text": "Contrast Lena with Maya over this interval.",
+        "expected": "compare",
+        "predicted": "compare"
+      },
+      {
+        "text": "Compare the earlier checkpoint with the later one.",
+        "expected": "compare",
+        "predicted": "compare"
+      },
+      {
+        "text": "What differs between the visual and spoken accounts?",
+        "expected": "compare",
+        "predicted": "compare"
+      },
+      {
+        "text": "Put the two reports next to each other.",
+        "expected": "compare",
+        "predicted": "verify"
+      },
+      {
+        "text": "Which changes stand out across both windows?",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Give me the differences between these runners.",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Show timing and commentary side by side.",
+        "expected": "compare",
+        "predicted": "compare"
+      },
+      {
+        "text": "Compare those two race sections.",
+        "expected": "compare",
+        "predicted": "compare"
+      },
+      {
+        "text": "How does this segment compare with the previous one?",
+        "expected": "compare",
+        "predicted": "compare"
+      }
+    ]
+  },
+  "dataset_sha256": "91da0e7a1b57065edfdced6d7d580b556edc1c1dd8a70e2587de4e9fc2e70dab"
+}

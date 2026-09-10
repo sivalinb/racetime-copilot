@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "created": "2026-09-10",
+  "provenance": "Author-created synthetic data. Frozen copies of the existing project datasets; not independent real-race ground truth.",
+  "datasets": {
+    "evidence-golden-v1.json": {
+      "sha256": "1b7063eb7031898b80092e445afba790207721e3b32b6a51ee3f315c0ef04434",
+      "records": 40
+    },
+    "router-v1.json": {
+      "sha256": "91da0e7a1b57065edfdced6d7d580b556edc1c1dd8a70e2587de4e9fc2e70dab",
+      "records": 184
+    }
+  }
+}

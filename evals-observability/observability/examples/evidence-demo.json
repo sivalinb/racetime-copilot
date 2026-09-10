@@ -1,0 +1,142 @@
+{
+  "provenance": "Actual local runs on fictional Canyon Relay observations; no provider calls.",
+  "generatedAt": "2026-09-10T20:44:08.603Z",
+  "checks": {
+    "conflictFlagged": true,
+    "retryRecorded": true,
+    "retrievalRecovered": true,
+    "cacheHitRecorded": true
+  },
+  "conflict": {
+    "status": "needs_review",
+    "latencyMs": 1.5410830000000715,
+    "cacheHit": false,
+    "conflicts": [
+      {
+        "key": "ridge-leader-08m",
+        "ids": [
+          "E05",
+          "E06"
+        ],
+        "values": [
+          "Lena Ortiz",
+          "Maya Chen"
+        ]
+      }
+    ],
+    "trace": [
+      {
+        "name": "route",
+        "status": "ok",
+        "durationMs": 0,
+        "detail": "Deterministic intent routing; no language model is connected."
+      },
+      {
+        "name": "retrieve",
+        "status": "ok",
+        "durationMs": 0.0394579999999678,
+        "detail": "2 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+      },
+      {
+        "name": "verify",
+        "status": "review",
+        "durationMs": 0,
+        "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+      },
+      {
+        "name": "compose",
+        "status": "ok",
+        "durationMs": 0,
+        "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+      },
+      {
+        "name": "human_review",
+        "status": "pending",
+        "durationMs": 0,
+        "detail": "User can approve or reject this saved recap before sharing."
+      }
+    ]
+  },
+  "retry": {
+    "status": "needs_review",
+    "latencyMs": 1.4434589999999616,
+    "cacheHit": false,
+    "conflicts": [
+      {
+        "key": "ridge-leader-08m",
+        "ids": [
+          "E05",
+          "E06"
+        ],
+        "values": [
+          "Lena Ortiz",
+          "Maya Chen"
+        ]
+      }
+    ],
+    "trace": [
+      {
+        "name": "route",
+        "status": "ok",
+        "durationMs": 0,
+        "detail": "Deterministic intent routing; no language model is connected."
+      },
+      {
+        "name": "retrieve",
+        "status": "retry",
+        "durationMs": 0.005750000000034561,
+        "detail": "Simulated transient retrieval failure; one bounded retry."
+      },
+      {
+        "name": "retrieve",
+        "status": "ok",
+        "durationMs": 0.02983300000005329,
+        "detail": "2 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+      },
+      {
+        "name": "verify",
+        "status": "review",
+        "durationMs": 0,
+        "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+      },
+      {
+        "name": "compose",
+        "status": "ok",
+        "durationMs": 0,
+        "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+      },
+      {
+        "name": "human_review",
+        "status": "pending",
+        "durationMs": 0,
+        "detail": "User can approve or reject this saved recap before sharing."
+      }
+    ]
+  },
+  "cacheHit": {
+    "status": "needs_review",
+    "latencyMs": 0.040541999999959444,
+    "cacheHit": true,
+    "conflicts": [
+      {
+        "key": "ridge-leader-08m",
+        "ids": [
+          "E05",
+          "E06"
+        ],
+        "values": [
+          "Lena Ortiz",
+          "Maya Chen"
+        ]
+      }
+    ],
+    "trace": [
+      {
+        "name": "cache",
+        "status": "hit",
+        "durationMs": 0,
+        "detail": "Revision-aware cache reused this exact request."
+      }
+    ]
+  }
+}

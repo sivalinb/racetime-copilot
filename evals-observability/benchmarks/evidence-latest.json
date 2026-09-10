@@ -1,0 +1,1933 @@
+{
+  "generatedAt": "2026-09-10T20:44:08.603Z",
+  "datasetVersion": "v1",
+  "datasetSha256": "1b7063eb7031898b80092e445afba790207721e3b32b6a51ee3f315c0ef04434",
+  "sourceCommit": "6fd17789c2b570628805929e610dc23a2137426e",
+  "workingTreeDirty": true,
+  "codeHashes": {
+    "lib/workflow.ts": "333542a1a41e7e7d9ab682f86b7470b4795d40c920d14a917a20b9d0845a4bbe",
+    "lib/retrieval.ts": "ef8f9808787dad0831dd6e76b9fe3eae40227dfb5929c6415b3e0d154a1a94bf",
+    "lib/cache.ts": "d2c0c8b9e026f4e1f0a55e6cc13f48aae3c42a3df67bf7f91b5942089f538add",
+    "lib/contracts.ts": "625b370618d14d5c683792dc6e8f70e145120f0f1790d821ac39c223b0c7fa8d",
+    "data/demo.ts": "7d0ce305a335a4492b5298fd7bce861210f7fbd27f33353a3320bd0546b970d4",
+    "evals-observability/run.ts": "8693052cc708c9c51637c8f9e2b7fcaa57296b8a2473294589d8891d6f4becb7"
+  },
+  "runtime": {
+    "node": "v24.19.0",
+    "platform": "darwin",
+    "arch": "arm64"
+  },
+  "scope": "Frozen authored synthetic evidence selection; no video model calls or real-race accuracy claim.",
+  "metric": "Exact equality of sorted selected evidence IDs to frozen expected IDs",
+  "baseline": "Naive temporal overlap; no availability, full containment or source-instruction filtering",
+  "count": 40,
+  "passed": 40,
+  "baselinePassed": 20,
+  "p50Ms": 1.474125000000015,
+  "p95Ms": 2.836167000000046,
+  "latencyScope": "One local in-process run per case; nearest-rank percentiles; excludes UI, network and video processing.",
+  "providerCalls": 0,
+  "providerCostUSD": 0,
+  "costScope": "No paid provider calls; excludes hardware, energy and development costs.",
+  "groups": [
+    {
+      "category": "exact_containment",
+      "count": 16,
+      "passed": 16,
+      "baselinePassed": 14
+    },
+    {
+      "category": "crossing_boundary",
+      "count": 16,
+      "passed": 16,
+      "baselinePassed": 0
+    },
+    {
+      "category": "authored_scenarios",
+      "count": 6,
+      "passed": 6,
+      "baselinePassed": 6
+    },
+    {
+      "category": "availability_cutoff",
+      "count": 1,
+      "passed": 1,
+      "baselinePassed": 0
+    },
+    {
+      "category": "source_instruction",
+      "count": 1,
+      "passed": 1,
+      "baselinePassed": 0
+    }
+  ],
+  "cases": [
+    {
+      "id": "contained-E01",
+      "category": "exact_containment",
+      "expected": [
+        "E01"
+      ],
+      "actual": [
+        "E01"
+      ],
+      "baseline": [
+        "E01"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 15.606999999999971,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.27054099999998016,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E01",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E01"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 2.836167000000046,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.054417000000000826,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E02",
+      "category": "exact_containment",
+      "expected": [
+        "E02"
+      ],
+      "actual": [
+        "E02"
+      ],
+      "baseline": [
+        "E02"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 2.233000000000004,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.04958299999998417,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E02",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E02"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 2.383958000000007,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.013874999999984539,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E03",
+      "category": "exact_containment",
+      "expected": [
+        "E03"
+      ],
+      "actual": [
+        "E03"
+      ],
+      "baseline": [
+        "E03"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 2.2427920000000086,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.0912089999999921,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E03",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E03"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.5405000000000086,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.012459000000035303,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E04",
+      "category": "exact_containment",
+      "expected": [
+        "E04"
+      ],
+      "actual": [
+        "E04"
+      ],
+      "baseline": [
+        "E04"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.495584000000008,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.038000000000010914,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E04",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E04"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.4518750000000296,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.009916999999973086,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E05",
+      "category": "exact_containment",
+      "expected": [
+        "E05"
+      ],
+      "actual": [
+        "E05"
+      ],
+      "baseline": [
+        "E05",
+        "E06"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.629541999999958,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.02820800000000645,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E05",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E05",
+        "E06"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.557957999999985,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.01675000000000182,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E06",
+      "category": "exact_containment",
+      "expected": [
+        "E06"
+      ],
+      "actual": [
+        "E06"
+      ],
+      "baseline": [
+        "E05",
+        "E06"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 2.0642919999999663,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.07404100000002245,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E06",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E05",
+        "E06"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.6064589999999725,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.0105829999999969,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E07",
+      "category": "exact_containment",
+      "expected": [
+        "E07"
+      ],
+      "actual": [
+        "E07"
+      ],
+      "baseline": [
+        "E07"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.505958000000021,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.026458000000047832,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E07",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E07"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.48029200000002,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.007457999999985532,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E08",
+      "category": "exact_containment",
+      "expected": [
+        "E08"
+      ],
+      "actual": [
+        "E08"
+      ],
+      "baseline": [
+        "E08"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.536042000000009,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.03350000000000364,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E08",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E08"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.646250000000009,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.011750000000006366,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E09",
+      "category": "exact_containment",
+      "expected": [
+        "E09"
+      ],
+      "actual": [
+        "E09"
+      ],
+      "baseline": [
+        "E09"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 2.2553330000000074,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.071124999999995,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E09",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E09"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.474125000000015,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.011000000000024102,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E10",
+      "category": "exact_containment",
+      "expected": [
+        "E10"
+      ],
+      "actual": [
+        "E10"
+      ],
+      "baseline": [
+        "E10"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.4447910000000093,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.03412500000001728,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E10",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E10"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.6790419999999813,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.010041000000001077,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E11",
+      "category": "exact_containment",
+      "expected": [
+        "E11"
+      ],
+      "actual": [
+        "E11"
+      ],
+      "baseline": [
+        "E11"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.4029160000000047,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.03916700000002038,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E11",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E11"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.297540999999967,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.009334000000023934,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E12",
+      "category": "exact_containment",
+      "expected": [
+        "E12"
+      ],
+      "actual": [
+        "E12"
+      ],
+      "baseline": [
+        "E12"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.4316670000000045,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.02087499999998954,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E12",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E12"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.1419579999999883,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.00637499999999136,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E13",
+      "category": "exact_containment",
+      "expected": [
+        "E13"
+      ],
+      "actual": [
+        "E13"
+      ],
+      "baseline": [
+        "E13"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.1874169999999822,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.023583000000030552,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E13",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E13"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.184958999999992,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.009375000000034106,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E14",
+      "category": "exact_containment",
+      "expected": [
+        "E14"
+      ],
+      "actual": [
+        "E14"
+      ],
+      "baseline": [
+        "E14"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.4782920000000104,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.02641700000003766,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E14",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E14"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.3262920000000236,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.010667000000012195,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E15",
+      "category": "exact_containment",
+      "expected": [
+        "E15"
+      ],
+      "actual": [
+        "E15"
+      ],
+      "baseline": [
+        "E15"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.3077499999999986,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.02504199999998491,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E15",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E15"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.0882910000000265,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.0066250000000422915,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "contained-E16",
+      "category": "exact_containment",
+      "expected": [
+        "E16"
+      ],
+      "actual": [
+        "E16"
+      ],
+      "baseline": [
+        "E16"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.0932080000000042,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.01929199999995035,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "clipped-E16",
+      "category": "crossing_boundary",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "E16"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.1422080000000392,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.006459000000006654,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "opening",
+      "category": "authored_scenarios",
+      "expected": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08"
+      ],
+      "actual": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08"
+      ],
+      "baseline": [
+        "E01",
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E07",
+        "E08"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.459292000000005,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.1834999999999809,
+          "detail": "8 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "review",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "gap",
+      "category": "authored_scenarios",
+      "expected": [],
+      "actual": [],
+      "baseline": [],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.755207999999982,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.010958000000016455,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "conflict",
+      "category": "authored_scenarios",
+      "expected": [
+        "E05",
+        "E06"
+      ],
+      "actual": [
+        "E05",
+        "E06"
+      ],
+      "baseline": [
+        "E05",
+        "E06"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.3945000000000505,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.040832999999963704,
+          "detail": "2 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "review",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "later",
+      "category": "authored_scenarios",
+      "expected": [
+        "E09",
+        "E10"
+      ],
+      "actual": [
+        "E09",
+        "E10"
+      ],
+      "baseline": [
+        "E09",
+        "E10"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.1164580000000228,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.04191600000001472,
+          "detail": "2 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "finish-hidden",
+      "category": "authored_scenarios",
+      "expected": [],
+      "actual": [],
+      "baseline": [],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.1427079999999705,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.006332999999983713,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "finish-visible",
+      "category": "authored_scenarios",
+      "expected": [
+        "E16"
+      ],
+      "actual": [
+        "E16"
+      ],
+      "baseline": [
+        "E16"
+      ],
+      "pass": true,
+      "baselinePass": true,
+      "latencyMs": 1.350166999999999,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.016707999999994172,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "delayed",
+      "category": "availability_cutoff",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "D"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 4.627707999999984,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.032500000000027285,
+          "detail": "0 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 0 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    },
+    {
+      "id": "untrusted-instruction",
+      "category": "source_instruction",
+      "expected": [],
+      "actual": [],
+      "baseline": [
+        "I"
+      ],
+      "pass": true,
+      "baselinePass": false,
+      "latencyMs": 1.1825840000000198,
+      "trace": [
+        {
+          "name": "route",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Deterministic intent routing; no language model is connected."
+        },
+        {
+          "name": "retrieve",
+          "status": "ok",
+          "durationMs": 0.021875000000022737,
+          "detail": "1 evidence records retrieved using lexical and hashed-vector scores within the interval and spoiler cutoff."
+        },
+        {
+          "name": "verify",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Checked related claims within the same time bounds; excluded 1 suspicious instruction records. Source statements remain unverified reports."
+        },
+        {
+          "name": "compose",
+          "status": "ok",
+          "durationMs": 0,
+          "detail": "Copied bounded evidence with timestamps; no inferred race facts."
+        },
+        {
+          "name": "human_review",
+          "status": "pending",
+          "durationMs": 0,
+          "detail": "User can approve or reject this saved recap before sharing."
+        }
+      ]
+    }
+  ]
+}
