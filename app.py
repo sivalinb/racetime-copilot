@@ -8,6 +8,13 @@ from demo.client import RaceTimeClient, elapsed, clock
 ROOT = Path(__file__).resolve().parent
 st.set_page_config(page_title='RaceTime Copilot', page_icon='🏃', layout='wide')
 experience = st.sidebar.radio('Workspace', ['Video workspace'] if os.getenv('RACETIME_VIDEO_ONLY')=='true' or os.getenv('RACETIME_PUBLIC')=='true' else ['Evidence demo', 'Video workspace'], key='workspace_mode')
+st.subheader('Why I’m building RaceTime')
+st.caption('I’m Siva—an ultrarunner, race organizer and crew member. When I miss a long race broadcast while sleeping or working, my mind stays with the race.')
+with st.expander('Meet Siva: the story behind RaceTime Copilot', expanded=False):
+    founder_art = ROOT/'public'/'art'/'founder-story.png'
+    st.image(str(founder_art), caption='An illustrated founder story, based on Siva’s photo. Scenes and app screen are illustrative.', width='stretch')
+    st.markdown((ROOT/'docs'/'founder-story.md').read_text().replace('(product-status.md)', '(https://github.com/sivalinb/racetime-copilot/blob/main/docs/product-status.md)'))
+    st.download_button('Download founder story illustration', founder_art.read_bytes(), file_name='racetime-founder-story.png', mime='image/png', key='founder_story_download')
 st.subheader('How to use')
 st.caption('For video or livestream questions, choose Video workspace. Add a link, set the time range, ask your question, then review the result.')
 with st.expander('Open the step-by-step guide and example questions'):

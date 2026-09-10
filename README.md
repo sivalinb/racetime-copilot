@@ -2,15 +2,25 @@
 
 > Catch up on a missed race interval with timestamped evidence and no future spoilers.
 
-Built by Siva Babu, an ultramarathoner and race organizer, for an agentic AI capstone.
+Built by Siva Babu, an ultrarunner, race organizer and crew member, for an agentic AI capstone.
 
 ![RaceTime Copilot](public/art/overview.png)
 
-## The problem
+## Why I’m building this
 
-You miss 15 minutes of a long race broadcast. Finding the important moments means scrubbing through video, checking runner names and reconciling conflicting commentary and timing graphics.
+![Siva’s illustrated founder story: living the sport, missing a long broadcast during sleep or work, and catching up with RaceTime](public/art/founder-story.png)
 
-RaceTime lets you choose an interval, ask what happened, and inspect the source observations behind the recap.
+I’m an ultrarunner, race organizer and crew member, and I follow ultra athletes closely. The races I follow can be livestreamed for more than 24 hours. I want to follow the whole story, but I also need to sleep and work.
+
+When I step away, part of my mind stays with the race: **What happened while I was away? How are the athletes I’m following doing? Which moments did I miss?** Coming back often means scrubbing through hours of footage to piece the story together. That is why I’m building RaceTime Copilot.
+
+I want to stay connected to the sport and the people I care about, while being present for the rest of my life. [Read my story and what the product does](docs/founder-story.md). The artwork uses my likeness; the scenes and app screen are illustrative.
+
+## What RaceTime does
+
+Add a YouTube link or video, choose an available interval, and ask **“What happened between 06:00 and 06:15?”** Set the same times in the app. RaceTime retrieves observations or inspects the footage when needed, then produces a recap with timestamped evidence to review. It applies time and spoiler boundaries and shows gaps or uncertainty when evidence is incomplete.
+
+It is being built for fans catching up, crews following athletes and organizers reviewing race moments. Live questions use captured coverage; a link does not automatically record an entire 24-hour broadcast.
 
 **Two workspaces:** the video product connects Gemini to public YouTube URLs or uploaded videos; the evidence demo works without a key using fictional race observations. See [implementation and validation status](docs/product-status.md).
 
