@@ -6,7 +6,7 @@
 
 [Open full-size illustration](../public/architecture/racetime-illustrated-architecture.png). Read left to right: input and queue → constrained agent → evidence and checks → human review. The laptop, decision trail, evidence store and review desk illustrate the local product. Sample race events are illustrative, not measured results. The separate lab and observability band shows supporting capstone work.
 
-This is the first tab in Streamlit's **Technical architecture** panel. The original engineering plates remain in the next two tabs. The hand-drawn presentation is inspired by [CryoWatch's illustrated workflow](https://github.com/archanajalamadugu/CryoWatch). RaceTime artwork was created with the built-in image-generation tool; [generation prompt](architecture-image-prompt.md).
+This is the first tab in Streamlit's **Technical architecture** panel. The original engineering plates remain in the next two tabs. RaceTime artwork was created with the built-in image-generation tool; [generation prompt](architecture-image-prompt.md).
 
 ## Engineering plates
 
@@ -24,7 +24,7 @@ These diagrams describe the implementation and validation status on **10 Septemb
 
 [Open full-size SVG](../public/architecture/racetime-decision-flow.svg). Follow retrieval into the permitted-action planner, then inspect, summarize or clarify. Generated answers pass citation checks and grounding before a durable human-review pause. A completed job records a decision; it does not certify truth.
 
-Both plates are available before sign-in in Streamlit's collapsed **Technical architecture** panel, with SVG downloads. The box-and-arrow engineering presentation is inspired by [CryoWatch](https://github.com/archanajalamadugu/CryoWatch); the diagrams and implementation details are original to RaceTime.
+Both plates are available before sign-in in Streamlit's collapsed **Technical architecture** panel, with SVG downloads.
 
 To update the editable diagrams, change `scripts/build_architecture.py` and run:
 
