@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1640" role="img" aria-labelledby="title description">
+<title id="title">I. System architecture</title><desc id="description">RaceTime system component diagram. Streamlit submits account-scoped jobs to a SQLite-backed worker. LangGraph coordinates video inspection, semantic retrieval, cited synthesis and durable review. Gemini, storage, evaluation and optional deployment are identified, with validation limits.</desc>
+<rect width="1600" height="1640" fill="#eef2f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#1b293a"/></marker>
+<marker id="blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#286487"/></marker>
+<marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#287462"/></marker>
+<marker id="red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#a04b3e"/></marker>
+</defs>
+<text x="40" y="35" font-family="Courier New, monospace" font-size="15" font-weight="700" fill="#506176" text-anchor="start">RACETIME COPILOT / ENGINEERING PLATES</text>
+<text x="40" y="75" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700" fill="#1b293a" text-anchor="start">I. System architecture</text>
+<text x="40" y="108" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">The local video product, its model boundary, persistent state and separate capstone components.</text>
+<polyline points="40,125 1560,125" fill="none" stroke="#becbd5" stroke-width="1.8"/>
+<rect x="40" y="139" width="13" height="13" rx="3" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="62" y="151" font-family="Courier New, monospace" font-size="13" font-weight="700" fill="#506176" text-anchor="start">APPLICATION / RULES</text>
+<rect x="400" y="139" width="13" height="13" rx="3" fill="#9a6922" stroke="#9a6922" stroke-width="1.5"/>
+<text x="422" y="151" font-family="Courier New, monospace" font-size="13" font-weight="700" fill="#506176" text-anchor="start">MODEL OPERATION</text>
+<rect x="755" y="139" width="13" height="13" rx="3" fill="#287462" stroke="#287462" stroke-width="1.5"/>
+<text x="777" y="151" font-family="Courier New, monospace" font-size="13" font-weight="700" fill="#506176" text-anchor="start">HUMAN REVIEW / RESULT</text>
+<rect x="1170" y="139" width="13" height="13" rx="3" fill="#a04b3e" stroke="#a04b3e" stroke-width="1.5"/>
+<text x="1192" y="151" font-family="Courier New, monospace" font-size="13" font-weight="700" fill="#506176" text-anchor="start">BLOCKED / UNVERIFIED</text>
+<text x="40" y="180" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#506176" text-anchor="start">INPUTS</text>
+<text x="545" y="180" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#506176" text-anchor="start">LOCAL APPLICATION</text>
+<text x="1120" y="180" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#506176" text-anchor="start">SERVICES + PERSISTENCE</text>
+<rect x="40" y="200" width="455" height="135" rx="10" fill="#ffffff" stroke="#becbd5" stroke-width="1.5"/>
+<rect x="40" y="212" width="4" height="111" rx="0" fill="#becbd5" stroke="#becbd5" stroke-width="1.5"/>
+<text x="58" y="230" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Video sources + question</text>
+<text x="58" y="256" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Public YouTube URL or local video</text>
+<text x="58" y="280" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">start / end / as_of + question</text>
+<text x="58" y="304" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">MP4 / MOV / WebM; upload &lt;= 100 MB</text>
+<rect x="545" y="200" width="510" height="135" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="545" y="212" width="4" height="111" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="563" y="230" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Streamlit UI :8501</text>
+<text x="563" y="256" font-family="Courier New, monospace" font-size="14" font-weight="400" fill="#506176" text-anchor="start">app.py + racetime/ui.py</text>
+<text x="563" y="281" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Save media; queue work; inspect results</text>
+<text x="563" y="305" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Review / export; human evaluation</text>
+<rect x="1120" y="200" width="440" height="135" rx="10" fill="#ffffff" stroke="#becbd5" stroke-width="1.5"/>
+<rect x="1120" y="212" width="4" height="111" rx="0" fill="#becbd5" stroke="#becbd5" stroke-width="1.5"/>
+<text x="1138" y="230" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Account + media records</text>
+<text x="1138" y="256" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">SQLite: users, media</text>
+<text x="1138" y="280" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Salted PBKDF2; owner-scoped reads</text>
+<text x="1138" y="304" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Uploads &lt;= 500 MB / account</text>
+<polyline points="495,267 545,267" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<polyline points="1055,267 1120,267" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="40" y="390" width="455" height="135" rx="10" fill="#f7e5df" stroke="#a04b3e" stroke-width="1.5"/>
+<rect x="40" y="402" width="4" height="111" rx="0" fill="#a04b3e" stroke="#a04b3e" stroke-width="1.5"/>
+<text x="58" y="420" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Live capture worker</text>
+<text x="58" y="446" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">yt-dlp -&gt; FFmpeg -&gt; 60 s segments</text>
+<text x="58" y="470" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">&lt;= 15 min; elapsed origin supplied</text>
+<text x="58" y="494" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Clock alignment / active test pending</text>
+<rect x="545" y="390" width="510" height="135" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="545" y="402" width="4" height="111" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="563" y="420" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Durable background jobs</text>
+<text x="563" y="446" font-family="Courier New, monospace" font-size="14" font-weight="400" fill="#506176" text-anchor="start">worker.py + Service.process_one()</text>
+<text x="563" y="471" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">claim -&gt; process -&gt; heartbeat -&gt; finish</text>
+<text x="563" y="495" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">3 active / account; recorded-job recovery</text>
+<rect x="1120" y="390" width="440" height="135" rx="10" fill="#ffffff" stroke="#becbd5" stroke-width="1.5"/>
+<rect x="1120" y="402" width="4" height="111" rx="0" fill="#becbd5" stroke="#becbd5" stroke-width="1.5"/>
+<text x="1138" y="420" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Job queue + call meter</text>
+<text x="1138" y="446" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">SQLite: jobs, usage; WAL transactions</text>
+<text x="1138" y="470" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">180 s lease; 20 s heartbeat</text>
+<text x="1138" y="494" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">32 calls / job; 120 / account / 24 h</text>
+<polyline points="800,335 800,390" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="820" y="367" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#506176" text-anchor="start">enqueue</text>
+<polyline points="545,457 495,457" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="517" y="442" font-family="Courier New, monospace" font-size="12" font-weight="400" fill="#506176" text-anchor="middle">live</text>
+<polyline points="1055,457 1120,457" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="40" y="590" width="1015" height="295" rx="10" fill="#ffffff" stroke="#286487" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="60" y="618" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#286487" text-anchor="start">LANGGRAPH / racetime/agent.py</text>
+<rect x="60" y="637" width="975" height="54" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<text x="78" y="659" font-family="Courier New, monospace" font-size="16" font-weight="400" fill="#1b293a" text-anchor="start">State: question + media + start/end/as_of + selected + iterations</text>
+<text x="78" y="681" font-family="Courier New, monospace" font-size="15" font-weight="400" fill="#506176" text-anchor="start">       inspected/retrieved + narrative + review + coverage/gaps + trace</text>
+<rect x="60" y="715" width="295" height="142" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="60" y="727" width="4" height="118" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="78" y="745" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#1b293a" text-anchor="start">1 / Legal actions</text>
+<text x="78" y="771" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Cold source: inspect after retrieval</text>
+<text x="78" y="795" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Then: inspect / summarize / clarify</text>
+<text x="78" y="819" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Iteration cap; one legal action</text>
+<text x="78" y="843" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">uses a rule, without an LLM call</text>
+<rect x="400" y="715" width="295" height="142" rx="10" fill="#fbefd7" stroke="#9a6922" stroke-width="1.5"/>
+<rect x="400" y="727" width="4" height="118" rx="0" fill="#9a6922" stroke="#9a6922" stroke-width="1.5"/>
+<text x="418" y="745" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#1b293a" text-anchor="start">2 / Model choice</text>
+<text x="418" y="771" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Gemini returns action + reason</text>
+<text x="418" y="795" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Pydantic / JSON Schema contract</text>
+<text x="418" y="819" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Action must be in permitted set</text>
+<text x="418" y="843" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Only called when there is a choice</text>
+<rect x="740" y="715" width="295" height="142" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="740" y="727" width="4" height="118" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="758" y="745" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#1b293a" text-anchor="start">3 / Rule fallback</text>
+<text x="758" y="771" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Illegal action or planner failure</text>
+<text x="758" y="795" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">falls back to a permitted action</text>
+<text x="758" y="819" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Trace mode: rule / llm / fallback</text>
+<text x="758" y="843" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">No invented successful inspection</text>
+<polyline points="355,787 400,787" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<polyline points="695,787 740,787" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<polyline points="800,525 800,590" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="820" y="563" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#506176" text-anchor="start">recap</text>
+<rect x="1120" y="590" width="440" height="295" rx="10" fill="#fbefd7" stroke="#9a6922" stroke-width="1.5"/>
+<rect x="1120" y="602" width="4" height="271" rx="0" fill="#9a6922" stroke="#9a6922" stroke-width="1.5"/>
+<text x="1138" y="620" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Gemini API boundary</text>
+<text x="1138" y="646" font-family="Courier New, monospace" font-size="14" font-weight="400" fill="#506176" text-anchor="start">google-genai + Pydantic</text>
+<text x="1138" y="671" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">gemini-3.5-flash (default)</text>
+<text x="1138" y="695" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Video extraction / planner / summary</text>
+<text x="1138" y="719" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Separate model grounding check</text>
+<text x="1138" y="743" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">gemini-embedding-2 -&gt; 768-d vectors</text>
+<text x="1138" y="767" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">120 s call timeout; 1 transient retry</text>
+<text x="1138" y="791" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Small inline MP4: integration verified</text>
+<text x="1138" y="815" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">URL + Files processing: HTTP 500</text>
+<text x="1138" y="839" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Live stream integration: not yet tested</text>
+<polyline points="1055,744 1120,744" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="1087" y="728" font-family="Courier New, monospace" font-size="12" font-weight="400" fill="#506176" text-anchor="middle">API</text>
+<text x="40" y="925" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#286487" text-anchor="start">TOOLS</text>
+<rect x="40" y="948" width="315" height="163" rx="10" fill="#fbefd7" stroke="#9a6922" stroke-width="1.5"/>
+<rect x="40" y="960" width="4" height="139" rx="0" fill="#9a6922" stroke="#9a6922" stroke-width="1.5"/>
+<text x="58" y="978" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#1b293a" text-anchor="start">Inspect + validate</text>
+<text x="58" y="1004" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Recorded windows &lt;= 300 s</text>
+<text x="58" y="1028" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Video sampling: 1 fps</text>
+<text x="58" y="1052" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Finite timestamps; provenance</text>
+<text x="58" y="1076" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">MP4 &lt;= 12 MB inline; else Files</text>
+<text x="58" y="1100" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Live clips use capture offsets</text>
+<rect x="390" y="948" width="315" height="163" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="390" y="960" width="4" height="139" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="408" y="978" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#1b293a" text-anchor="start">Retrieve + filter</text>
+<text x="408" y="1004" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Embed question; vector similarity</text>
+<text x="408" y="1028" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Strict start/end + availability</text>
+<text x="408" y="1052" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Top 30 + related claim conflicts</text>
+<text x="408" y="1076" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Retain coverage gaps / limitations</text>
+<text x="408" y="1100" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Stored notes are model evidence</text>
+<rect x="740" y="948" width="315" height="163" rx="10" fill="#fbefd7" stroke="#9a6922" stroke-width="1.5"/>
+<rect x="740" y="960" width="4" height="139" rx="0" fill="#9a6922" stroke="#9a6922" stroke-width="1.5"/>
+<text x="758" y="978" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#1b293a" text-anchor="start">Synthesize + check</text>
+<text x="758" y="1004" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Narrative -&gt; known evidence IDs</text>
+<text x="758" y="1028" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Gemini grounding Verification</text>
+<text x="758" y="1052" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Rejected output -&gt; labelled extracts</text>
+<text x="758" y="1076" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Missing evidence -&gt; clarification</text>
+<text x="758" y="1100" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">No claim of guaranteed accuracy</text>
+<polyline points="355,1026 390,1026" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<polyline points="705,1026 740,1026" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<polyline points="200,885 200,948" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<polyline points="550,885 550,948" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<polyline points="900,885 900,948" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<polyline points="40,470 22,470 22,1028 40,1028" fill="none" stroke="#a04b3e" stroke-width="1.8" marker-end="url(#red)" stroke-dasharray="7 5"/>
+<rect x="1120" y="948" width="440" height="163" rx="10" fill="#ffffff" stroke="#becbd5" stroke-width="1.5"/>
+<rect x="1120" y="960" width="4" height="139" rx="0" fill="#becbd5" stroke="#becbd5" stroke-width="1.5"/>
+<text x="1138" y="978" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Evidence store</text>
+<text x="1138" y="1004" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">SQLite: evidence, windows, window_notes</text>
+<text x="1138" y="1028" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">JSON observations + normalized vectors</text>
+<text x="1138" y="1052" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Reinspection replaces contained notes</text>
+<text x="1138" y="1076" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Full interval and cutoff checks at retrieval</text>
+<text x="1138" y="1100" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Written by inspect; read by retrieve</text>
+<polyline points="550,1111 550,1147 1090,1147 1090,1030 1120,1030" fill="none" stroke="#286487" stroke-width="1.8" marker-end="url(#blue)"/>
+<text x="570" y="1137" font-family="Courier New, monospace" font-size="13" font-weight="400" fill="#286487" text-anchor="start">retrieval / indexed evidence</text>
+<rect x="40" y="1175" width="1015" height="133" rx="10" fill="#deefe8" stroke="#287462" stroke-width="1.5"/>
+<rect x="40" y="1187" width="4" height="109" rx="0" fill="#287462" stroke="#287462" stroke-width="1.5"/>
+<text x="58" y="1205" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Cited recap -&gt; durable human review</text>
+<text x="58" y="1231" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">interrupt() pauses for source verification; approve / reject records a decision.</text>
+<text x="58" y="1255" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">UI calls Service.review() -&gt; Command(resume=decision); thread_id = owner:job.</text>
+<text x="58" y="1279" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Result + evidence + trace export; clarification or failures can end without a recap.</text>
+<rect x="1120" y="1175" width="440" height="133" rx="10" fill="#ffffff" stroke="#becbd5" stroke-width="1.5"/>
+<rect x="1120" y="1187" width="4" height="109" rx="0" fill="#becbd5" stroke="#becbd5" stroke-width="1.5"/>
+<text x="1138" y="1205" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Graph checkpoints</text>
+<text x="1138" y="1231" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">SqliteSaver -&gt; checkpoints.sqlite</text>
+<text x="1138" y="1255" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Persists graph steps, not only approval</text>
+<text x="1138" y="1279" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Resume is scoped to owner + job</text>
+<polyline points="900,1111 900,1175" fill="none" stroke="#287462" stroke-width="1.8" marker-end="url(#green)"/>
+<polyline points="1055,1240 1120,1240" fill="none" stroke="#287462" stroke-width="1.8" marker-end="url(#green)"/>
+<text x="40" y="1351" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#506176" text-anchor="start">SEPARATE SURFACES / these are not dependencies of a video recap</text>
+<rect x="40" y="1370" width="490" height="161" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="40" y="1382" width="4" height="137" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="58" y="1400" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Evidence demo + optional React</text>
+<text x="58" y="1426" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">TypeScript / Zod / LangGraph -&gt; D1</text>
+<text x="58" y="1450" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">VTT/SRT/JSON; lexical + hashed ranking</text>
+<text x="58" y="1474" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Byte-weighted LRU: 500 KB / 5 min</text>
+<text x="58" y="1498" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Revision-aware cache; manual live append</text>
+<rect x="555" y="1370" width="490" height="161" rx="10" fill="#ffffff" stroke="#becbd5" stroke-width="1.5"/>
+<rect x="555" y="1382" width="4" height="137" rx="0" fill="#becbd5" stroke="#becbd5" stroke-width="1.5"/>
+<text x="573" y="1400" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Evaluation + specialization</text>
+<text x="573" y="1426" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">40 synthetic evidence cases; 20 -&gt; 40 pass</text>
+<text x="573" y="1450" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">BERT-tiny + PEFT LoRA: 52.5% -&gt; 70%</text>
+<text x="573" y="1474" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Offline router; not deployed in this graph</text>
+<text x="573" y="1498" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Local traces; LangSmith quota blocked</text>
+<rect x="1070" y="1370" width="490" height="161" rx="10" fill="#f7e5df" stroke="#a04b3e" stroke-width="1.5"/>
+<rect x="1070" y="1382" width="4" height="137" rx="0" fill="#a04b3e" stroke="#a04b3e" stroke-width="1.5"/>
+<text x="1088" y="1400" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Prepared public deployment</text>
+<text x="1088" y="1426" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Docker + Caddy HTTPS + Google OIDC</text>
+<text x="1088" y="1450" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Verified-email allow-list; persistent volume</text>
+<text x="1088" y="1474" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Container / hosted login not validated</text>
+<text x="1088" y="1498" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Local-first scope; no hosted service claimed</text>
+<polyline points="40,1560 1560,1560" fill="none" stroke="#becbd5" stroke-width="1.8"/>
+<text x="40" y="1587" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Solid arrows: primary calls / data relationships. Dashed arrows: conditional or fallback paths. Labels describe the implemented local design.</text>
+<text x="40" y="1612" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Validation status: 10 Sep 2026. Small-video integration is not real-race accuracy. Secrets and runtime data stay outside Git.</text>
+</svg>

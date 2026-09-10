@@ -14,6 +14,18 @@ with st.expander('Open the step-by-step guide and example questions'):
     st.markdown((ROOT/'docs'/'how-to-use.md').read_text())
 with st.expander('Week 1–5 learning map: concepts, product features and proof', expanded=False):
     st.markdown((ROOT/'docs'/'capstone-learning.md').read_text())
+with st.expander('Technical architecture: components, data flow and agent decisions', expanded=False):
+    st.caption('Blue: application rules · Amber: model operations · Green: review and results · Red: blocked or unverified. Download an SVG to zoom in without losing detail.')
+    system_tab, decision_tab = st.tabs(['System architecture', 'Question lifecycle'])
+    for tab, filename, label in [
+        (system_tab, 'racetime-system-architecture.svg', 'System architecture'),
+        (decision_tab, 'racetime-decision-flow.svg', 'Question lifecycle'),
+    ]:
+        with tab:
+            diagram = ROOT/'public'/'architecture'/filename
+            st.image(str(diagram), caption=label, width='stretch')
+            st.download_button('Download ' + label.lower() + ' (SVG)', diagram.read_bytes(), file_name=filename, mime='image/svg+xml', key=filename)
+    st.caption('Implementation and validation snapshot: 10 September 2026. The diagrams distinguish the video product from the separate evidence demo and LoRA lab.')
 if experience == 'Video workspace':
     from racetime.ui import render
     render()

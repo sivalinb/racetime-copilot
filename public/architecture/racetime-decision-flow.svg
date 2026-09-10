@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1780" role="img" aria-labelledby="title description">
+<title id="title">II. How one video question runs</title><desc id="description">Decision flow for a RaceTime recap job. Retrieval feeds legal-action selection, Gemini or rules choose an action, inspection loops to retrieval, summary is checked then paused for human review, and clarification ends without a generated recap. Queue and budget failure paths are explicit.</desc>
+<rect width="1600" height="1780" fill="#eef2f5"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#1b293a"/></marker>
+<marker id="blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#286487"/></marker>
+<marker id="green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#287462"/></marker>
+<marker id="red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#a04b3e"/></marker>
+</defs>
+<text x="40" y="35" font-family="Courier New, monospace" font-size="15" font-weight="700" fill="#506176" text-anchor="start">RACETIME COPILOT / ENGINEERING PLATES</text>
+<text x="40" y="75" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700" fill="#1b293a" text-anchor="start">II. How one video question runs</text>
+<text x="40" y="108" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">The actual recap graph: retrieve first, bound the decision, inspect when needed, then pause for review.</text>
+<polyline points="40,125 1560,125" fill="none" stroke="#becbd5" stroke-width="1.8"/>
+<rect x="40" y="139" width="13" height="13" rx="3" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="62" y="151" font-family="Courier New, monospace" font-size="13" font-weight="700" fill="#506176" text-anchor="start">APPLICATION / RULES</text>
+<rect x="400" y="139" width="13" height="13" rx="3" fill="#9a6922" stroke="#9a6922" stroke-width="1.5"/>
+<text x="422" y="151" font-family="Courier New, monospace" font-size="13" font-weight="700" fill="#506176" text-anchor="start">MODEL OPERATION</text>
+<rect x="755" y="139" width="13" height="13" rx="3" fill="#287462" stroke="#287462" stroke-width="1.5"/>
+<text x="777" y="151" font-family="Courier New, monospace" font-size="13" font-weight="700" fill="#506176" text-anchor="start">HUMAN REVIEW / RESULT</text>
+<rect x="1170" y="139" width="13" height="13" rx="3" fill="#a04b3e" stroke="#a04b3e" stroke-width="1.5"/>
+<text x="1192" y="151" font-family="Courier New, monospace" font-size="13" font-weight="700" fill="#506176" text-anchor="start">BLOCKED / UNVERIFIED</text>
+<rect x="310" y="205" width="660" height="112" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="310" y="217" width="4" height="88" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="328" y="235" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">0 / Worker claims an account-scoped recap</text>
+<text x="328" y="261" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">media + question + start / end / as_of</text>
+<text x="328" y="285" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">SQLite lease + heartbeat; job status = running</text>
+<rect x="1040" y="205" width="520" height="112" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="1040" y="217" width="4" height="88" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="1058" y="235" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Input contract</text>
+<text x="1058" y="261" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">0 &lt;= start &lt; end &lt;= as_of &lt;= 604800 s</text>
+<text x="1058" y="285" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Interval &lt;= 1 hour; valid owned media</text>
+<polyline points="640,317 640,365" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="310" y="365" width="660" height="170" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="310" y="377" width="4" height="146" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="328" y="395" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">1 / Retrieve existing observations</text>
+<text x="328" y="421" font-family="Courier New, monospace" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Agent.retrieve() -&gt; Store + Gemini.embed()</text>
+<text x="328" y="446" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Full containment + availability cutoff + source-text filter</text>
+<text x="328" y="470" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Question embedding -&gt; similarity-ranked vectors</text>
+<text x="328" y="494" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Top 30 notes + related annotated conflicting claims</text>
+<text x="328" y="518" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Update selected, retrieved, coverage, gaps and trace</text>
+<rect x="1040" y="365" width="520" height="170" rx="10" fill="#ffffff" stroke="#becbd5" stroke-width="1.5"/>
+<rect x="1040" y="377" width="4" height="146" rx="0" fill="#becbd5" stroke="#becbd5" stroke-width="1.5"/>
+<text x="1058" y="395" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Observation contract</text>
+<text x="1058" y="421" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">id / start / end / text / kind</text>
+<text x="1058" y="445" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">runner / claimKey / claimValue (when known)</text>
+<text x="1058" y="469" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">availableAt / provenance; persisted 768-d vector</text>
+<text x="1058" y="493" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">No eligible observations = empty selection</text>
+<polyline points="640,535 640,585" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="310" y="585" width="660" height="143" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="310" y="597" width="4" height="119" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="328" y="615" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">2 / Compute the permitted actions</text>
+<text x="328" y="641" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Cold recorded source with no notes -&gt; inspect</text>
+<text x="328" y="665" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Existing notes -&gt; summarize; inspect may remain legal</text>
+<text x="328" y="689" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Live with no usable notes -&gt; clarify; never inspect old live</text>
+<text x="328" y="713" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">At the iteration cap -&gt; summarize or clarify</text>
+<rect x="1040" y="585" width="520" height="143" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="1040" y="597" width="4" height="119" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="1058" y="615" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">State constrains the planner</text>
+<text x="1058" y="641" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">retrieved / inspected / iterations / selected</text>
+<text x="1058" y="665" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Inspect is available only before its bounded use.</text>
+<text x="1058" y="689" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">After inspect, retrieval runs again.</text>
+<text x="1058" y="713" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Rules choose directly when only one action is legal.</text>
+<polyline points="640,728 640,790" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<rect x="310" y="790" width="660" height="155" rx="10" fill="#fbefd7" stroke="#9a6922" stroke-width="1.5"/>
+<rect x="310" y="802" width="4" height="131" rx="0" fill="#9a6922" stroke="#9a6922" stroke-width="1.5"/>
+<text x="328" y="820" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">3 / Choose one action + record the reason</text>
+<text x="328" y="846" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Multiple choices: Gemini returns a structured Decision.</text>
+<text x="328" y="870" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Validate action membership; accept only a permitted tool.</text>
+<text x="328" y="894" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">One choice: run the rule directly.</text>
+<text x="328" y="918" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Record mode = llm / rule / fallback in trace.</text>
+<rect x="1040" y="790" width="520" height="155" rx="10" fill="#dfeef5" stroke="#286487" stroke-width="1.5"/>
+<rect x="1040" y="802" width="4" height="131" rx="0" fill="#286487" stroke="#286487" stroke-width="1.5"/>
+<text x="1058" y="820" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Planner unavailable / invalid response</text>
+<text x="1058" y="846" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Use a permitted fallback:</text>
+<text x="1058" y="870" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">summarize if possible, otherwise inspect, else clarify.</text>
+<text x="1058" y="894" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">The same budgets and evidence boundaries apply.</text>
+<text x="1058" y="918" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Fallback is recorded, not presented as a model choice.</text>
+<polyline points="970,827 1040,827" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<text x="1002" y="811" font-family="Courier New, monospace" font-size="12" font-weight="400" fill="#506176" text-anchor="middle">error</text>
+<polyline points="1040,922 1000,922 1000,971 640,971" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<polyline points="640,945 640,997" fill="none" stroke="#1b293a" stroke-width="1.8"/>
+<polyline points="640,997 150,997 150,1045" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<polyline points="640,997 640,1045" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<polyline points="640,997 1300,997 1300,1045" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
+<text x="60" y="1027" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#a04b3e" text-anchor="start">clarify</text>
+<text x="665" y="1027" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#9a6922" text-anchor="start">summarize</text>
+<text x="1320" y="1027" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#9a6922" text-anchor="start">inspect</text>
+<rect x="40" y="1045" width="220" height="142" rx="10" fill="#f7e5df" stroke="#a04b3e" stroke-width="1.5"/>
+<rect x="40" y="1057" width="4" height="118" rx="0" fill="#a04b3e" stroke="#a04b3e" stroke-width="1.5"/>
+<text x="58" y="1075" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#1b293a" text-anchor="start">Clarification</text>
+<text x="58" y="1101" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Insufficient evidence.</text>
+<text x="58" y="1125" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Choose another interval</text>
+<text x="58" y="1149" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">or clarify the question.</text>
+<text x="58" y="1173" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">END; no review pause.</text>
+<rect x="310" y="1045" width="660" height="166" rx="10" fill="#fbefd7" stroke="#9a6922" stroke-width="1.5"/>
+<rect x="310" y="1057" width="4" height="142" rx="0" fill="#9a6922" stroke="#9a6922" stroke-width="1.5"/>
+<text x="328" y="1075" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">4 / Generate a cited recap, then check it</text>
+<text x="328" y="1101" font-family="Courier New, monospace" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Gemini.summarize() -&gt; Agent.summarize()</text>
+<text x="328" y="1126" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Gemini Narrative: at most 6 sentences, each with IDs.</text>
+<text x="328" y="1150" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Reject unknown IDs; Gemini Verification checks support.</text>
+<text x="328" y="1174" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Failure -&gt; up to 6 labelled extracts + warning.</text>
+<text x="328" y="1198" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Both paths preserve the selected source observations.</text>
+<rect x="1040" y="1045" width="520" height="166" rx="10" fill="#fbefd7" stroke="#9a6922" stroke-width="1.5"/>
+<rect x="1040" y="1057" width="4" height="142" rx="0" fill="#9a6922" stroke="#9a6922" stroke-width="1.5"/>
+<text x="1058" y="1075" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Inspect the bounded recorded interval</text>
+<text x="1058" y="1101" font-family="Courier New, monospace" font-size="14" font-weight="400" fill="#506176" text-anchor="start">Service.inspect(force=True)</text>
+<text x="1058" y="1126" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Source URI / inline MP4 / provider file</text>
+<text x="1058" y="1150" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Extract observations -&gt; validate time bounds</text>
+<text x="1058" y="1174" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Embed text -&gt; save window, notes + vectors</text>
+<text x="1058" y="1198" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Set inspected = true -&gt; retrieve again</text>
+<polyline points="1560,1120 1582,1120 1582,552 995,552 995,450 970,450" fill="none" stroke="#286487" stroke-width="1.8" marker-end="url(#blue)"/>
+<text x="1190" y="546" font-family="Courier New, monospace" font-size="14" font-weight="400" fill="#286487" text-anchor="start">new evidence -&gt; retrieve -&gt; plan</text>
+<polyline points="640,1211 640,1270" fill="none" stroke="#287462" stroke-width="1.8" marker-end="url(#green)"/>
+<rect x="310" y="1270" width="660" height="170" rx="10" fill="#deefe8" stroke="#287462" stroke-width="1.5"/>
+<rect x="310" y="1282" width="4" height="146" rx="0" fill="#287462" stroke="#287462" stroke-width="1.5"/>
+<text x="328" y="1300" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">5 / Pause for human source review</text>
+<text x="328" y="1326" font-family="Courier New, monospace" font-size="14" font-weight="400" fill="#506176" text-anchor="start">SqliteSaver / checkpoints.sqlite</text>
+<text x="328" y="1351" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">interrupt({ narrative }) persists the waiting graph.</text>
+<text x="328" y="1375" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Job becomes awaiting_review; UI displays citations.</text>
+<text x="328" y="1399" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">The reviewer checks footage, then approves or rejects.</text>
+<text x="328" y="1423" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Saved state survives a worker / app restart.</text>
+<rect x="1040" y="1270" width="520" height="170" rx="10" fill="#f7e5df" stroke="#a04b3e" stroke-width="1.5"/>
+<rect x="1040" y="1282" width="4" height="146" rx="0" fill="#a04b3e" stroke="#a04b3e" stroke-width="1.5"/>
+<text x="1058" y="1300" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Failure and cancellation boundaries</text>
+<text x="1058" y="1326" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">120 s model timeout; one retry on eligible errors</text>
+<text x="1058" y="1350" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">32 calls / job; 120 / account / 24 h (defaults)</text>
+<text x="1058" y="1374" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Cancellation checked between processing operations</text>
+<text x="1058" y="1398" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Uncaught processing failure -&gt; failed job with safe error</text>
+<text x="1058" y="1422" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Completed live windows survive interrupted capture</text>
+<polyline points="640,1440 640,1497" fill="none" stroke="#287462" stroke-width="1.8" marker-end="url(#green)"/>
+<rect x="310" y="1497" width="660" height="116" rx="10" fill="#deefe8" stroke="#287462" stroke-width="1.5"/>
+<rect x="310" y="1509" width="4" height="92" rx="0" fill="#287462" stroke="#287462" stroke-width="1.5"/>
+<text x="328" y="1527" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">6 / Resume and save the review decision</text>
+<text x="328" y="1553" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">Command(resume=approved | rejected), same owner:job</text>
+<text x="328" y="1577" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#506176" text-anchor="start">review stored -&gt; completed -&gt; source-linked JSON export</text>
+<rect x="1040" y="1497" width="520" height="116" rx="10" fill="#ffffff" stroke="#becbd5" stroke-width="1.5"/>
+<rect x="1040" y="1509" width="4" height="92" rx="0" fill="#becbd5" stroke="#becbd5" stroke-width="1.5"/>
+<text x="1058" y="1527" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Meaning of completed</text>
+<text x="1058" y="1553" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">The workflow finished and a decision was saved.</text>
+<text x="1058" y="1577" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">It does not certify the factual accuracy of the recap.</text>
+<text x="40" y="1671" font-family="Courier New, monospace" font-size="14" font-weight="700" fill="#286487" text-anchor="start">READ THE TRACE: plan -&gt; retrieve -&gt; plan -&gt; inspect (if needed) -&gt; retrieve -&gt; plan -&gt; summarize -&gt; human_review</text>
+<polyline points="40,1685 1560,1685" fill="none" stroke="#becbd5" stroke-width="1.8"/>
+<text x="40" y="1712" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="400" fill="#506176" text-anchor="start">Live capture is a separate job; this recap graph can query only processed live observations. No active-stream test has been claimed.</text>
+<text x="40" y="1737" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#506176" text-anchor="start">This plate describes current code, not a hypothetical multi-agent design. Rules, model calls, fallback and review are intentionally distinct.</text>
+</svg>

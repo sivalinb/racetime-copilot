@@ -67,6 +67,16 @@ Video → bounded inspection → semantic retrieval → cited recap → durable 
 
 The video workspace uses a bounded Gemini planner, semantic retrieval, cited summaries, SQLite jobs and a durable LangGraph review checkpoint. Continuous live capture processes completed segments with explicit coverage. The original TypeScript evidence demo remains available with its D1 store and weighted LRU.
 
+## Architecture
+
+Two technical views show the running components and the decisions behind a recap. Blue marks application rules, amber model operations, green human review and red blocked or unverified paths.
+
+![System architecture: Streamlit, worker, LangGraph, Gemini, persistence and separate capstone components](public/architecture/racetime-system-architecture.svg)
+
+![Question lifecycle: retrieval, bounded planning, inspection, verification and durable human review](public/architecture/racetime-decision-flow.svg)
+
+Open the [system diagram](public/architecture/racetime-system-architecture.svg) or [decision flow](public/architecture/racetime-decision-flow.svg) to zoom in. Both are also in Streamlit's collapsed **Technical architecture** panel. [Architecture details and validation limits](docs/architecture.md).
+
 ## Check it
 
 ```bash

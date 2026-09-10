@@ -1,17 +1,30 @@
 # Architecture
 
-```mermaid
-flowchart LR
-  UI[Streamlit] --> Queue[(SQLite accounts and jobs)]
-  Queue --> Worker[Background worker]
-  Worker --> Graph[LangGraph planner]
-  Graph --> Video[Gemini video inspection]
-  Video --> Evidence[(Observations and learned vectors)]
-  Graph --> Evidence
-  Graph --> Summary[Cited summary and grounding check]
-  Summary --> Pause[(Durable review checkpoint)]
-  Pause --> UI
+## Engineering plates
+
+These diagrams describe the implementation and validation status on **10 September 2026**. Blue marks application rules, amber model operations, green human review and results, and red blocked or unverified paths. Dashed connectors indicate conditional paths; labelled dashed boxes group components.
+
+### I. System architecture
+
+![System architecture](../public/architecture/racetime-system-architecture.svg)
+
+[Open full-size SVG](../public/architecture/racetime-system-architecture.svg). Follow the video request from Streamlit into the SQLite job queue, worker and LangGraph tools. The lower band separates the TypeScript evidence demo, evaluation and LoRA experiment, and deployment preparation from the local video product.
+
+### II. Question lifecycle
+
+![Question lifecycle](../public/architecture/racetime-decision-flow.svg)
+
+[Open full-size SVG](../public/architecture/racetime-decision-flow.svg). Follow retrieval into the permitted-action planner, then inspect, summarize or clarify. Generated answers pass citation checks and grounding before a durable human-review pause. A completed job records a decision; it does not certify truth.
+
+Both plates are available before sign-in in Streamlit's collapsed **Technical architecture** panel, with SVG downloads. The box-and-arrow engineering presentation is inspired by [CryoWatch](https://github.com/archanajalamadugu/CryoWatch); the diagrams and implementation details are original to RaceTime.
+
+To update the editable diagrams, change `scripts/build_architecture.py` and run:
+
+```bash
+python scripts/build_architecture.py
 ```
+
+## Local processes
 
 `python scripts/run_product.py` starts the video workspace and worker on localhost:8501. It needs Python and a Gemini key. `run_demo.py` also includes the original TypeScript evidence API on port 3000 and the key-free fictional demo. The optional React screen uses that API.
 
