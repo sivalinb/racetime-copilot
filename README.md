@@ -1,6 +1,6 @@
 # RaceTime Copilot
 
-> Catch up on a missed race interval with timestamped evidence and no future spoilers.
+> An evidence-backed catch-up companion for endurance-race fans and crews.
 
 ## Why I’m building this
 
@@ -19,6 +19,16 @@ Add a YouTube link or video, choose an available interval, and ask **“What hap
 It is being built for fans catching up, crews following athletes and organizers reviewing race moments. Live questions use captured coverage; a link does not automatically record an entire 24-hour broadcast.
 
 **Two workspaces:** the video product connects Gemini to public YouTube URLs or uploaded videos; the evidence demo works without a key using fictional race observations. See [implementation and validation status](docs/product-status.md).
+
+## Why RaceTime?
+
+Video Q&A and summaries already exist in tools such as Gemini, ScreenApp and Eightify. RaceTime's contribution is a race-focused catch-up workflow: choose the missed interval, apply a spoiler cutoff, inspect timestamped evidence and gaps, then approve or reject the recap.
+
+**Why this is a strong first step:** it starts with a real problem from the founder's race experience and demonstrates the full path from a YouTube question to saved evidence and human review. The next opportunity is verified runner/timing data and dependable overnight coverage, followed by other sports or time-based investigations.
+
+One YouTube interval has worked; broader accuracy, user value and long-duration live reliability still need testing. This is a promising application foundation, not a claim of a new AI capability or proven market advantage.
+
+[Compare available products, inspect the evidence and see the validation plan](docs/product-positioning.md). The same comparison appears in Streamlit under **Why RaceTime**.
 
 ## Beyond ultra races
 
@@ -131,6 +141,7 @@ The working YouTube example demonstrates the app, RAG chain and agent review che
 |---|---|
 | [Six-page brochure](docs/RaceTime-Copilot-Brochure.pdf) | Problem, audience, workflow, technology, results and next steps |
 | [How to use](docs/how-to-use.md) | Links, time ranges, prompt examples, expected output and background steps |
+| [Why RaceTime](docs/product-positioning.md) | Existing alternatives, demonstrated differences and the path to a larger application |
 | [Learning guide](docs/learning-guide.md) | What the main files do and where to start |
 | [Demo guide](docs/demo-guide.md) | Five-minute walkthrough and import examples |
 | [Week 1–5 explained](docs/capstone-learning.md) | Learning, product application, demo evidence and remaining gaps for each week |

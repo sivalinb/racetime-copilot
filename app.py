@@ -65,6 +65,10 @@ with st.expander("Meet Siva: the story behind RaceTime Copilot", expanded=False)
         mime="image/png",
         key="founder_story_download",
     )
+with st.expander(
+    "Why RaceTime: alternatives, differences and the bigger opportunity", expanded=False
+):
+    st.markdown((ROOT / "docs" / "product-positioning.md").read_text())
 with st.expander("Beyond ultra races: top 5 future use cases", expanded=False):
     st.markdown((ROOT / "docs" / "future-use-cases.md").read_text())
 st.subheader("How to use")
