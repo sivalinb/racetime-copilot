@@ -105,6 +105,8 @@ Open the [system diagram](public/architecture/racetime-system-architecture.svg) 
 
 ## Check it
 
+For Python changes, follow the [coding standard and formatting commands](CONTRIBUTING.md). Ruff formatting and lint are checked by GitHub Actions.
+
 **Recorded YouTube test (10 September 2026):** a direct link worked for **05:00–08:00**, producing seven observations and a cited recap without an upload. Human factual review is pending. [Read the result, timestamps, trace and reproduction steps](reports/youtube-interval-test.md). The saved report is also available in Streamlit’s **Recorded YouTube test** panel.
 
 See [Evals and observability](evals-observability/README.md) for frozen golden datasets, per-case benchmarks, baseline comparisons, trace examples and a five-minute demonstration.

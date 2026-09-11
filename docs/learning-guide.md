@@ -4,6 +4,8 @@ RaceTime asks: **what happened during the part of the race I missed?**
 
 Start with the video workspace in the README. Read these files in order:
 
+Python files use a shared Ruff formatting/lint configuration. See the [coding standard](../CONTRIBUTING.md) for indentation, naming, docstrings and the commands to check your changes.
+
 | File | What it does |
 |---|---|
 | `app.py`, `racetime/ui.py` | Streamlit workspace selection, accounts, videos, jobs, review and evaluation. |
