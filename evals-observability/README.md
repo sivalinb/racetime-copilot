@@ -51,3 +51,7 @@ The original `npm run eval` remains available. It generates its cases from the o
 The 40 cases test deterministic evidence handling, not generated-summary factual accuracy. The routing lab uses one small synthetic split and one seed. Local millisecond timings exclude video processing and network calls. One direct YouTube interval passed integration; an earlier different URL and Files API processing failed. Active livestream validation is pending, and LangSmith quota was exhausted. See [current product status](../docs/product-status.md).
 
 Private videos, accounts, credentials and runtime traces stay outside this folder. Only fictional data and already-public integration examples are committed.
+
+## Course evidence
+
+See the [Week 1–5 handout audit](../docs/course-completion-audit.md) for the difference between demonstrated learning and completed assignments. Week 4 is partial: the frozen synthetic benchmark and local traces do not replace independently reviewed video cases, verified LangSmith model/tool child runs or 3–4 measured improvements. The 100 questions are candidate scenarios, not completed evals.

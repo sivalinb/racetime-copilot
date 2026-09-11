@@ -6,6 +6,21 @@ Follow each week from **learning → implementation → what to try → evidence
 
 All five learning themes are represented. Remaining validation and submission items are stated separately; this is not a claim that every assignment is complete.
 
+## Coverage after the working YouTube example
+
+| Week | Concrete evidence | What is still needed |
+|---|---|---|
+| 1 — App | Streamlit URL/time/question flow, iterative UI and public code | Actual coding screenshots, Google Doc and ≤5-minute recording |
+| 2 — RAG | 05:00–08:00 produced seven stored/retrieved observations and five cited sentences | Numeric quality/latency targets and independently evaluated video questions |
+| 3 — Agent | Real model chose `summarize`; graph paused for review; restart/error tests pass | User-outcome measurement and submission recording; YouTube review itself still pending |
+| 4 — Evals | 40 synthetic golden cases, 20/40 → 40/40 baseline comparison, local traces and annotation UI | Reviewed video-agent dataset, verified LangSmith child traces, failure analysis and 3–4 measured improvements |
+| 5 — LoRA | Separate router: 52.5% → 70%, held-out metrics, saved adapter and merge check | Explain custom BERT substitution; training curve and recording; no live-router cost/speed benefit established |
+
+**All five themes are mapped; full assignment completion is not yet established.** This mapping uses your original project handouts, not a newer public course syllabus. Open the **Handout completion checklist** tab in this panel, or [read the requirement-by-requirement audit](https://github.com/sivalinb/racetime-copilot/blob/main/docs/course-completion-audit.md).
+
+**Follow the same working example:** in the recorded JSON, `selected` shows Week 2 evidence, `narrative.sentences[].evidence_ids` shows grounding, `trace` shows Week 3 decisions, and `awaiting_review` shows the human checkpoint. Week 4 must evaluate that answer independently. Week 5 is demonstrated by the separate training artifacts; it was not called during the YouTube run.
+
+
 ## Week 1 — Build a useful app with AI assistance
 
 - **Define a real problem and turn it into a product.**
@@ -14,7 +29,7 @@ All five learning themes are represented. Remaining validation and submission it
 
 - **Build an interactive Streamlit application.**
   - **How it works:** Streamlit collects the video, interval and question; Python validates the request and saves a background job.
-  - **Follow through:** save a clip at least 30 seconds long. In Ask / inspect, select Ask the agent; set Start `00:00`, End `00:30` and cutoff `00:30`. Ask “What happened in these 30 seconds?” and click Queue job.
+  - **Follow through:** save the public URL `https://www.youtube.com/watch?v=S_9wb3g7jtY`. In Ask / inspect, select Ask the agent; set Start `05:00`, End `08:00` and cutoff `08:00`. Ask “What happened between 05:00 and 08:00?” and click Queue job. For a walkthrough without new provider calls, show the saved report in the Recorded YouTube test panel.
   - **Evidence:** Jobs / results shows the saved request and its status. A provider error demonstrates the failure path, not a successful analysis.
 
 - **Iterate using structured prompts and feedback.**
@@ -30,7 +45,7 @@ All five learning themes are represented. Remaining validation and submission it
 
 - **Ingest a source and divide it into useful pieces.**
   - **How it works:** a recorded-video request is inspected in windows of up to 300 seconds. Gemini returns individual observations containing start/end times, text and a type such as visual or commentary. These notes are the retrievable pieces; the app does not embed the entire video as one text document.
-  - **Follow through:** run the short-clip question from Week 1. Open the completed job's result JSON and find `selected`. Inspect an observation's `start`, `end`, `text` and `kind`.
+  - **Follow through:** run the short-clip question from Week 1. Open the job's result JSON and find `selected`. Inspect an observation's `start`, `end`, `text` and `kind`.
   - **Evidence:** source observations are structured and tied to an interval. In Evidence demo, VTT/SRT/JSON imports provide an alternative ingestion path.
 
 - **Create embeddings and store knowledge for reuse.**
@@ -41,7 +56,7 @@ All five learning themes are represented. Remaining validation and submission it
 - **Retrieve relevant evidence with time and spoiler filters.**
   - **How it works:** retrieval keeps only observations fully inside Start–End and available by the cutoff. It ranks eligible vectors by similarity, selects up to 30 observations initially, and retains related annotated conflicting claims when relevant.
   - **Follow through:** ask a second question about the same interval, such as “What was visible, rather than mentioned in commentary?” Inspect `selected` and the `retrieve` entry in `trace`.
-  - **Evidence:** the selected notes should satisfy the time rules. Whether their ranking answers the question well still needs human evaluation. A new question does not guarantee the planner will avoid another inspection.
+  - **Evidence:** the selected notes should satisfy the time rules. The saved YouTube run retrieved seven notes after inspection. Whether their ranking answers other questions well still needs human evaluation. A new question does not guarantee the planner will avoid another inspection.
 
 - **Generate a cited answer and handle missing evidence.**
   - **How it works:** Gemini writes sentences with observation IDs. Unknown IDs are rejected, and a separate model call checks support. If generation fails, the app can show labelled extracts; if evidence is insufficient, it can return a clarification message.
@@ -83,12 +98,12 @@ All five learning themes are represented. Remaining validation and submission it
 
 - **Define expected behavior with a repeatable dataset.**
   - **How it works:** 40 authored synthetic cases specify expected evidence IDs for full cues, clipped cues, gaps, delayed observations and untrusted instructions.
-  - **Follow through:** open [golden-cases.json](https://github.com/sivalinb/racetime-copilot/blob/main/reports/golden-cases.json). Choose a case and compare its question/time range with `expected`.
+  - **Follow through:** open [frozen evidence-golden-v1.json](https://github.com/sivalinb/racetime-copilot/blob/main/evals-observability/datasets/evidence-golden-v1.json). Choose a case and compare its question/time range with `expected`.
   - **Evidence:** expected behavior is specified before scoring. These are synthetic evidence tests, not independent labels for real video.
 
 - **Compare a baseline with the candidate workflow.**
   - **How it works:** the baseline accepts overlapping observations. The candidate applies stricter interval, availability and instruction rules. Both run on the same cases; exact evidence-ID matches determine a pass.
-  - **Follow through:** in Evidence demo → Capstone learning → Evidence evaluation, compare `baselinePassed` and `passed`. For case-level detail, open [workflow-evaluation.json](https://github.com/sivalinb/racetime-copilot/blob/main/reports/workflow-evaluation.json) and compare `expected`, `baseline` and `actual`.
+  - **Follow through:** in Evidence demo → Capstone learning → Evidence evaluation, compare `baselinePassed` and `passed`. For case-level detail, open [evidence-latest.json](https://github.com/sivalinb/racetime-copilot/blob/main/evals-observability/benchmarks/evidence-latest.json) and compare `expected`, `baseline` and `actual`.
   - **Measured result:** 20/40 baseline versus 40/40 candidate. That is 50% versus 100% on this dataset, not 100% race-summary accuracy.
 
 - **Explain which failures a change addresses.**
@@ -104,7 +119,7 @@ All five learning themes are represented. Remaining validation and submission it
 - **Collect human judgments for real footage.**
   - **How it works:** Evaluation records expected facts, supported-sentence percentage, missed events, spoiler leaks and largest timestamp error.
   - **Follow through:** independently watch the chosen interval, select its recap in Video workspace → Evaluation, enter your judgments and save them. Do not tick the reviewed checkbox without watching.
-  - **Next evidence:** aggregate saved reviews with the documented evaluation command. Reviewed race cases and verified LangSmith case/model/tool traces remain necessary before claiming full video-agent evaluation coverage.
+  - **Next evidence:** aggregate saved reviews with the documented evaluation command. Reviewed race cases and verified LangSmith case/model/tool traces remain necessary before claiming full video-agent evaluation coverage. The 100 scenario prompts have `execution_status: not_run` and `ground_truth: null`; they are not 100 evaluated examples.
 
 ## Week 5 — Train and evaluate a focused model with LoRA
 

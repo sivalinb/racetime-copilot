@@ -2,6 +2,8 @@
 
 For a plain-language explanation of each week, read [How RaceTime applies Week 1–5](capstone-learning.md), also available in the app.
 
+**Completion check:** [the handout audit](course-completion-audit.md) maps each core learning and submission requirement to evidence and remaining work. All five themes have coverage; Week 4 validation and several submission artifacts remain incomplete.
+
 Each tool has a product job. The capstone applies the course themes; it does not claim every handout's exact tool sequence.
 
 | Technology | Product use and reason |
@@ -24,10 +26,10 @@ Each tool has a product job. The capstone applies the course themes; it does not
 | Week | Applied learning | Remaining validation |
 |---|---|---|
 | 1: app | Streamlit workflow, accounts, persistence and background processing | Race-fan usability feedback |
-| 2: retrieval | Bounded video ingestion, learned embeddings, citations and generated summaries | Provider video reliability and independent factual/timestamp labels |
-| 3: orchestration | Legal model-selected actions, retries, budgets, checkpointed human review | Real planner usefulness across reviewed cases |
-| 4: evaluation | Synthetic baseline comparison, restart/isolation tests, local traces and real-review UI | Human-reviewed race cases and external LangSmith quota |
-| 5: specialization | BERT-tiny LoRA, held-out comparison, merge and inference check | Exact optional Qwen3/LLaMA Factory exercise remains separate |
+| 2: retrieval | Direct YouTube 05:00–08:00: seven observations, embeddings, retrieval and five cited sentences | Numeric targets, independent factual/timestamp labels and varied-source reliability |
+| 3: orchestration | Real model-selected summarization, pending review checkpoint; restart/error tests | Planner usefulness and user completion/time targets across reviewed cases |
+| 4: evaluation | 40 frozen synthetic cases, baseline comparison, local traces and real-review UI | Reviewed video golden cases, LangSmith case/model/tool traces and 3–4 measured improvements; 100 prompts remain untested |
+| 5: specialization | Custom BERT-tiny LoRA, 52.5% → 70%, merge and inference check | Training curve, custom-submission recording and measured business benefit; exact optional Qwen3 exercise remains separate |
 
 The original evidence evaluation is **40/40**, versus **20/40** for naive overlap. The separate LoRA lab reached **70%**, versus **52.5%** for a frozen encoder with a trained head, on 144 training and 40 held-out authored examples. These synthetic results do not establish real-video quality. The trained classifier is not deployed.
 

@@ -128,7 +128,21 @@ with st.expander("100 useful YouTube questions and scenarios", expanded=False):
 with st.expander(
     "Week 1–5 learning map: concepts, product features and proof", expanded=False
 ):
-    st.markdown((ROOT / "docs" / "capstone-learning.md").read_text())
+    learning_tab, completion_tab = st.tabs(
+        ["Learning walkthrough", "Handout completion checklist"]
+    )
+    with learning_tab:
+        st.markdown((ROOT / "docs" / "capstone-learning.md").read_text())
+    with completion_tab:
+        completion_path = ROOT / "docs" / "course-completion-audit.md"
+        st.markdown(completion_path.read_text())
+        st.download_button(
+            "Download Week 1–5 completion checklist",
+            completion_path.read_text(),
+            file_name="racetime-week-1-to-5-completion.md",
+            mime="text/markdown",
+            key="course_completion_download",
+        )
 with st.expander(
     "Technical architecture: components, data flow and agent decisions", expanded=False
 ):

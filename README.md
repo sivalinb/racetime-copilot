@@ -121,6 +121,10 @@ python tests/streamlit_smoke.py  # with the local demo running
 
 The evidence workflow passed **40/40** synthetic cases versus **20/40** for the naive baseline. A separate LoRA routing experiment scored **70%** versus **52.5%** for its baseline. These results do not establish real-video quality; the trained router is not used in the app.
 
+## Week 1–5 coverage
+
+The working YouTube example demonstrates the app, RAG chain and agent review checkpoint. The separate evaluation pack and LoRA lab cover the other learning themes. **All five themes are mapped; full assignment completion is still partial**, especially reviewed video evaluations, verified LangSmith traces, measured improvements and submission recordings. [Learning walkthrough](docs/capstone-learning.md) · [Handout completion checklist](docs/course-completion-audit.md). Both appear in the Streamlit Week 1–5 panel.
+
 ## Read next
 
 | Document | Purpose |

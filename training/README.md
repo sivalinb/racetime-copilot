@@ -1,6 +1,6 @@
 # LoRA intent-router lab
 
-This separate experiment adapts the Week 5 specialization technique to four race-viewer intents: recap, runner, verify and compare. It is an **encoder classifier**, not a video model or a generative LLM. The app continues to use rules.
+This separate experiment adapts the Week 5 specialization technique to four race-viewer intents: recap, runner, verify and compare. It is an **encoder classifier**, not a video model or a generative LLM. The video app uses a bounded Gemini planner with application rules; this trained classifier is not deployed in that graph. See the [Week 1–5 completion checklist](../docs/course-completion-audit.md) for demonstrated learning and remaining submission evidence.
 
 ## Reproduce
 
