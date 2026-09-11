@@ -10,10 +10,13 @@ Start here to see **what we test, what the data contains, what passed, and how a
 | [Routing experiment](benchmarks/router-recorded.json) | Accuracy 52.5% → 70%; macro F1 0.522 → 0.709 | Separate BERT-tiny LoRA classifier; not deployed |
 | [Trace examples](observability/examples/evidence-demo.json) | Conflict, failed retrieval, recovery and cache hit | Actual local runs using fictional race observations |
 | [Video integration record](observability/examples/video-integration-recorded.json) | Six-second red/blue clip, cited recap and review after restart | Real Gemini integration on synthetic video; not race accuracy |
+| [Direct YouTube interval test](../reports/youtube-interval-test.md) | 05:00–08:00; seven observations and cited recap awaiting review | Real public race-discussion video; integration only, no human accuracy score |
 | [Real-video evaluation process](datasets/README.md#real-video-ground-truth) | Annotation UI and aggregation implemented | No independently reviewed real-race benchmark published |
 | [External observability](observability/README.md#langsmith) | LangSmith configured; last test returned quota HTTP 429 | Local traces work; external ingestion still needs rechecking |
 
 ## Run the golden benchmark
+
+For useful next test candidates, browse [100 YouTube questions and scenarios](../docs/youtube-question-library.md) and their [structured catalog](datasets/youtube-question-scenarios-v1.json). Every case is marked `not_run`, with `ground_truth: null`. This is a prompt library, separate from the frozen golden benchmark and its scores.
 
 From the repository root, after installing Node.js 22.13+:
 
@@ -45,6 +48,6 @@ The original `npm run eval` remains available. It generates its cases from the o
 
 ## What the scores do not establish
 
-The 40 cases test deterministic evidence handling, not generated-summary factual accuracy. The routing lab uses one small synthetic split and one seed. Local millisecond timings exclude video processing and network calls. The last YouTube/Files tests failed, active livestream validation is pending, and LangSmith quota was exhausted. See [current product status](../docs/product-status.md).
+The 40 cases test deterministic evidence handling, not generated-summary factual accuracy. The routing lab uses one small synthetic split and one seed. Local millisecond timings exclude video processing and network calls. One direct YouTube interval passed integration; an earlier different URL and Files API processing failed. Active livestream validation is pending, and LangSmith quota was exhausted. See [current product status](../docs/product-status.md).
 
 Private videos, accounts, credentials and runtime traces stay outside this folder. Only fictional data and already-public integration examples are committed.

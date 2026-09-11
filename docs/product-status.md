@@ -5,7 +5,8 @@ The local implementation is ready for continued testing. **It is not yet a valid
 | Capability | Working implementation | Verification / remaining work |
 |---|---|---|
 | Small uploaded MP4 | Inline Gemini video extraction, learned retrieval and cited recap | Real six-second red/blue clip passed; two correctly timestamped observations, generated recap and review after restart |
-| Recorded YouTube / large upload | Bounded URL analysis and Files API path | Shared race URL returned Gemini HTTP 500; Files API processing also returned HTTP 500. These paths remain unverified |
+| Recorded YouTube | Bounded direct URL analysis | `S_9wb3g7jtY` 05:00–08:00 passed: seven observations and cited recap awaiting review; no upload. One source/interval only; [test report](../reports/youtube-interval-test.md) |
+| Large upload | Files API processing path | Earlier processing returned HTTP 500; larger-upload end-to-end success remains unverified |
 | Agent decisions | Bounded Gemini retrieve/inspect/summarize/clarify graph, fallback and call budgets | Real small-video graph passed; 21 local product tests pass with provider fixtures |
 | Summary grounding | Evidence IDs, separate model check, explicit extractive fallback | Integration passed; independent race factual review still needed |
 | Semantic retrieval | Learned Gemini Embedding 2 vectors and strict time filters | Real generation and 768-dimensional embedding checks passed |
@@ -23,7 +24,7 @@ The original evidence demo remains the dependable key-free presentation path: **
 ## Finish validation
 
 1. Analyze short race MP4s and independently review at least 10 varied intervals in Evaluation.
-2. Recheck the shared YouTube URL and Files API after provider processing is available.
+2. Expand the successful YouTube interval check to varied sources; recheck the earlier failed URL and Files API.
 3. Test a currently live public race stream when one is available.
 4. Restore LangSmith quota, restart with tracing enabled and confirm an external run.
 

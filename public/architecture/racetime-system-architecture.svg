@@ -104,8 +104,8 @@
 <text x="1138" y="719" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Separate model grounding check</text>
 <text x="1138" y="743" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">gemini-embedding-2 -&gt; 768-d vectors</text>
 <text x="1138" y="767" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">120 s call timeout; 1 transient retry</text>
-<text x="1138" y="791" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Small inline MP4: integration verified</text>
-<text x="1138" y="815" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">URL + Files processing: HTTP 500</text>
+<text x="1138" y="791" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Inline MP4 + one YouTube interval: passed</text>
+<text x="1138" y="815" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Files API: prior HTTP 500; unverified</text>
 <text x="1138" y="839" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Live stream integration: not yet tested</text>
 <polyline points="1055,744 1120,744" fill="none" stroke="#1b293a" stroke-width="1.8" marker-end="url(#arrow)"/>
 <text x="1087" y="728" font-family="Courier New, monospace" font-size="12" font-weight="400" fill="#506176" text-anchor="middle">API</text>

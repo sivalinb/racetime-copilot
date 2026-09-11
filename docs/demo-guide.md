@@ -8,6 +8,8 @@ New to the app? Start with [How to use RaceTime](how-to-use.md) for example ques
 4. Inspect citations, coverage gaps, provider limitations and the graph trace. Approve or reject after checking the footage.
 5. In **Evaluation**, record independently watched facts and summary errors. Never treat model observations as human ground truth.
 
+For a recorded success, use [this YouTube test](../reports/youtube-interval-test.md): `S_9wb3g7jtY`, Start `05:00`, End/cutoff `08:00`. The saved report includes seven observations and a recap awaiting human review. A fresh request can differ and uses provider quota.
+
 If provider video processing fails, show the explicit error and use the evidence-demo walkthrough below. Generation and embeddings alone do not establish video integration.
 
 # Five-minute demo

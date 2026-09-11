@@ -67,6 +67,8 @@ For a livestream, first use **Capture a live stream** with the current elapsed b
 
 ## Try one scenario
 
+Need question ideas? Browse [100 useful YouTube questions and scenarios](docs/youtube-question-library.md): 20 for the tested race-briefing interval and 80 for athlete tracking, crew handoffs, course updates, replay moments and more. Each includes the intended response. All are authored suggestions awaiting testing. The same library appears in Streamlit, grouped by category.
+
 In the optional **Evidence demo**, choose **Canyon Relay**, enter `00:00` to `15:00`, set the cutoff to `15:00`, and ask **What happened?**
 
 Two ridge reports disagree. RaceTime shows both, flags the conflict, and excludes the later timing update. Inspect the trace, approve or reject the recap, and export it.
@@ -102,6 +104,8 @@ Two technical views show the running components and the decisions behind a recap
 Open the [system diagram](public/architecture/racetime-system-architecture.svg) or [decision flow](public/architecture/racetime-decision-flow.svg) to zoom in. Both are also in Streamlit's collapsed **Technical architecture** panel. [Architecture details and validation limits](docs/architecture.md).
 
 ## Check it
+
+**Recorded YouTube test (10 September 2026):** a direct link worked for **05:00–08:00**, producing seven observations and a cited recap without an upload. Human factual review is pending. [Read the result, timestamps, trace and reproduction steps](reports/youtube-interval-test.md). The saved report is also available in Streamlit’s **Recorded YouTube test** panel.
 
 See [Evals and observability](evals-observability/README.md) for frozen golden datasets, per-case benchmarks, baseline comparisons, trace examples and a five-minute demonstration.
 

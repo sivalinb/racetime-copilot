@@ -30,6 +30,24 @@ st.subheader('How to use')
 st.caption('For video or livestream questions, choose Video workspace. Add a link, set the time range, ask your question, then review the result.')
 with st.expander('Open the step-by-step guide and example questions'):
     st.markdown((ROOT/'docs'/'how-to-use.md').read_text())
+with st.expander('Recorded YouTube test: 05:00–08:00, result and trace', expanded=False):
+    st.markdown((ROOT/'reports'/'youtube-interval-test.md').read_text())
+    video_test = ROOT/'evals-observability'/'observability'/'examples'/'youtube-S_9wb3g7jtY-05m-08m.json'
+    st.download_button('Download recorded YouTube test (JSON)', video_test.read_bytes(), file_name=video_test.name, mime='application/json', key='youtube_test_download')
+with st.expander('100 useful YouTube questions and scenarios', expanded=False):
+    catalog_path = ROOT/'evals-observability'/'datasets'/'youtube-question-scenarios-v1.json'
+    catalog = json.loads(catalog_path.read_text())
+    st.caption('100 suggested prompts, not 100 passed tests. The first 20 target the recorded 05:00–08:00 example; the other 80 need suitable footage. Set the time fields explicitly and replace placeholders before asking.')
+    categories = list(dict.fromkeys(case['category'] for case in catalog['cases']))
+    category = st.selectbox('Choose a question category', categories, key='youtube_question_category')
+    for case in catalog['cases']:
+        if case['category'] == category:
+            st.markdown('**' + case['id'] + ' · ' + case['scenario'] + '**')
+            st.code(case['prompt'], language=None, wrap_lines=True)
+            st.caption('Useful response: ' + case['expected_response_behavior'])
+    st.caption('These prompts guide a short cited recap. Exact counts, exhaustive visual searches and complex formatting are not guaranteed. Drafts are not sent; timestamp suggestions do not create clips. Live questions require processed coverage.')
+    st.download_button('Download all 100 questions (Markdown)', (ROOT/'docs'/'youtube-question-library.md').read_text(), file_name='racetime-100-youtube-questions.md', mime='text/markdown', key='youtube_questions_md')
+    st.download_button('Download scenario catalog (JSON)', catalog_path.read_bytes(), file_name=catalog_path.name, mime='application/json', key='youtube_questions_json')
 with st.expander('Week 1–5 learning map: concepts, product features and proof', expanded=False):
     st.markdown((ROOT/'docs'/'capstone-learning.md').read_text())
 with st.expander('Technical architecture: components, data flow and agent decisions', expanded=False):

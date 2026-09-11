@@ -59,3 +59,7 @@ SQLite is intended for this single-host local product. The prepared public conta
 The original TypeScript workflow uses Zod contracts, VTT/SRT/JSON imports, lexical ranking and deterministic hashed vectors. Its D1 store and byte-weighted LRU remain separate from the video workspace. The cache holds 500 KB of serialized results for five minutes and includes source revision in its key. Manual live append invalidates old revisions. Its review records are ordinary saved decisions, unlike the video workspace's graph checkpoint.
 
 The BERT-tiny LoRA lab is a separate experiment, not the production planner. Local traces work without LangSmith; external traces need an account with available quota. See [status](product-status.md) for measured validation and blockers.
+
+## Recorded YouTube integration
+
+A direct YouTube request for `S_9wb3g7jtY` at 05:00–08:00 passed on 10 September 2026 without an upload. The existing graph retrieved, inspected, retrieved seven notes, chose summarization and saved a cited recap at the human-review checkpoint. [Result and trace](../reports/youtube-interval-test.md). This verifies one interval through the architecture, not general video accuracy, Files API success or live-stream reliability.

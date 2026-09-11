@@ -27,7 +27,7 @@ Provider use can incur charges. Defaults limit each job to 32 generation/embeddi
 
 Save a public YouTube URL or upload an MP4, MOV or WebM. Choose a short interval first. `Ask the agent` retrieves existing evidence, decides whether another inspection is useful, creates a cited summary, checks grounding and pauses for review. Approve or reject under Jobs / results.
 
-YouTube access depends on provider support and the video's availability. Private, restricted or unavailable videos fail explicitly. Small MP4 uploads up to 12 MB use inline input; larger uploads use the Files API. The small inline path passed integration testing; YouTube and Files API processing returned server errors during the latest check. Uploaded videos are the alternative; the app does not bypass access controls.
+YouTube access depends on provider support and the video's availability. Private, restricted or unavailable videos fail explicitly. Small MP4 uploads up to 12 MB use inline input; larger uploads use the Files API. The small inline path and one direct YouTube interval (05:00–08:00 of `S_9wb3g7jtY`) passed integration testing. An earlier different YouTube source and Files API processing returned server errors; larger-upload processing remains unverified. [Recorded YouTube test](../reports/youtube-interval-test.md). Uploaded videos are the alternative; the app does not bypass access controls.
 
 ## 4. Live capture
 

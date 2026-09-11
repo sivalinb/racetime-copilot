@@ -24,7 +24,9 @@ The [recorded result](../benchmarks/router-recorded.json) contains every held-ou
 
 ## Real-video ground truth
 
-There is **no published independently reviewed race dataset yet**. The red/blue provider integration example is synthetic video; neither its model observations nor an approved recap should be promoted to ground truth.
+[youtube-question-scenarios-v1.json](youtube-question-scenarios-v1.json) contains 100 authored candidate scenarios across 10 categories. Twenty target the demonstrated YouTube interval; 80 require suitable other footage. Each records the user's need, prompt and expected response behavior. All are `not_run` with `ground_truth: null`; the qualitative expectations are not factual labels. The catalog is excluded from the golden manifest and benchmark counts. [Readable question library](../../docs/youtube-question-library.md).
+
+There is **no published independently reviewed race dataset yet**. The red/blue provider integration example is synthetic video; neither its model observations nor an approved recap should be promoted to ground truth. The [successful direct YouTube test](../../reports/youtube-interval-test.md) also remains an unreviewed integration record; its model-generated observations are excluded from the golden datasets.
 
 1. Use authorized race footage and choose an interval. Write expected facts and source timestamps independently of the model's answer.
 2. After generating a recap, open **Video workspace → Evaluation** and confirm that you watched the interval.

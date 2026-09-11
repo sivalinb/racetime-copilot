@@ -36,3 +36,5 @@ The report includes class precision/recall/F1, confusion matrices and 40 predict
 The existing [TypeScript tests](../../tests/core.test.ts) and [21 Python product tests](../../tests/product_test.py) check implementation contracts such as time boundaries, account isolation, durable review, retry/cancellation, leases and usage limits. They are tests, not additional benchmark samples. Run them with `npm test` and `python -m unittest discover -s tests -p product_test.py`.
 
 The [video integration snapshot](../observability/examples/video-integration-recorded.json) confirms a real provider round trip on a six-second synthetic clip and review after restart. Real race accuracy, active live capture and external LangSmith ingestion remain separate validation work.
+
+The [direct YouTube interval test](../../reports/youtube-interval-test.md) additionally records a successful three-minute public-video integration. Its seven model observations are not golden labels. It does not change the synthetic benchmark counts or establish a real-video accuracy, latency or cost score.

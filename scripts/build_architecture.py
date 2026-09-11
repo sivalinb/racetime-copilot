@@ -70,7 +70,7 @@ p.card(400,715,295,142,'2 / Model choice',['Gemini returns action + reason','Pyd
 p.card(740,715,295,142,'3 / Rule fallback',['Illegal action or planner failure','falls back to a permitted action','Trace mode: rule / llm / fallback','No invented successful inspection'],kind='app',size=14,title_size=19)
 p.line([(355,787),(400,787)]);p.line([(695,787),(740,787)],dash=True)
 p.line([(800,525),(800,590)]);p.tag(820,563,'recap')
-p.card(1120,590,440,295,'Gemini API boundary',['gemini-3.5-flash (default)','Video extraction / planner / summary','Separate model grounding check','gemini-embedding-2 -> 768-d vectors','120 s call timeout; 1 transient retry','Small inline MP4: integration verified','URL + Files processing: HTTP 500','Live stream integration: not yet tested'],kind='model',code='google-genai + Pydantic',size=16)
+p.card(1120,590,440,295,'Gemini API boundary',['gemini-3.5-flash (default)','Video extraction / planner / summary','Separate model grounding check','gemini-embedding-2 -> 768-d vectors','120 s call timeout; 1 transient retry','Inline MP4 + one YouTube interval: passed','Files API: prior HTTP 500; unverified','Live stream integration: not yet tested'],kind='model',code='google-genai + Pydantic',size=16)
 p.line([(1055,744),(1120,744)]);p.text(1087,728,'API',12,MUTED,mono=True,anchor='middle')
 p.tag(40,925,'TOOLS',BLUE)
 p.card(40,948,315,163,'Inspect + validate',['Recorded windows <= 300 s','Video sampling: 1 fps','Finite timestamps; provenance','MP4 <= 12 MB inline; else Files','Live clips use capture offsets'],kind='model',size=15,title_size=20)

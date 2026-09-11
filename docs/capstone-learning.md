@@ -2,7 +2,7 @@
 
 Follow each week from **learning → implementation → what to try → evidence**. The nested bullets explain exactly how the feature demonstrates the concept.
 
-**Before you start:** open Video workspace and sign in. For a video walkthrough, use a short MP4 under 12 MB; YouTube processing has encountered provider errors. For the key-free examples below, switch to Evidence demo and select the fictional Canyon Relay race.
+**Before you start:** open Video workspace and sign in. For a video walkthrough, use a short MP4 under 12 MB or the successful [YouTube 05:00–08:00 example](https://github.com/sivalinb/racetime-copilot/blob/main/reports/youtube-interval-test.md). Some sources have encountered provider errors. For the key-free examples below, switch to Evidence demo and select the fictional Canyon Relay race.
 
 All five learning themes are represented. Remaining validation and submission items are stated separately; this is not a claim that every assignment is complete.
 
@@ -50,7 +50,7 @@ All five learning themes are represented. Remaining validation and submission it
 
 - **Connect the steps into a complete RAG chain.**
   - **Follow the code:** [service.py](https://github.com/sivalinb/racetime-copilot/blob/main/racetime/service.py) ingests and stores notes; [provider.py](https://github.com/sivalinb/racetime-copilot/blob/main/racetime/provider.py) embeds and generates; [agent.py](https://github.com/sivalinb/racetime-copilot/blob/main/racetime/agent.py) retrieves and coordinates the answer.
-  - **Current proof:** a six-second synthetic uploaded video passed extraction, learned retrieval and cited recap integration. YouTube/large-file reliability and independently reviewed race cases remain open.
+  - **Current proof:** a six-second synthetic uploaded video and one direct YouTube interval passed extraction, learned retrieval and cited recap integration. The YouTube run returned seven observations and paused for review; [report and trace](https://github.com/sivalinb/racetime-copilot/blob/main/reports/youtube-interval-test.md). Broader URL/large-file reliability and independently reviewed race cases remain open.
 
 ## Week 3 — Build an agent with decisions, tools and state
 
