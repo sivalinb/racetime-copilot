@@ -2,6 +2,10 @@
 
 > An evidence-backed catch-up companion for endurance-race fans and crews.
 
+![RaceTime at a glance: step away from a long broadcast, choose the missed interval and spoiler cutoff, then review a recap with timestamped evidence](public/architecture/racetime-readme-intro.png)
+
+**Step away → choose your interval → catch up with evidence.** [Open the introduction diagram](public/architecture/racetime-readme-intro.svg). Example screens are illustrative; live catch-up requires captured coverage.
+
 ## Why I’m building this
 
 ![Siva’s illustrated founder story: living the sport, missing a long broadcast during sleep or work, and catching up with RaceTime](public/art/founder-story.png)
@@ -101,6 +105,14 @@ The video workspace uses a bounded Gemini planner, semantic retrieval, cited sum
 
 ## Architecture
 
+![Architecture overview of the Python video workspace: source video, Streamlit and job queue, background worker, bounded LangGraph agent, Gemini, SQLite persistence, human review and observability](public/architecture/racetime-readme-architecture.png)
+
+Follow the request from source video to a reviewed recap. The main workflow is Python; the TypeScript evidence demo and LoRA lab are separate capstone components. [Open the editable architecture diagram](public/architecture/racetime-readme-architecture.svg) · [Implementation details](docs/architecture.md).
+
+<details>
+<summary>Explore the existing illustrated architecture and detailed engineering views</summary>
+
+
 ![Illustrated architecture: race video and job queue, constrained LangGraph agent, evidence retrieval and human review](public/architecture/racetime-illustrated-architecture.png)
 
 Follow a race question through this illustrated overview. The example race events are illustrative. [Open the full-size image](public/architecture/racetime-illustrated-architecture.png).
@@ -112,6 +124,8 @@ Two technical views show the running components and the decisions behind a recap
 ![Question lifecycle: retrieval, bounded planning, inspection, verification and durable human review](public/architecture/racetime-decision-flow.svg)
 
 Open the [system diagram](public/architecture/racetime-system-architecture.svg) or [decision flow](public/architecture/racetime-decision-flow.svg) to zoom in. Both are also in Streamlit's collapsed **Technical architecture** panel. [Architecture details and validation limits](docs/architecture.md).
+
+</details>
 
 ## Check it
 

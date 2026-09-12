@@ -1,5 +1,11 @@
 # Architecture
 
+## README overview
+
+![Python video workspace at a glance](../public/architecture/racetime-readme-architecture.png)
+
+[Editable architecture SVG](../public/architecture/racetime-readme-architecture.svg) · [Product introduction SVG](../public/architecture/racetime-readme-intro.svg). These diagrams summarize the implemented workflow without adding new integrations. Generate the SVGs with `python scripts/build_readme_diagrams.py`; the matching PNG files are README previews.
+
 ## Illustrated overview
 
 ![How a race question runs](../public/architecture/racetime-illustrated-architecture.png)

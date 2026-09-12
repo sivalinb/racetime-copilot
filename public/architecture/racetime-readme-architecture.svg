@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1150" viewBox="0 0 1440 1150" role="img" aria-labelledby="title desc">
+<title id="title">RaceTime Copilot architecture overview</title><desc id="desc">Video sources enter a Streamlit account-scoped job queue. A worker runs a bounded LangGraph agent that retrieves evidence, optionally inspects video with Gemini and generates a checked recap. SQLite persists jobs, observations and review checkpoints. Local traces and optional LangSmith support inspection; the TypeScript evidence demo and LoRA training lab are separate.</desc>
+<rect width="1440" height="1150" rx="24" fill="#f5f3eb"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#6a8790"/></marker></defs>
+<text x="40" y="48" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#187b70">RACETIME COPILOT  /  IMPLEMENTED VIDEO WORKSPACE</text>
+<text x="40" y="101" font-family="DejaVu Sans, sans-serif" font-size="36" font-weight="700" fill="#203646">From a race question to evidence you can review</text>
+<text x="40" y="141" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#526976">Python application • bounded model calls • persistent jobs and human review</text>
+<rect x="40" y="190" width="400" height="180" rx="18" fill="#ffffff" stroke="none"/>
+<rect x="520" y="190" width="400" height="180" rx="18" fill="#ffffff" stroke="none"/>
+<rect x="1000" y="190" width="400" height="180" rx="18" fill="#ffffff" stroke="none"/>
+<circle cx="80" cy="224" r="18" fill="#187b70" stroke="none" stroke-width="2"/>
+<text x="73" y="232" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="700" fill="#ffffff">1</text>
+<text x="112" y="232" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#203646">Video sources</text>
+<text x="64" y="277" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#203646">Public YouTube or upload</text>
+<text x="64" y="312" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#396f9a">Live: yt-dlp + FFmpeg</text>
+<text x="64" y="345" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">Completed segments only</text>
+<circle cx="560" cy="224" r="18" fill="#187b70" stroke="none" stroke-width="2"/>
+<text x="553" y="232" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="700" fill="#ffffff">2</text>
+<text x="592" y="232" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#203646">Streamlit + service</text>
+<text x="544" y="277" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#203646">Sign in · question · interval</text>
+<text x="544" y="312" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#396f9a">Validate time and cutoff</text>
+<text x="544" y="345" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">Save an owner-scoped job</text>
+<circle cx="1040" cy="224" r="18" fill="#187b70" stroke="none" stroke-width="2"/>
+<text x="1033" y="232" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="700" fill="#ffffff">3</text>
+<text x="1072" y="232" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#203646">Background worker</text>
+<text x="1024" y="277" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#203646">Claim queued work</text>
+<text x="1024" y="312" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#396f9a">Leases, budgets, cancellation</text>
+<text x="1024" y="345" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">Run or resume investigation</text>
+<path d="M458 282 H500" stroke="#6a8790" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M938 282 H980" stroke="#6a8790" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M1200 370 V398 H484 V430" stroke="#6a8790" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="40" y="440" width="880" height="335" rx="18" fill="#e4edf3" stroke="none"/>
+<text x="65" y="482" font-family="DejaVu Sans, sans-serif" font-size="25" font-weight="700" fill="#396f9a">BOUNDED LANGGRAPH AGENT</text>
+<rect x="65" y="510" width="255" height="135" rx="18" fill="#ffffff" stroke="none"/>
+<text x="81" y="545" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#396f9a">Retrieve</text>
+<text x="81" y="583" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#203646">Eligible observations</text>
+<text x="81" y="615" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#526976">Semantic ranking</text>
+<rect x="350" y="510" width="255" height="135" rx="18" fill="#ffffff" stroke="none"/>
+<text x="366" y="545" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#396f9a">Plan</text>
+<text x="366" y="583" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#203646">Permitted actions</text>
+<text x="366" y="615" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#526976">Bounded iterations</text>
+<rect x="635" y="510" width="255" height="135" rx="18" fill="#ffffff" stroke="none"/>
+<text x="651" y="545" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#396f9a">Act</text>
+<text x="651" y="583" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#203646">Inspect or summarize</text>
+<text x="651" y="615" font-family="DejaVu Sans, sans-serif" font-size="19" font-weight="400" fill="#526976">Clarify if insufficient</text>
+<path d="M323 575 H342" stroke="#6a8790" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M608 575 H627" stroke="#6a8790" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="65" y="689" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#396f9a">Inspect → retrieve again  ·  Planner enforces action limits</text>
+<rect x="65" y="709" width="825" height="46" rx="10" fill="#ffffff" stroke="none"/>
+<text x="82" y="740" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="700" fill="#187b70">Cited recap → grounding check → durable review pause</text>
+<rect x="1000" y="440" width="400" height="335" rx="18" fill="#fbefd9" stroke="none"/>
+<circle cx="1050" cy="478" r="15" fill="#d9a254" stroke="none" stroke-width="2"/>
+<text x="1078" y="486" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="700" fill="#a66b27">GEMINI API</text>
+<text x="1025" y="537" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#203646">Video inspection</text>
+<text x="1025" y="577" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#203646">Embeddings and planning</text>
+<text x="1025" y="617" font-family="DejaVu Sans, sans-serif" font-size="23" font-weight="400" fill="#203646">Recap and grounding</text>
+<text x="1025" y="676" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="700" fill="#a66b27">Model output can be wrong.</text>
+<text x="1025" y="713" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">Failed generation falls back</text>
+<text x="1025" y="744" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">to labelled evidence extracts.</text>
+<path d="M922 562 H997" stroke="#6a8790" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M997 606 H922" stroke="#6a8790" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="40" y="840" width="400" height="183" rx="18" fill="#ffffff" stroke="none"/>
+<rect x="520" y="840" width="400" height="183" rx="18" fill="#ffffff" stroke="none"/>
+<rect x="1000" y="840" width="400" height="183" rx="18" fill="#ffffff" stroke="none"/>
+<path d="M240 775 V835" stroke="#6a8790" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M720 775 V835" stroke="#6a8790" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="64" y="882" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#396f9a">SQLite persistence</text>
+<text x="64" y="923" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#203646">Accounts, jobs, observations</text>
+<text x="64" y="958" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#203646">Usage and graph checkpoints</text>
+<text x="64" y="994" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">Local files under .runtime/</text>
+<text x="544" y="882" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#187b70">Human review</text>
+<text x="544" y="923" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#203646">Recap + timestamps + gaps</text>
+<text x="544" y="958" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#203646">Approve or reject; save decision</text>
+<text x="544" y="994" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">Approval does not certify truth.</text>
+<text x="1024" y="882" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#396f9a">Observability</text>
+<text x="1024" y="923" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#203646">Local traces and usage</text>
+<text x="1024" y="958" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#203646">Optional LangSmith export</text>
+<text x="1024" y="994" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">Requires account and quota</text>
+<text x="40" y="1073" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#187b70">SEPARATE CAPSTONE COMPONENTS</text>
+<text x="40" y="1111" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#526976">TypeScript evidence demo + D1/LRU   •   Evaluation pack   •   LoRA routing lab (not used by this agent)</text>
+</svg>
