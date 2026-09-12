@@ -36,6 +36,7 @@ jobs:
           python -m ruff check .
       - run: pip install -r requirements.txt
       - run: python -m unittest discover -s tests -p product_test.py
+      - run: python -m unittest discover -s tests -p observability_test.py
       - name: Streamlit integration
         run: |
           npm run dev > /tmp/racetime-api.log 2>&1 &

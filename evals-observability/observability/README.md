@@ -35,8 +35,29 @@ Both video snapshots are saved integration records and have no cost/latency meas
 
 ## LangSmith
 
-LangGraph run names and metadata are wired in the application. Configure `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY` and `LANGSMITH_PROJECT=racetime-copilot` in the ignored `.env`, then restart the app and worker. Never put a key in this folder or a screenshot.
+The video workflow now has explicit LangSmith instrumentation. Configure `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT=racetime-copilot` and `LANGSMITH_TRACING_SAMPLING_RATE=1.0` in the ignored `.env`, then restart the app and worker. Never put a key in this folder or a screenshot.
 
-The last external ingestion check returned **HTTP 429 because monthly trace quota was exhausted**. The local demo was subsequently started with external tracing disabled. Once quota is available, run a short authorized example and confirm that a new run reaches the project before presenting an external trace. Configuration alone is not proof of successful ingestion.
+**External check, 11 September 2026:** authentication and project creation succeeded, but a synchronous trace write returned **HTTP 429: monthly trace limit reached**. No hosted child-span or token readback is claimed. Local tests capture the actual SDK payloads from the real graph and verify nesting, four synthetic generation calls, token fields, sanitized failures and durable review. Restore account quota before repeating the hosted check; deleting old traces does not undo monthly ingestion usage.
+
+| Span | What to inspect |
+|---|---|
+| RaceTime video job | Question, interval, job/media IDs, total duration and outcome |
+| racetime-video-agent | Graph node order, planner decisions and review interruption |
+| Retrieve interval evidence | Selected observations, timestamps and coverage gaps |
+| Inspect video interval | Bounded start/end and extracted notes; raw video is omitted |
+| Gemini generation | Purpose: extraction, planner, summary or grounding check; prompt, structured output and token usage |
+| Gemini embeddings | Query/document text, model name, vector count and dimensions; vectors are omitted |
+| RaceTime human review | Separate resumed trace, approve/reject decision and matching job ID |
+
+To demonstrate once quota is available:
+
+1. Run `python -m scripts.check_langsmith`. This uses synthetic SDK responses, sends three traces and makes no Gemini calls. It fails unless hosted model/tool spans, fixture token counts and review completion are readable. The private report is `.runtime/langsmith-check.json`.
+2. In Streamlit → Video workspace, save a public YouTube URL and queue a short interval question.
+3. In Jobs / results, click **Open LangSmith trace**. Expand the root and inspect the spans above. If a trace is missing, check quota and connection status; a generated URL does not prove ingestion.
+4. Inspect model outputs and source timestamps, then approve/reject in Streamlit. Open the review trace; its exported result also retains the original run reference.
+
+Generation token counts include reported thinking tokens where available. They do not establish complete provider cost; failed calls and embedding usage may be missing. LangSmith latency measurements cover the traced execution, not time spent waiting in the job queue. Use sampling below 1.0 for routine development, but retain all cases during a controlled evaluation.
+
+Implementation: [observability helper](../../racetime/observability.py), [provider spans](../../racetime/provider.py), [job wrapper](../../racetime/service.py), [local instrumentation tests](../../tests/observability_test.py), [hosted check](../../scripts/check_langsmith.py).
 
 Local evidence traces and video job/checkpoint data remain available independently of LangSmith. Real requests may contain private source content; inspect and redact any exported trace before publishing it. The committed examples use fictional observations, the synthetic color clip or the user-authorized public YouTube interval. No keys or private source media are included.

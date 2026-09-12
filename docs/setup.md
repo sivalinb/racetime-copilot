@@ -43,9 +43,14 @@ Create a key at https://smith.langchain.com and add these values to `.env`:
 LANGSMITH_TRACING=true
 LANGSMITH_API_KEY=your_key
 LANGSMITH_PROJECT=racetime-copilot
+LANGSMITH_TRACING_SAMPLING_RATE=1.0
 ```
 
 Restart the worker and run a video question. Verify the job's graph run in LangSmith. This sends workflow inputs and evidence to LangSmith. Local job traces remain available without this account. If ingestion reports a monthly quota limit, check LangSmith Settings and restore quota or wait for its reset. Set LANGSMITH_TRACING=false and restart to use local traces meanwhile. Do not keep retrying an exhausted quota.
+
+Jobs / results includes **Open LangSmith trace** for traced results. The root identifies the job and interval; expand it for graph decisions, retrieval, video inspection, Gemini generation and embeddings. Generation spans contain reported token usage; raw video bytes, upload paths and SDK credentials are omitted from custom spans. The trace still contains questions and generated evidence. An approve/reject action creates a separate review trace linked to the original result.
+
+Run `python -m scripts.check_langsmith` once to verify hosted ingestion and nested spans using synthetic SDK responses. It consumes three LangSmith traces, makes no Gemini calls, and saves a private report to `.runtime/langsmith-check.json`. Fixture tokens and observations are not real-video measurements. The app's trace link means tracing was requested; only a successful hosted readback confirms ingestion. See [the observability walkthrough](../evals-observability/observability/README.md#langsmith).
 
 ## 6. Real-video evaluation
 

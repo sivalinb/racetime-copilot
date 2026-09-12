@@ -14,7 +14,7 @@ The local implementation is ready for continued testing. **It is not yet a valid
 | Background jobs / accounts | Persistent local login, account isolation, leases, cancellation and recovery | Local contract and Streamlit tests pass |
 | Live capture | Continuous public YouTube segments, explicit coverage and last-15-minute query | Active race-stream test deferred at the user's request; clock alignment remains unmeasured |
 | Real evaluation | Human annotation screen and aggregation command | No independently reviewed race dataset yet; no real-race quality score claimed |
-| Tracing | Local graph traces and LangSmith configuration | Local traces work. LangSmith ingestion returned HTTP 429: monthly trace quota exhausted |
+| Tracing | Local traces plus LangSmith job, graph, retrieval, inspection, generation and embedding spans; Streamlit trace links | Nested SDK payloads/token fields tested locally. Project creation succeeded; 11 September hosted write still returned HTTP 429 (monthly limit). Hosted readback pending |
 | Public hosting | Docker/Caddy/OIDC configuration and backup script | Deferred: local product first. Container build and hosted authentication are unverified |
 
 The default generation model is `gemini-3.5-flash`. Small MP4s up to 12 MB use inline input; larger files use the provider Files API. An API key alone does not guarantee access to every model or video source. There is no automatic bypass of unavailable/restricted video.

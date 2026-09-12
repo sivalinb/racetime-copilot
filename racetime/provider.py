@@ -9,9 +9,11 @@ from typing import Literal
 
 from google import genai
 from google.genai import types
+from langsmith import get_current_run_tree
 from pydantic import BaseModel, ConfigDict, Field
 
 from .config import EMBED_MODEL, MODEL
+from .observability import metadata, observed, record
 
 
 class Observation(BaseModel):
@@ -61,7 +63,13 @@ class Gemini:
             api_key=key, http_options=types.HttpOptions(timeout=120000)
         )
 
+    @observed("Gemini generation", "llm", ("purpose", "prompt"))
     def call(self, purpose, prompt, schema, parts=None):
+        trace = get_current_run_tree()
+        metadata(
+            trace, {"ls_provider": "google", "ls_model_name": MODEL, "purpose": purpose}
+        )
+        input_tokens = output_tokens = 0
         for attempt in range(2):
             if self.store.job(self.owner, self.job)["cancel"]:
                 raise ValueError("Job cancelled.")
@@ -82,6 +90,21 @@ class Gemini:
                     ),
                 )
                 usage = response.usage_metadata
+                input_tokens += getattr(usage, "prompt_token_count", 0) or 0
+                output_tokens += (getattr(usage, "candidates_token_count", 0) or 0) + (
+                    getattr(usage, "thoughts_token_count", 0) or 0
+                )
+                record(
+                    trace,
+                    {
+                        "usage_metadata": {
+                            "input_tokens": input_tokens,
+                            "output_tokens": output_tokens,
+                            "total_tokens": input_tokens + output_tokens,
+                        },
+                        "attempts": attempt + 1,
+                    },
+                )
                 self.store.used(
                     ticket,
                     getattr(usage, "prompt_token_count", 0) or 0,
@@ -111,6 +134,7 @@ class Gemini:
             raise ValueError("Provider could not process this video.")
         return file
 
+    @observed("Inspect video interval", "tool", ("start", "end", "origin"))
     def extract(self, uri, start, end, origin=0):
         data = (
             {"inline_data": types.Blob(data=uri, mime_type="video/mp4")}
@@ -152,7 +176,17 @@ class Gemini:
             events.append(e)
         return events, data.limitations
 
+    @observed(
+        "Gemini embeddings",
+        "embedding",
+        ("texts", "query"),
+        output=lambda vectors: {"count": len(vectors), "dimensions": 768},
+    )
     def embed(self, texts, query=False):
+        metadata(
+            get_current_run_tree(),
+            {"ls_provider": "google", "ls_model_name": EMBED_MODEL},
+        )
         if not texts:
             return []
         ticket = self.store.reserve(self.owner, self.job, "semantic embeddings")

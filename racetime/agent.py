@@ -10,6 +10,7 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 
 from .config import DATA
+from .observability import observed
 
 
 class State(TypedDict, total=False):
@@ -133,6 +134,7 @@ class Agent:
             "trace": [{"step": "plan", "mode": mode, **decision}],
         }
 
+    @observed("Retrieve interval evidence", "retriever", ("state",))
     def retrieve(self, state):
         """Rank eligible observations and retain related conflicting claims."""
         pool = [

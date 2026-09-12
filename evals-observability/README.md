@@ -12,7 +12,7 @@ Start here to see **what we test, what the data contains, what passed, and how a
 | [Video integration record](observability/examples/video-integration-recorded.json) | Six-second red/blue clip, cited recap and review after restart | Real Gemini integration on synthetic video; not race accuracy |
 | [Direct YouTube interval test](../reports/youtube-interval-test.md) | 05:00–08:00; seven observations and cited recap awaiting review | Real public race-discussion video; integration only, no human accuracy score |
 | [Real-video evaluation process](datasets/README.md#real-video-ground-truth) | Annotation UI and aggregation implemented | No independently reviewed real-race benchmark published |
-| [External observability](observability/README.md#langsmith) | LangSmith configured; last test returned quota HTTP 429 | Local traces work; external ingestion still needs rechecking |
+| [External observability](observability/README.md#langsmith) | Explicit job/model/tool spans and Streamlit links; [instrumentation check](observability/langsmith-check.md) | Local SDK payload tests pass; hosted ingestion still blocked by monthly HTTP 429 |
 
 ## Run the golden benchmark
 

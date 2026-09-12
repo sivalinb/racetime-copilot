@@ -218,6 +218,12 @@ def render():
                         store.cancel(owner, j["id"])
                         st.rerun()
                 result = j["result"] or {}
+                observability = result.get("observability", {})
+                if observability.get("url"):
+                    st.link_button("Open LangSmith trace", observability["url"])
+                    st.caption(
+                        "Trace delivery is asynchronous; quota or connection errors can prevent ingestion."
+                    )
                 if result.get("gaps"):
                     st.warning(
                         "No processed coverage for these intervals (seconds): "

@@ -16,6 +16,7 @@ import imageio_ffmpeg
 
 from .agent import Agent
 from .config import DATA, MAX_UPLOAD
+from .observability import record, span, trace_reference
 from .provider import Gemini
 from .store import Store
 
@@ -217,7 +218,7 @@ class Service:
         if changed != 1:
             raise ValueError("This job is not waiting for review.")
         try:
-            result, waiting = self.recap(job, resume=decision)
+            result, waiting = self.execute(job, resume=decision)
             self.store.finish(
                 owner, id, "awaiting_review" if waiting else "completed", result
             )
@@ -389,6 +390,42 @@ class Service:
             "clock_note": "Live offsets use the elapsed time supplied at capture start; broadcaster/network delay can affect alignment.",
         }
 
+    def execute(self, job, resume=None):
+        """Trace a worker attempt or review resume under its durable job ID."""
+        with span(
+            "RaceTime human review" if resume else "RaceTime video job",
+            inputs={**job["payload"], "kind": job["kind"], "review": resume},
+            metadata={"job_id": job["id"], "media_id": job["payload"]["media"]},
+        ) as run:
+            if job["kind"] == "analyze":
+                result = self.inspect(
+                    job["owner"],
+                    job["id"],
+                    job["payload"]["media"],
+                    job["payload"]["start"],
+                    job["payload"]["end"],
+                )
+                waiting = False
+            elif job["kind"] == "live":
+                result, waiting = self.live(job), False
+            else:
+                result, waiting = self.recap(job, resume=resume)
+            record(
+                run,
+                {
+                    "status": "awaiting_review" if waiting else "completed",
+                    "result": result,
+                },
+            )
+            reference = trace_reference(run)
+            if reference:
+                result["observability"] = reference
+                if resume and (job.get("result") or {}).get("observability"):
+                    result["observability"]["original_run"] = job["result"][
+                        "observability"
+                    ]
+            return result, waiting
+
     def process_one(self):
         job = self.store.claim()
         if not job:
@@ -402,20 +439,7 @@ class Service:
         beat = threading.Thread(target=heartbeat, daemon=True)
         beat.start()
         try:
-            if job["kind"] == "analyze":
-                result = self.inspect(
-                    job["owner"],
-                    job["id"],
-                    job["payload"]["media"],
-                    job["payload"]["start"],
-                    job["payload"]["end"],
-                )
-                waiting = False
-            elif job["kind"] == "live":
-                result = self.live(job)
-                waiting = False
-            else:
-                result, waiting = self.recap(job)
+            result, waiting = self.execute(job)
             if self.store.job(job["owner"], job["id"])["cancel"]:
                 raise Cancelled()
             self.store.finish(
