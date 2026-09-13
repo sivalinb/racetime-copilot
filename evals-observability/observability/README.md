@@ -61,3 +61,7 @@ Generation token counts include reported thinking tokens where available. They d
 Implementation: [observability helper](../../racetime/observability.py), [provider spans](../../racetime/provider.py), [job wrapper](../../racetime/service.py), [local instrumentation tests](../../tests/observability_test.py), [hosted check](../../scripts/check_langsmith.py).
 
 Local evidence traces and video job/checkpoint data remain available independently of LangSmith. Real requests may contain private source content; inspect and redact any exported trace before publishing it. The committed examples use fictional observations, the synthetic color clip or the user-authorized public YouTube interval. No keys or private source media are included.
+
+## Week 4 evaluation follow-through
+
+[Independent labels, judge calibration and controlled abstention experiments](https://github.com/sivalinb/racetime-copilot/blob/main/docs/week4-evaluation.md): the reviewer form and analysis tools now retain unanswerable cases, distinguish unnecessary refusals from unsupported answers, preserve review revisions and analyze paired 2×2 runs. Missing study evidence blocks readiness; complete inputs still require manual release review. Independent video labels, calibrated judge results and real interaction runs remain pending. Earlier feedback is not presented as a RaceTime experiment result.

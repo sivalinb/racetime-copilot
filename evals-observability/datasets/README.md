@@ -30,14 +30,18 @@ There is **no published independently reviewed race dataset yet**. The red/blue 
 
 1. Use authorized race footage and choose an interval. Write expected facts and source timestamps independently of the model's answer.
 2. After generating a recap, open **Video workspace → Evaluation** and confirm that you watched the interval.
-3. Record expected facts, supported-sentence percentage, missed important events, spoiler leaks and largest timestamp error. Save and download the annotation.
-4. Annotations remain under ignored `.runtime/evaluations/<owner>/<job>.json`. Saving again for the same job replaces that annotation. Keep a separate reviewed dataset if multiple reviewers or revisions are needed.
+3. Record answerability and actual response type separately, source rationale, timestamped expected facts, unsupported claims, missed events, spoilers and timestamp error. Unanswerable cases may have no facts. Abstentions have null supported percentage. Save and download the annotation.
+4. Annotations remain under ignored `.runtime/evaluations/<owner>/<job>-<unique-id>.json`. Each save preserves previous reviews. Adjudicate revisions and multiple reviewers into one case label before a benchmark; the local summary counts annotations.
 5. Aggregate saved annotations from the repository root:
 
 ```bash
 python scripts/evaluate_real.py
 ```
 
-The command refuses to produce a benchmark when no reviewed cases exist. It reports case/reviewer count, mean reviewer-entered supported percentage, total misses/leaks and largest timestamp error. The mean is per-case, not weighted by sentence count. Scores are human judgments; the program does not independently certify them.
+The command writes an explicit incomplete report and exits nonzero when no valid records exist or any annotations are invalid. Legacy records need reviewed migration to explicit answerability; they are listed as exclusions. It reports answerability and response counts, unnecessary abstentions, answers to unanswerable questions, unsupported claims, misses/leaks and timestamp error. Supported percentage averages only non-abstention annotations, not sentences. Scores are human judgments; the program does not certify label independence or approve a release.
 
 [human-review-template.json](human-review-template.json) documents the annotation fields with empty values. It is not a labeled example and must not be counted as an evaluated case. Before claiming real-race quality, use varied footage, more than one reviewer where possible, resolve disagreements, and reserve a blind test set.
+
+## Week 4 feedback follow-through
+
+See the [labeling, calibration, ablation and release protocol](../../docs/week4-evaluation.md) and [empty study template](week4-study-template.json). These are tools and a protocol, not completed independent experiments.

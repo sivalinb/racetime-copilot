@@ -26,6 +26,7 @@ class VideoUI(unittest.TestCase):
             with (
                 patch("racetime.ui.service", return_value=svc),
                 patch("racetime.ui.configured", return_value=True),
+                patch("racetime.ui.DATA", Path(folder)),
             ):
                 at = AppTest.from_file(str(ROOT / "app.py"), default_timeout=30).run()
                 at.radio(key="workspace_mode").set_value("Video workspace").run()
@@ -56,6 +57,51 @@ class VideoUI(unittest.TestCase):
                 self.assertEqual(jobs[0]["status"], "queued")
                 next(b for b in at.button if b.label == "Cancel job").click().run()
                 self.assertTrue(svc.store.job(owner, jobs[0]["id"])["cancel"])
+                svc.store.finish(
+                    owner,
+                    jobs[0]["id"],
+                    "completed",
+                    {"clarification": "No evidence for a winner."},
+                )
+                at.run()
+                self.assertFalse(at.exception)
+                next(
+                    c
+                    for c in at.checkbox
+                    if c.label.startswith("I independently watched")
+                ).check()
+                next(
+                    s
+                    for s in at.selectbox
+                    if s.label == "Can this interval answer the question?"
+                ).select("unanswerable")
+                next(
+                    s
+                    for s in at.selectbox
+                    if s.label == "What did the actual response do?"
+                ).select("abstain")
+                next(
+                    t
+                    for t in at.text_area
+                    if t.label.startswith("Explain the evidence")
+                ).set_value("No winner is announced in this fixture interval.")
+                next(
+                    b for b in at.button if b.label == "Save human evaluation"
+                ).click().run()
+                self.assertFalse(at.exception)
+                saved = list((Path(folder) / "evaluations" / owner).glob("*.json"))
+                self.assertEqual(len(saved), 1)
+                import json
+
+                record = json.loads(saved[0].read_text())
+                self.assertEqual(record["expected_facts"], [])
+                self.assertIsNone(record["supported_percent"])
+                next(
+                    b for b in at.button if b.label == "Save human evaluation"
+                ).click().run()
+                self.assertEqual(
+                    len(list((Path(folder) / "evaluations" / owner).glob("*.json"))), 2
+                )
 
 
 if __name__ == "__main__":

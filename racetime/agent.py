@@ -214,7 +214,17 @@ class Agent:
     def clarify(self, state):
         return {
             "clarification": "There is not enough usable evidence for this question. Choose another interval, make the question more specific, or inspect the video first.",
-            "trace": [{"step": "clarify", "mode": "rule"}],
+            "trace": [
+                {
+                    "step": "clarify",
+                    "mode": "rule",
+                    "reason_code": "no_eligible_evidence"
+                    if not state.get("selected")
+                    else "planner_requested_clarification",
+                    "selected_count": len(state.get("selected", [])),
+                    "inspected": state.get("inspected", False),
+                }
+            ],
         }
 
     def review(self, state):

@@ -1,0 +1,29 @@
+{
+  "description": "Empty study template. Not evaluated data. Supply reviewed labels and measured runs; never copy fixture scores as video results.",
+  "dataset_version": null,
+  "rubric_version": null,
+  "code_revision": null,
+  "model_version": null,
+  "source_snapshot": null,
+  "split_manifest": null,
+  "label_review_record": null,
+  "release_criteria": null,
+  "calibration": [],
+  "interaction_runs": [],
+  "calibration_row_fields": {
+    "id": "unique frozen response ID",
+    "human_accept": "boolean human rubric verdict",
+    "judge_accept": "boolean judge verdict"
+  },
+  "interaction_row_fields": {
+    "case_id": "stable adjudicated case ID",
+    "repeat": "positive integer",
+    "retrieval": "current or candidate",
+    "policy": "current or candidate",
+    "passed": "boolean reviewed verdict against frozen rubric",
+    "trace_url": "optional trace link",
+    "latency_ms": "optional measured latency",
+    "cost_usd": "optional measured cost",
+    "failure_reason": "keep negative results visible"
+  }
+}

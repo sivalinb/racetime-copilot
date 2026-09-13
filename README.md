@@ -173,3 +173,7 @@ Public deployment configuration is included, but a host, domain and OIDC credent
 **New data sources → Domain tools → Evidence-linked answers → Human review.** Each extension would reuse the time-window workflow and add its own integrations and validation.
 
 *Future possibilities, not completed features. The scenes and sample screens are illustrative.* [Explore all five use cases](docs/future-use-cases.md) · [Open the full-size illustration](public/art/expansion-footer.png).
+
+## Week 4 evaluation follow-through
+
+[Independent labels, judge calibration and controlled abstention experiments](https://github.com/sivalinb/racetime-copilot/blob/main/docs/week4-evaluation.md): the reviewer form and analysis tools now retain unanswerable cases, distinguish unnecessary refusals from unsupported answers, preserve review revisions and analyze paired 2×2 runs. Missing study evidence blocks readiness; complete inputs still require manual release review. Independent video labels, calibrated judge results and real interaction runs remain pending. Earlier feedback is not presented as a RaceTime experiment result.

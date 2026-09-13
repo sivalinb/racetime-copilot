@@ -29,3 +29,7 @@ The original evidence demo remains the dependable key-free presentation path: **
 4. Restore LangSmith quota, restart with tracing enabled and confirm an external run.
 
 See [setup](setup.md) for exact account and launch steps, and [verification](../reports/verification.md) for test scope.
+
+## Week 4 evaluation follow-through
+
+[Independent labels, judge calibration and controlled abstention experiments](https://github.com/sivalinb/racetime-copilot/blob/main/docs/week4-evaluation.md): the reviewer form and analysis tools now retain unanswerable cases, distinguish unnecessary refusals from unsupported answers, preserve review revisions and analyze paired 2×2 runs. Missing study evidence blocks readiness; complete inputs still require manual release review. Independent video labels, calibrated judge results and real interaction runs remain pending. Earlier feedback is not presented as a RaceTime experiment result.

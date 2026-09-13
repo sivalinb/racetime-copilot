@@ -148,6 +148,11 @@ with st.expander(
             key="course_completion_download",
         )
 with st.expander(
+    "Week 4 evaluation: independent labels, judge calibration and abstention",
+    expanded=False,
+):
+    st.markdown((ROOT / "docs" / "week4-evaluation.md").read_text())
+with st.expander(
     "Technical architecture: components, data flow and agent decisions", expanded=False
 ):
     st.caption(

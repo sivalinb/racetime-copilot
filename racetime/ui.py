@@ -3,12 +3,14 @@
 import json
 import os
 from pathlib import Path
+from uuid import uuid4
 
 import streamlit as st
 
 from demo.client import clock, elapsed
 
 from .config import DATA, configured
+from .evaluation import validate_annotation
 from .service import Service
 
 
@@ -132,7 +134,9 @@ def render():
         else:
             by_id = {m["id"]: m for m in media}
             selected = st.selectbox(
-                "Video", list(by_id), format_func=lambda id: by_id[id]["title"]
+                "Video",
+                list(by_id),
+                format_func=lambda id, media_by_id=by_id: media_by_id[id]["title"],
             )
             action = st.selectbox(
                 "Action",
@@ -272,8 +276,14 @@ def render():
                     )
     with review:
         st.write(
-            "Create independently reviewed examples from real race footage. Model-generated observations are not ground truth."
+            "Review the source video, including questions it cannot answer. Model observations are not ground truth."
         )
+        with st.expander("Week 4: labels, judge calibration and release decisions"):
+            st.markdown(
+                (
+                    Path(__file__).resolve().parents[1] / "docs/week4-evaluation.md"
+                ).read_text()
+            )
         candidates = [
             j for j in store.jobs(owner) if j["kind"] == "recap" and j["result"]
         ]
@@ -284,7 +294,25 @@ def render():
                 watched = st.checkbox(
                     "I independently watched this interval and checked the source timestamps."
                 )
-                facts = st.text_area("Expected facts, one per line")
+                blind = st.checkbox(
+                    "I prepared these source labels before seeing the model answer."
+                )
+                answerability = st.selectbox(
+                    "Can this interval answer the question?",
+                    ["answerable", "partial", "unanswerable"],
+                )
+                response_type = st.selectbox(
+                    "What did the actual response do?", ["answer", "partial", "abstain"]
+                )
+                facts = st.text_area(
+                    "Expected facts with timestamps, one per line (may be empty for unanswerable)"
+                )
+                label_reason = st.text_area(
+                    "Explain the evidence or why the answer is unavailable"
+                )
+                unsupported = st.number_input(
+                    "Unsupported factual claims in the response", 0, 100, 0
+                )
                 accuracy = st.slider("Supported summary sentences (%)", 0, 100, 0)
                 missed = st.number_input("Important events missed", 0, 100, 0)
                 leaks = st.number_input(
@@ -295,28 +323,41 @@ def render():
                 )
                 save = st.form_submit_button("Save human evaluation")
             if save:
-                if not watched or not facts.strip():
-                    st.error("Watch the source and enter expected facts before saving.")
+                data = {
+                    "schema_version": 2,
+                    "job": id,
+                    "reviewer": owner,
+                    "independently_reviewed": watched,
+                    "labels_prepared_blind": blind,
+                    "answerability": answerability,
+                    "response_type": response_type,
+                    "label_reason": label_reason,
+                    "expected_facts": [
+                        fact.strip() for fact in facts.splitlines() if fact.strip()
+                    ],
+                    "supported_percent": None
+                    if response_type == "abstain"
+                    else accuracy,
+                    "unsupported_claims": unsupported,
+                    "missed_events": missed,
+                    "spoiler_leaks": leaks,
+                    "max_timestamp_error_s": timestamp_error,
+                    "query": by_id[id]["payload"],
+                }
+                try:
+                    validate_annotation(data)
+                except ValueError as exc:
+                    st.error(str(exc))
                 else:
                     folder = DATA / "evaluations" / owner
                     folder.mkdir(parents=True, exist_ok=True)
-                    data = {
-                        "job": id,
-                        "reviewer": owner,
-                        "independently_reviewed": True,
-                        "expected_facts": facts.splitlines(),
-                        "supported_percent": accuracy,
-                        "missed_events": missed,
-                        "spoiler_leaks": leaks,
-                        "max_timestamp_error_s": timestamp_error,
-                        "query": by_id[id]["payload"],
-                    }
-                    (folder / (id + ".json")).write_text(json.dumps(data, indent=2))
-                    st.success("Human evaluation saved locally.")
+                    filename = id + "-" + uuid4().hex + ".json"
+                    (folder / filename).write_text(json.dumps(data, indent=2))
+                    st.success(
+                        "Human evaluation saved locally. Earlier reviews were preserved; this is not release approval."
+                    )
                     st.download_button(
-                        "Download evaluation",
-                        json.dumps(data, indent=2),
-                        id + "-evaluation.json",
+                        "Download evaluation", json.dumps(data, indent=2), filename
                     )
         else:
             st.caption("Complete a real-video recap to begin evaluation.")

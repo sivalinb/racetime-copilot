@@ -7,5 +7,17 @@
   "missed_events": null,
   "spoiler_leaks": null,
   "max_timestamp_error_s": null,
-  "query": {"media": "", "question": "", "start": null, "end": null, "as_of": null}
+  "query": {
+    "media": "",
+    "question": "",
+    "start": null,
+    "end": null,
+    "as_of": null
+  },
+  "schema_version": 2,
+  "labels_prepared_blind": false,
+  "answerability": null,
+  "response_type": null,
+  "label_reason": "",
+  "unsupported_claims": null
 }

@@ -55,3 +55,7 @@ Private videos, accounts, credentials and runtime traces stay outside this folde
 ## Course evidence
 
 See the [Week 1–5 handout audit](../docs/course-completion-audit.md) for the difference between demonstrated learning and completed assignments. Week 4 is partial: the frozen synthetic benchmark and local traces do not replace independently reviewed video cases, verified LangSmith model/tool child runs or 3–4 measured improvements. The 100 questions are candidate scenarios, not completed evals.
+
+## Week 4 evaluation follow-through
+
+[Independent labels, judge calibration and controlled abstention experiments](https://github.com/sivalinb/racetime-copilot/blob/main/docs/week4-evaluation.md): the reviewer form and analysis tools now retain unanswerable cases, distinguish unnecessary refusals from unsupported answers, preserve review revisions and analyze paired 2×2 runs. Missing study evidence blocks readiness; complete inputs still require manual release review. Independent video labels, calibrated judge results and real interaction runs remain pending. Earlier feedback is not presented as a RaceTime experiment result.

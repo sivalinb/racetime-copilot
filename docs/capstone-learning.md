@@ -151,3 +151,7 @@ All five learning themes are represented. Remaining validation and submission it
 ## Your presentation in one sentence
 
 > “I built a usable app in Week 1, connected answers to evidence in Week 2, added controlled agent decisions and human review in Week 3, measured behavior in Week 4, and tested a specialized router in Week 5—with the evidence and remaining gaps visible for each.”
+
+## Week 4 evaluation follow-through
+
+[Independent labels, judge calibration and controlled abstention experiments](https://github.com/sivalinb/racetime-copilot/blob/main/docs/week4-evaluation.md): the reviewer form and analysis tools now retain unanswerable cases, distinguish unnecessary refusals from unsupported answers, preserve review revisions and analyze paired 2×2 runs. Missing study evidence blocks readiness; complete inputs still require manual release review. Independent video labels, calibrated judge results and real interaction runs remain pending. Earlier feedback is not presented as a RaceTime experiment result.

@@ -166,3 +166,7 @@ Live-stream validation and large-upload reliability remain product gaps. They sh
 ## A defensible capstone statement
 
 > RaceTime demonstrates AI-assisted app development, a working video RAG chain, a stateful agent with durable human review, reproducible synthetic evaluation and an adapted LoRA classifier. One direct YouTube interval worked end to end up to review. Full video-quality evaluation and submission evidence remain to be completed.
+
+## Week 4 evaluation follow-through
+
+[Independent labels, judge calibration and controlled abstention experiments](https://github.com/sivalinb/racetime-copilot/blob/main/docs/week4-evaluation.md): the reviewer form and analysis tools now retain unanswerable cases, distinguish unnecessary refusals from unsupported answers, preserve review revisions and analyze paired 2×2 runs. Missing study evidence blocks readiness; complete inputs still require manual release review. Independent video labels, calibrated judge results and real interaction runs remain pending. Earlier feedback is not presented as a RaceTime experiment result.
