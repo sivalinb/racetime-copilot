@@ -28,3 +28,7 @@ Both arms start with the same pretrained encoder and seeded classification head.
 The full report includes per-class precision/recall/F1, confusion matrices and every held-out prediction. Merge/inference smoke checks preserved logits within `1e-5` absolute tolerance.
 
 This is one small synthetic split and one seed, without independent human labeling. Low training loss does not establish generalization: 12/40 held-out requests were still misrouted. The comparison is against a frozen-encoder classifier, not against a frontier LLM. A handout-exact Qwen3-1.7B / LLaMA Factory version remains a future extension.
+
+## Completed custom demonstration
+
+Open the Week 5 expander in Streamlit for the actual 96-step curves, five correct merge smoke examples, 12 retained held-out errors and a live local classifier. The current report also includes a 27.5% untrained-head baseline; its random head is not a generative zero-shot model. Export the loss chart with `python training/plot_losses.py`. See [the full demonstration and submission boundary](../docs/week5-demonstration.md).

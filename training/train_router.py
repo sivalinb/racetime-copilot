@@ -163,7 +163,7 @@ T = tok(
 TY = [LABELS.index(x["label"]) for x in heldout]
 results = {}
 predictions = {}
-for mode in ["frozen_encoder", "lora"]:
+for mode in ["untrained_head", "frozen_encoder", "lora"]:
     torch.manual_seed(SEED)
     model = BertForSequenceClassification.from_pretrained(
         MODEL,
@@ -192,7 +192,7 @@ for mode in ["frozen_encoder", "lora"]:
     started = time.monotonic()
     losses = []
     model.train()
-    for epoch in range(16):
+    for epoch in range(0 if mode == "untrained_head" else 16):
         order = torch.randperm(
             len(Y), generator=torch.Generator().manual_seed(SEED + epoch)
         )
@@ -219,8 +219,9 @@ for mode in ["frozen_encoder", "lora"]:
             p.numel() for p in model.parameters() if p.requires_grad
         ),
         "train_seconds": round(time.monotonic() - started, 3),
-        "initial_loss": losses[0],
-        "final_loss": losses[-1],
+        "initial_loss": losses[0] if losses else None,
+        "final_loss": losses[-1] if losses else None,
+        "loss_by_step": losses,
         "steps": len(losses),
     }
     predictions[mode] = [
@@ -238,7 +239,7 @@ report = {
     "labels": LABELS,
     "train_count": len(train),
     "test_count": len(heldout),
-    "comparison": "Identical frozen pretrained encoder and classifier initialization; classifier trained in both arms. LoRA arm additionally trains rank-8 query/value adapters. Same data, batches, epochs and optimizer learning rate.",
+    "comparison": "The untrained-head arm has no task-specific training and a seeded random classifier; this is not a generative zero-shot baseline. The other two arms use identical frozen pretrained encoder and classifier initialization; classifier trained in both arms. LoRA arm additionally trains rank-8 query/value adapters. Same data, batches, epochs and optimizer learning rate.",
     "limitations": [
         "Small authored synthetic dataset; no independent human review.",
         "One seed, one split; no significance or real-user generalization claim.",

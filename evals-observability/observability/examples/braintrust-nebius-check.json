@@ -1,0 +1,67 @@
+{
+  "status": "verified",
+  "scope": "authored_fixture; not a real-video quality benchmark",
+  "real_nebius_call": true,
+  "reference": {
+    "run_id": "0eae6d55-ec00-46a5-a3e4-51e0f280363d",
+    "provider": "braintrust",
+    "project": "racetime-copilot",
+    "status": "verified by server-side readback in this check",
+    "url": "https://www.braintrust.dev/app/siva-project/object?object_type=project_logs&object_id=f1a828a0-8dd9-4519-9839-49740bc5523e&id=0eae6d55-ec00-46a5-a3e4-51e0f280363d",
+    "root_run_id": "0eae6d55-ec00-46a5-a3e4-51e0f280363d"
+  },
+  "spans": [
+    {
+      "id": "c3ad9dae-0d09-46f4-ae6c-1a0a1c6caaeb",
+      "span_id": "e81cab616466b017",
+      "root_span_id": "42481b62e3015f6ecbab92ad27c81d69",
+      "span_parents": [
+        "b52a169991a4268a"
+      ],
+      "span_attributes": {
+        "name": "Nebius evaluation judge",
+        "type": "llm"
+      },
+      "metrics": {
+        "completion_tokens": 159,
+        "duration": 5.379604816436768,
+        "end": 1789261839.908928,
+        "prompt_tokens": 294,
+        "start": 1789261834.529323,
+        "tokens": 453
+      }
+    },
+    {
+      "id": "21029597-cd3b-4ce6-845a-6bb2e1b8c50e",
+      "span_id": "642716004812fc09",
+      "root_span_id": "42481b62e3015f6ecbab92ad27c81d69",
+      "span_parents": [
+        "b52a169991a4268a"
+      ],
+      "span_attributes": {
+        "name": "Retrieve fixture references",
+        "type": "tool"
+      },
+      "metrics": {
+        "duration": 0.007954835891723633,
+        "end": 1789261834.51261,
+        "start": 1789261834.5046551
+      }
+    },
+    {
+      "id": "0eae6d55-ec00-46a5-a3e4-51e0f280363d",
+      "span_id": "b52a169991a4268a",
+      "root_span_id": "42481b62e3015f6ecbab92ad27c81d69",
+      "span_parents": null,
+      "span_attributes": {
+        "name": "RaceTime observability check",
+        "type": "task"
+      },
+      "metrics": {
+        "duration": 5.486526966094971,
+        "end": 1789261839.9521952,
+        "start": 1789261834.4656682
+      }
+    }
+  ]
+}

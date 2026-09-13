@@ -11,6 +11,8 @@ from demo.client import clock, elapsed
 
 from .config import DATA, configured
 from .evaluation import validate_annotation
+from .judge import JudgeCase, judge
+from .judge import configured as judge_configured
 from .service import Service
 
 
@@ -224,7 +226,14 @@ def render():
                 result = j["result"] or {}
                 observability = result.get("observability", {})
                 if observability.get("url"):
-                    st.link_button("Open LangSmith trace", observability["url"])
+                    st.link_button(
+                        "Open "
+                        + result.get("observability", {})
+                        .get("provider", "langsmith")
+                        .title()
+                        + " trace",
+                        observability["url"],
+                    )
                     st.caption(
                         "Trace delivery is asynchronous; quota or connection errors can prevent ingestion."
                     )
@@ -322,7 +331,13 @@ def render():
                     "Largest timestamp error (seconds)", 0.0, 3600.0, 0.0
                 )
                 save = st.form_submit_button("Save human evaluation")
-            if save:
+                run_judge = st.form_submit_button(
+                    "Evaluate with Nebius", disabled=not judge_configured()
+                )
+            st.caption(
+                "Nebius checks against your entered source facts. Its verdict is not independently calibrated and does not approve a release."
+            )
+            if save or run_judge:
                 data = {
                     "schema_version": 2,
                     "job": id,
@@ -359,5 +374,47 @@ def render():
                     st.download_button(
                         "Download evaluation", json.dumps(data, indent=2), filename
                     )
+                    if run_judge:
+                        query = data["query"]
+                        try:
+                            case = JudgeCase(
+                                case_id=id,
+                                question=query["question"],
+                                start=query["start"],
+                                end=query["end"],
+                                as_of=query["as_of"],
+                                answerability=answerability,
+                                response_type=response_type,
+                                expected_facts=data["expected_facts"],
+                                label_reason=label_reason,
+                                label_source="human_reviewed",
+                                answer=json.dumps(
+                                    by_id[id]["result"].get("narrative")
+                                    or by_id[id]["result"].get("clarification")
+                                ),
+                            )
+                            with st.spinner(
+                                "Nebius is checking the response against your reference facts…"
+                            ):
+                                verdict = judge(case)
+                            judge_folder = DATA / "judge-results" / owner
+                            judge_folder.mkdir(parents=True, exist_ok=True)
+                            (judge_folder / filename).write_text(
+                                json.dumps(verdict, indent=2)
+                            )
+                            st.json(verdict)
+                            st.download_button(
+                                "Download Nebius verdict",
+                                json.dumps(verdict, indent=2),
+                                "judge-" + filename,
+                            )
+                            if verdict.get("observability", {}).get("url"):
+                                st.link_button(
+                                    "Open judge trace", verdict["observability"]["url"]
+                                )
+                        except ValueError:
+                            st.error(
+                                "Nebius evaluation failed; no judge score was saved. Check the key, quota, inputs and provider availability."
+                            )
         else:
             st.caption("Complete a real-video recap to begin evaluation.")

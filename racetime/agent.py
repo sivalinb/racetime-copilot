@@ -76,6 +76,7 @@ class Agent:
         graph.add_edge("review", END)
         self.graph = graph.compile(checkpointer=self.checkpointer)
 
+    @observed("Choose next agent action", "chain", ("state",))
     def plan(self, state):
         """Choose a permitted action within the inspection and iteration limits."""
         if not state.get("retrieved"):
@@ -185,6 +186,7 @@ class Agent:
             "trace": [{"step": "retrieve", "mode": "semantic", "count": len(selected)}],
         }
 
+    @observed("Inspect requested video", "chain", ("state",))
     def inspect_node(self, state):
         """Inspect the requested interval before retrieving the new evidence."""
         self.inspect(state["media"], state["start"], state["end"])
@@ -195,6 +197,7 @@ class Agent:
             ],
         }
 
+    @observed("Summarize and verify evidence", "chain", ("state",))
     def summarize(self, state):
         """Generate a grounded recap, falling back to labeled evidence extracts."""
         try:
@@ -211,6 +214,7 @@ class Agent:
             mode = "extractive_fallback"
         return {"narrative": narrative, "trace": [{"step": "summarize", "mode": mode}]}
 
+    @observed("Explain insufficient evidence", "chain", ("state",))
     def clarify(self, state):
         return {
             "clarification": "There is not enough usable evidence for this question. Choose another interval, make the question more specific, or inspect the video first.",

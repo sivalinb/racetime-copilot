@@ -1,6 +1,13 @@
 {
   "merge_max_abs_logit_difference": 9.5367431640625e-07,
   "merge_equivalent_atol": 1e-05,
+  "expected_labels": [
+    "recap",
+    "compare",
+    "verify",
+    "runner",
+    "recap"
+  ],
   "examples": [
     {
       "question": "Recap the last part of the broadcast.",
@@ -17,6 +24,12 @@
     {
       "question": "Any news about bib 42?",
       "predicted": "runner"
+    },
+    {
+      "question": "Summarize what happened at the aid station.",
+      "predicted": "recap"
     }
-  ]
+  ],
+  "correct_count": 5,
+  "all_five_correct": true
 }

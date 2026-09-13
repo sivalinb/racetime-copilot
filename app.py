@@ -153,6 +153,12 @@ with st.expander(
 ):
     st.markdown((ROOT / "docs" / "week4-evaluation.md").read_text())
 with st.expander(
+    "Week 5 demonstration: LoRA training, results and live router", expanded=False
+):
+    from demo.specialization import render as render_specialization
+
+    render_specialization()
+with st.expander(
     "Technical architecture: components, data flow and agent decisions", expanded=False
 ):
     st.caption(

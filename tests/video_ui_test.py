@@ -6,6 +6,7 @@ import tempfile
 import unittest
 
 os.environ["LANGSMITH_TRACING"] = "false"
+os.environ["RACETIME_OBSERVABILITY"] = "none"
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))

@@ -6,6 +6,7 @@ import time
 import unittest
 
 os.environ["LANGSMITH_TRACING"] = "false"
+os.environ["RACETIME_OBSERVABILITY"] = "none"
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch

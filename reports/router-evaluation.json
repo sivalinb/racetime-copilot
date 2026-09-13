@@ -10,7 +10,7 @@
   ],
   "train_count": 144,
   "test_count": 40,
-  "comparison": "Identical frozen pretrained encoder and classifier initialization; classifier trained in both arms. LoRA arm additionally trains rank-8 query/value adapters. Same data, batches, epochs and optimizer learning rate.",
+  "comparison": "The untrained-head arm has no task-specific training and a seeded random classifier; this is not a generative zero-shot baseline. The other two arms use identical frozen pretrained encoder and classifier initialization; classifier trained in both arms. LoRA arm additionally trains rank-8 query/value adapters. Same data, batches, epochs and optimizer learning rate.",
   "limitations": [
     "Small authored synthetic dataset; no independent human review.",
     "One seed, one split; no significance or real-user generalization claim.",
@@ -18,6 +18,60 @@
     "No deployment decision was made using training accuracy."
   ],
   "results": {
+    "untrained_head": {
+      "accuracy": 0.275,
+      "macro_f1": 0.22205852469010362,
+      "precision_by_label": {
+        "recap": 0.2222222222222222,
+        "runner": 0.4444444444444444,
+        "verify": 0.25,
+        "compare": 0.0
+      },
+      "recall_by_label": {
+        "recap": 0.6,
+        "runner": 0.4,
+        "verify": 0.1,
+        "compare": 0.0
+      },
+      "f1_by_label": {
+        "recap": 0.32432432432432434,
+        "runner": 0.42105263157894735,
+        "verify": 0.14285714285714285,
+        "compare": 0.0
+      },
+      "confusion_matrix": [
+        [
+          6,
+          2,
+          2,
+          0
+        ],
+        [
+          5,
+          4,
+          1,
+          0
+        ],
+        [
+          8,
+          1,
+          1,
+          0
+        ],
+        [
+          8,
+          2,
+          0,
+          0
+        ]
+      ],
+      "trainable_parameters": 516,
+      "train_seconds": 0.041,
+      "initial_loss": null,
+      "final_loss": null,
+      "loss_by_step": [],
+      "steps": 0
+    },
     "frozen_encoder": {
       "accuracy": 0.525,
       "macro_f1": 0.521664609899904,
@@ -66,9 +120,107 @@
         ]
       ],
       "trainable_parameters": 516,
-      "train_seconds": 0.523,
+      "train_seconds": 0.449,
       "initial_loss": 1.3855624198913574,
       "final_loss": 1.2514368295669556,
+      "loss_by_step": [
+        1.3855624198913574,
+        1.3650761842727661,
+        1.3833904266357422,
+        1.4374204874038696,
+        1.4091954231262207,
+        1.391830563545227,
+        1.359054446220398,
+        1.3390156030654907,
+        1.325255274772644,
+        1.3476343154907227,
+        1.4009968042373657,
+        1.3300837278366089,
+        1.334283471107483,
+        1.3232074975967407,
+        1.4050410985946655,
+        1.3542243242263794,
+        1.3171318769454956,
+        1.3429876565933228,
+        1.323889136314392,
+        1.3426927328109741,
+        1.3619498014450073,
+        1.339916706085205,
+        1.314793348312378,
+        1.2921892404556274,
+        1.3231316804885864,
+        1.299553394317627,
+        1.2800384759902954,
+        1.281507968902588,
+        1.2942333221435547,
+        1.2761907577514648,
+        1.2586727142333984,
+        1.2357488870620728,
+        1.2825857400894165,
+        1.2858487367630005,
+        1.3442630767822266,
+        1.2537504434585571,
+        1.2743216753005981,
+        1.2941683530807495,
+        1.2396444082260132,
+        1.2548285722732544,
+        1.2428449392318726,
+        1.2711888551712036,
+        1.2548681497573853,
+        1.2710641622543335,
+        1.2274569272994995,
+        1.2321165800094604,
+        1.2917042970657349,
+        1.2387253046035767,
+        1.226711630821228,
+        1.2818470001220703,
+        1.2338815927505493,
+        1.2610620260238647,
+        1.2419238090515137,
+        1.2916598320007324,
+        1.1973880529403687,
+        1.270938515663147,
+        1.242726445198059,
+        1.1910456418991089,
+        1.2073023319244385,
+        1.224517822265625,
+        1.1737453937530518,
+        1.1712793111801147,
+        1.180411458015442,
+        1.2219346761703491,
+        1.1274827718734741,
+        1.251457929611206,
+        1.2007949352264404,
+        1.1277179718017578,
+        1.1391969919204712,
+        1.2551922798156738,
+        1.1595741510391235,
+        1.2072259187698364,
+        1.1379599571228027,
+        1.1931349039077759,
+        1.2781985998153687,
+        1.220285415649414,
+        1.2047276496887207,
+        1.219740390777588,
+        1.1432336568832397,
+        1.2846111059188843,
+        1.0976885557174683,
+        1.1025159358978271,
+        1.1903618574142456,
+        1.2607005834579468,
+        1.1533931493759155,
+        1.1146005392074585,
+        1.178862452507019,
+        1.1435421705245972,
+        1.1995819807052612,
+        1.2082020044326782,
+        1.10129976272583,
+        1.1324490308761597,
+        1.1679736375808716,
+        1.1505740880966187,
+        1.1457664966583252,
+        1.2514368295669556
+      ],
       "steps": 96
     },
     "lora": {
@@ -119,13 +271,313 @@
         ]
       ],
       "trainable_parameters": 8708,
-      "train_seconds": 1.112,
+      "train_seconds": 0.938,
       "initial_loss": 1.4153538942337036,
       "final_loss": 0.023934198543429375,
+      "loss_by_step": [
+        1.4153538942337036,
+        1.4011996984481812,
+        1.3715777397155762,
+        1.4148279428482056,
+        1.3553208112716675,
+        1.3843921422958374,
+        1.3659005165100098,
+        1.3615301847457886,
+        1.3043372631072998,
+        1.2963420152664185,
+        1.3463186025619507,
+        1.289793610572815,
+        1.2242538928985596,
+        1.2532798051834106,
+        1.2994226217269897,
+        1.296751618385315,
+        1.1497384309768677,
+        1.1550449132919312,
+        1.1649407148361206,
+        1.1646662950515747,
+        1.0376054048538208,
+        1.033837914466858,
+        1.0066511631011963,
+        0.9486849904060364,
+        0.9045236110687256,
+        0.8869247436523438,
+        0.9552745223045349,
+        0.8578739762306213,
+        0.8717774748802185,
+        0.8118953704833984,
+        0.6762247085571289,
+        0.7534330487251282,
+        0.6966991424560547,
+        0.6715023517608643,
+        0.7776076197624207,
+        0.6887454390525818,
+        0.6331658959388733,
+        0.6303372979164124,
+        0.5935120582580566,
+        0.5329530835151672,
+        0.5024251341819763,
+        0.5027353167533875,
+        0.5209448933601379,
+        0.43963372707366943,
+        0.45914188027381897,
+        0.40097686648368835,
+        0.40799465775489807,
+        0.4835264980792999,
+        0.4026852548122406,
+        0.35317572951316833,
+        0.25626423954963684,
+        0.3107942044734955,
+        0.21871381998062134,
+        0.259133905172348,
+        0.20473720133304596,
+        0.28721120953559875,
+        0.18215739727020264,
+        0.2049986571073532,
+        0.1611431986093521,
+        0.2092265486717224,
+        0.18301308155059814,
+        0.16283608973026276,
+        0.19961242377758026,
+        0.16684775054454803,
+        0.1569274365901947,
+        0.11295076459646225,
+        0.08462158590555191,
+        0.09054786711931229,
+        0.09287232905626297,
+        0.08074824512004852,
+        0.0719122588634491,
+        0.07845140248537064,
+        0.06228211894631386,
+        0.09283997863531113,
+        0.05477632209658623,
+        0.06283573061227798,
+        0.04457245394587517,
+        0.047935012727975845,
+        0.05029073730111122,
+        0.0511099211871624,
+        0.03614242002367973,
+        0.04129345342516899,
+        0.02973618544638157,
+        0.04262267425656319,
+        0.033240675926208496,
+        0.03722941875457764,
+        0.041746724396944046,
+        0.02673254907131195,
+        0.02683393657207489,
+        0.03200821951031685,
+        0.03858846798539162,
+        0.023128211498260498,
+        0.03042287565767765,
+        0.020060723647475243,
+        0.020693739876151085,
+        0.023934198543429375
+      ],
       "steps": 96
     }
   },
   "predictions": {
+    "untrained_head": [
+      {
+        "text": "What happened in these fifteen minutes?",
+        "expected": "recap",
+        "predicted": "verify"
+      },
+      {
+        "text": "Give me the highlights since the broadcast returned.",
+        "expected": "recap",
+        "predicted": "verify"
+      },
+      {
+        "text": "I stepped away; what did I miss?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Brief me on the selected video window.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Explain the sequence of events in this range.",
+        "expected": "recap",
+        "predicted": "runner"
+      },
+      {
+        "text": "What should I know before rejoining the stream?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Make a chronological catch-up for this section.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "List the important moments from minute ten to twenty.",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Can I get a short race summary?",
+        "expected": "recap",
+        "predicted": "recap"
+      },
+      {
+        "text": "Recap the last part of the broadcast.",
+        "expected": "recap",
+        "predicted": "runner"
+      },
+      {
+        "text": "Any news about bib 42?",
+        "expected": "runner",
+        "predicted": "verify"
+      },
+      {
+        "text": "Find shots featuring Maya Chen.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Where did Lena last appear?",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Only include updates about runner Maya.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Track bib 87 through the available footage.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "I am crewing for Lena; show her sightings.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Tell me where runner Chen was seen.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Filter this clip for bib 214.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Follow Lena rather than the whole field.",
+        "expected": "runner",
+        "predicted": "recap"
+      },
+      {
+        "text": "Show the most recent mention of runner Maya.",
+        "expected": "runner",
+        "predicted": "runner"
+      },
+      {
+        "text": "Did that lead change actually happen?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "The announcer and timing board disagree; which claims conflict?",
+        "expected": "verify",
+        "predicted": "runner"
+      },
+      {
+        "text": "Is the claimed arrival time backed by evidence?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Can we trust that gap announcement?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Check this claim against the visible timing.",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Are the two position reports consistent?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Flag statements that cannot be confirmed.",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Was the leader call supported at that moment?",
+        "expected": "verify",
+        "predicted": "verify"
+      },
+      {
+        "text": "Do we have corroboration for this report?",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "Verify whether the graphic contradicts the commentary.",
+        "expected": "verify",
+        "predicted": "recap"
+      },
+      {
+        "text": "How did the first half differ from the second?",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Contrast Lena with Maya over this interval.",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Compare the earlier checkpoint with the later one.",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "What differs between the visual and spoken accounts?",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Put the two reports next to each other.",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Which changes stand out across both windows?",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Give me the differences between these runners.",
+        "expected": "compare",
+        "predicted": "recap"
+      },
+      {
+        "text": "Show timing and commentary side by side.",
+        "expected": "compare",
+        "predicted": "runner"
+      },
+      {
+        "text": "Compare those two race sections.",
+        "expected": "compare",
+        "predicted": "runner"
+      },
+      {
+        "text": "How does this segment compare with the previous one?",
+        "expected": "compare",
+        "predicted": "recap"
+      }
+    ],
     "frozen_encoder": [
       {
         "text": "What happened in these fifteen minutes?",

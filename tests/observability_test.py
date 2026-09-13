@@ -13,6 +13,11 @@ from racetime.observability import observed, span
 
 
 class ObservabilityTests(unittest.TestCase):
+    def setUp(self):
+        env = patch.dict(os.environ, {"RACETIME_OBSERVABILITY": "langsmith"})
+        env.start()
+        self.addCleanup(env.stop)
+
     def test_real_graph_emits_nested_model_and_tool_payloads(self):
         import langsmith as ls
 

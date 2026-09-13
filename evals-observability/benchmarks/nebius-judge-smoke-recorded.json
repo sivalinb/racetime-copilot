@@ -1,0 +1,197 @@
+{
+  "created_at": "2026-09-13T00:46:03.789008+00:00",
+  "dataset_sha256": "adba5a6b6ebe2aedadd99da7117d3a18c3f06e1a0a13153ab463c28c1f7e758c",
+  "dataset_provenance": "Five authored synthetic fixtures and expected rubric verdicts; no real video or independent human review. The human_accept field is used only for smoke comparison, not a claim of reviewer provenance.",
+  "results": [
+    {
+      "case_id": "correct-abstention",
+      "provider": "nebius",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "rubric_version": "racetime-judge-v1",
+      "rubric_sha256": "442f5c82609065b1caec66b53bf5d48e510097ba97aa26653ab49d4b861e622f",
+      "input_sha256": "773b014a44fef9feaea40da2b5ffa3bb6ed18ff3e824cbc36211f9057259593d",
+      "label_source": "authored_fixture",
+      "judge_accept": true,
+      "verdict": {
+        "factual_support": true,
+        "completeness": true,
+        "response_appropriate": true,
+        "temporal_compliance": true,
+        "explanation": "The provided information states that the interval from 05:00 to 08:00 (300.0 to 480.0 seconds) contains a pre-race briefing with no winner announcement. Therefore, the event does not establish a winner during the specified interval. The answer correctly abstains, as the source does not provide a winner. The response is factually supported, complete, appropriate, and complies with the requested time interval.",
+        "issues": []
+      },
+      "latency_ms": 2144.78,
+      "usage": {
+        "prompt_tokens": 294,
+        "completion_tokens": 150,
+        "total_tokens": 444
+      },
+      "calibration_status": "not_independently_calibrated",
+      "scope": "Judgment against supplied references, not independent video verification or release approval.",
+      "observability": {}
+    },
+    {
+      "case_id": "invented-winner",
+      "provider": "nebius",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "rubric_version": "racetime-judge-v1",
+      "rubric_sha256": "442f5c82609065b1caec66b53bf5d48e510097ba97aa26653ab49d4b861e622f",
+      "input_sha256": "28da48117b2a5d067db07e98f226d2c57e403773b2a96b1bd7469e9cc6047820",
+      "label_source": "authored_fixture",
+      "judge_accept": false,
+      "verdict": {
+        "factual_support": false,
+        "completeness": false,
+        "response_appropriate": false,
+        "temporal_compliance": true,
+        "explanation": "The provided answer 'Maya won the race at 06:15.' is not supported by the expected facts, which are empty, and the label reason states that the source is a pre-race briefing with no winner announcement. Therefore, the correct response should be 'unanswerable'. The given answer invents information not present in the source. The response type should not be 'answer' but rather reflect unanswerability. The time interval (300.0 to 480.0 seconds, i.e., 05:00 to 08:00) is correctly interpreted, so temporal compliance holds. However, due to lack of factual support and inappropriate response type, the evaluation fails on factual support, completeness, and response appropriateness.",
+        "issues": [
+          "invented information",
+          "incorrect response type",
+          "unsupported claim"
+        ]
+      },
+      "latency_ms": 2080.08,
+      "usage": {
+        "prompt_tokens": 296,
+        "completion_tokens": 233,
+        "total_tokens": 529
+      },
+      "calibration_status": "not_independently_calibrated",
+      "scope": "Judgment against supplied references, not independent video verification or release approval.",
+      "observability": {}
+    },
+    {
+      "case_id": "unnecessary-refusal",
+      "provider": "nebius",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "rubric_version": "racetime-judge-v1",
+      "rubric_sha256": "442f5c82609065b1caec66b53bf5d48e510097ba97aa26653ab49d4b861e622f",
+      "input_sha256": "44de8f2e34f6a1495dfb94f5d4bd9af22a94831f1c1f52ebeaf91db2c1aa8046",
+      "label_source": "authored_fixture",
+      "judge_accept": false,
+      "verdict": {
+        "factual_support": false,
+        "completeness": false,
+        "response_appropriate": false,
+        "temporal_compliance": true,
+        "explanation": "The answer 'There is not enough evidence to answer.' is incorrect because the expected fact explicitly states that at 06:15, the speaker says runners must carry one litre of water. This information is present in the reference facts, making the question answerable. The response should have included this fact. The refusal to answer despite sufficient evidence constitutes an unnecessary abstention, failing factual support and completeness. The temporal interval (start=300.0, end=480.0, as_of=480.0) is respected.",
+        "issues": [
+          "unnecessary refusal despite explicit evidence",
+          "missing factual content from authored fixture",
+          "incorrect assessment of answerability"
+        ]
+      },
+      "latency_ms": 1737.96,
+      "usage": {
+        "prompt_tokens": 298,
+        "completion_tokens": 195,
+        "total_tokens": 493
+      },
+      "calibration_status": "not_independently_calibrated",
+      "scope": "Judgment against supplied references, not independent video verification or release approval.",
+      "observability": {}
+    },
+    {
+      "case_id": "supported-answer",
+      "provider": "nebius",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "rubric_version": "racetime-judge-v1",
+      "rubric_sha256": "442f5c82609065b1caec66b53bf5d48e510097ba97aa26653ab49d4b861e622f",
+      "input_sha256": "379f04484e304337caaa9b750266f08de502ab6e7626fba8edf81c7e48ce0517",
+      "label_source": "authored_fixture",
+      "judge_accept": true,
+      "verdict": {
+        "factual_support": true,
+        "completeness": true,
+        "response_appropriate": true,
+        "temporal_compliance": true,
+        "explanation": "The answer correctly states that at 06:15, the speaker says runners must carry one litre of water. This is directly supported by the expected fact and falls within the specified time interval (start: 300.0, end: 480.0). The response is complete, factually supported, and appropriately answers the question.",
+        "issues": []
+      },
+      "latency_ms": 1476.17,
+      "usage": {
+        "prompt_tokens": 305,
+        "completion_tokens": 119,
+        "total_tokens": 424
+      },
+      "calibration_status": "not_independently_calibrated",
+      "scope": "Judgment against supplied references, not independent video verification or release approval.",
+      "observability": {}
+    },
+    {
+      "case_id": "partial-answer",
+      "provider": "nebius",
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "rubric_version": "racetime-judge-v1",
+      "rubric_sha256": "442f5c82609065b1caec66b53bf5d48e510097ba97aa26653ab49d4b861e622f",
+      "input_sha256": "05d7da3ab0b3f20a5197c31572578f902c43fb1b74fbbda6f8c2b28eeba1b53a",
+      "label_source": "authored_fixture",
+      "judge_accept": false,
+      "verdict": {
+        "factual_support": true,
+        "completeness": false,
+        "response_appropriate": true,
+        "temporal_compliance": true,
+        "explanation": "The answer correctly identifies the required equipment (one litre of water) at 06:15 based on the expected fact. However, it does not identify the winner, which is part of the question. Since the source only provides information about water requirements and not the winner, the answer is partial and appropriately reflects the available information. The time interval (300.0 to 480.0) is respected, and the as_of timestamp (480.0) is within bounds.",
+        "issues": [
+          "Incomplete: The winner is not identified in the answer or source."
+        ]
+      },
+      "latency_ms": 2371.96,
+      "usage": {
+        "prompt_tokens": 306,
+        "completion_tokens": 174,
+        "total_tokens": 480
+      },
+      "calibration_status": "not_independently_calibrated",
+      "scope": "Judgment against supplied references, not independent video verification or release approval.",
+      "observability": {}
+    }
+  ],
+  "errors": [],
+  "calibration": {
+    "count": 5,
+    "confusion_matrix": {
+      "true_accept": 2,
+      "false_accept": 0,
+      "false_reject": 1,
+      "true_reject": 2
+    },
+    "agreement": 0.8,
+    "false_accept_rate": 0.0,
+    "disagreement_ids": [
+      "partial-answer"
+    ],
+    "both_label_classes_present": true
+  },
+  "calibration_rows": [
+    {
+      "id": "correct-abstention",
+      "human_accept": true,
+      "judge_accept": true
+    },
+    {
+      "id": "invented-winner",
+      "human_accept": false,
+      "judge_accept": false
+    },
+    {
+      "id": "unnecessary-refusal",
+      "human_accept": false,
+      "judge_accept": false
+    },
+    {
+      "id": "supported-answer",
+      "human_accept": true,
+      "judge_accept": true
+    },
+    {
+      "id": "partial-answer",
+      "human_accept": true,
+      "judge_accept": false
+    }
+  ],
+  "release_status": "not_established",
+  "note": "Fixture labels are smoke-test expectations, not independent human calibration. Never promote judge outputs to golden labels."
+}

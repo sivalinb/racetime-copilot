@@ -142,17 +142,16 @@ Source: **Week 5 Project Handout (Aug 2026).pdf**, pp. 1–4. The example uses Q
 - **W5.2 — Train a LoRA adapter with understandable choices: Adapted and demonstrated.**
   - **How:** [train_router.py](https://github.com/sivalinb/racetime-copilot/blob/main/training/train_router.py) uses PyTorch/Transformers/PEFT, BERT-tiny, rank-8 query/value adapters and a trained classifier head. Base encoder weights stay frozen; the report records 96 steps and 8,708 trainable parameters for the LoRA arm.
   - **Scope:** model, environment and training UI differ from the provided Qwen3/LLaMA Factory exercise.
-- **W5.3 — Inspect training behavior: Partial.**
-  - **Present:** initial/final loss and training-step counts are recorded.
-  - **Remaining:** a saved per-step loss curve and training-run screenshot are not included in the current report. End-point loss values alone do not show that training stabilized throughout.
+- **W5.3 — Inspect training behavior: Demonstrated for the custom lab.**
+  - **Proof:** all 96 per-step losses for both trained arms are saved in [the current report](../reports/router-evaluation.json), with an [actual loss curve](../reports/week5-training-curve.png) and a Streamlit demonstration panel. This is local custom training, not a LLaMA Board screenshot.
 - **W5.4 — Merge and smoke-test inference: Demonstrated.**
-  - **Proof:** [router-smoke.json](https://github.com/sivalinb/racetime-copilot/blob/main/reports/router-smoke.json) records four sample predictions and merge error `9.54e-7`, within `1e-5`. The handout's exact example asks for five obvious tickets; this custom lab currently has four intent examples.
+  - **Proof:** [router-smoke.json](https://github.com/sivalinb/racetime-copilot/blob/main/reports/router-smoke.json) records four sample predictions and merge error `9.54e-7`, within `1e-5`. The custom lab now records five obvious race-intent examples, all correct, in the current report.
 - **W5.5 — Compare baseline and adapted model: Demonstrated for classification; business benefit pending.**
   - **Proof:** held-out accuracy **52.5% → 70%**, macro F1 **0.522 → 0.709**, class metrics, confusion matrices and predictions in the [recorded report](https://github.com/sivalinb/racetime-copilot/blob/main/evals-observability/benchmarks/router-recorded.json).
-  - **Scope:** both arms train a classifier head; only one trains adapters. This differs from the handout's untrained generative baseline. The adapter remains outside the live video graph; reduced app latency, cost or improved video answers have not been established.
+  - **Scope:** both arms train a classifier head; only one trains adapters. This differs from the handout's untrained generative baseline. The adapter remains outside the live video graph; Streamlit now demonstrates inference separately. An additional seeded untrained-head arm scores 27.5%; it is not a generative zero-shot baseline. Reduced app latency, cost or improved video answers have not been established.
 - **W5.6 — Package and explain the custom result: Partial.**
   - **Present:** training/inference code, reproducibility instructions, data, adapter and reports are in GitHub.
-  - **Remaining:** a custom-project Loom and an explanation of the substitutions and errors. The exact notebook exercise remains separate. Week 5 is optional for the certificate; only the instructor can determine acceptance of the custom submission.
+  - **Remaining:** the required custom-project recording/submission. [The demonstration guide](week5-demonstration.md) now explains substitutions and shows retained errors. A local screen recording may be used as an artifact, but the handout specifically names Loom. The exact notebook exercise remains separate. Week 5 is optional for the certificate; only the instructor can determine acceptance of the custom submission.
 
 ## Practical completion order
 

@@ -24,6 +24,7 @@ questions = [
     "Compare those two race sections.",
     "Verify whether the graphic contradicts the commentary.",
     "Any news about bib 42?",
+    "Summarize what happened at the aid station.",
 ]
 inputs = tok(questions, padding=True, truncation=True, return_tensors="pt")
 with torch.no_grad():
@@ -38,11 +39,19 @@ tok.save_pretrained(ROOT / "merged")
 smoke = {
     "merge_max_abs_logit_difference": max_diff,
     "merge_equivalent_atol": 1e-5,
+    "expected_labels": ["recap", "compare", "verify", "runner", "recap"],
     "examples": [
         {"question": q, "predicted": report["labels"][i]}
         for q, i in zip(questions, after.argmax(-1).tolist())
     ],
 }
+smoke["correct_count"] = sum(
+    example["predicted"] == expected
+    for example, expected in zip(
+        smoke["examples"], smoke["expected_labels"], strict=True
+    )
+)
+smoke["all_five_correct"] = smoke["correct_count"] == 5
 (ROOT.parent / "reports/router-smoke.json").write_text(json.dumps(smoke, indent=2))
 if len(sys.argv) > 1:
     with torch.no_grad():

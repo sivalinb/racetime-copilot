@@ -79,3 +79,7 @@ Back up the database with `python scripts/backup.py /path/to/backup` and separat
 ## 8. Week 5 exact tooling
 
 The completed LoRA experiment uses BERT-tiny. The Week 5 handout's exact Qwen3-1.7B-Base/LLaMA Factory exercise is a separate support-ticket task and is explicitly optional for the certificate. If your instructor requires that exact exercise, use the course notebook with a T4 runtime and the labelled `support_tickets.csv`; those inputs are not in this race project. No Qwen training result is claimed here.
+
+## Nebius judge and Week 5 demo
+
+[Nebius and Braintrust guide](https://github.com/sivalinb/racetime-copilot/blob/main/docs/nebius-braintrust.md): optional Nebius judge implemented and tested with five real provider calls (4/5 authored-fixture agreement; one disagreement retained). Braintrust parent/retrieval/Nebius spans were verified by server-side readback; [recorded proof](https://github.com/sivalinb/racetime-copilot/blob/main/evals-observability/observability/examples/braintrust-nebius-check.json). [Week 5 demonstration](https://github.com/sivalinb/racetime-copilot/blob/main/docs/week5-demonstration.md) includes the measured loss curve, five correct smoke examples, baseline comparisons and live local router. Independent judge calibration and custom submission remain pending.

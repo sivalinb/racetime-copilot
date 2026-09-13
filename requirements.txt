@@ -7,3 +7,4 @@ langgraph-checkpoint-sqlite==3.1.1
 python-dotenv==1.2.3
 imageio-ffmpeg==0.6.0
 yt-dlp==2026.8.19
+braintrust==0.39.0

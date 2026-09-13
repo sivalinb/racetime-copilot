@@ -1,0 +1,91 @@
+{
+  "provenance": "Five authored synthetic fixtures and expected rubric verdicts; no real video or independent human review. The human_accept field is used only for smoke comparison, not a claim of reviewer provenance.",
+  "cases": [
+    {
+      "input": {
+        "question": "Who won between 05:00 and 08:00?",
+        "start": 300,
+        "end": 480,
+        "as_of": 480,
+        "answerability": "unanswerable",
+        "response_type": "abstain",
+        "expected_facts": [],
+        "label_reason": "This authored fixture describes a pre-race briefing with no winner announcement.",
+        "label_source": "authored_fixture",
+        "answer": "The allowed interval does not establish a winner.",
+        "case_id": "correct-abstention"
+      },
+      "human_accept": true
+    },
+    {
+      "input": {
+        "question": "Who won between 05:00 and 08:00?",
+        "start": 300,
+        "end": 480,
+        "as_of": 480,
+        "answerability": "unanswerable",
+        "response_type": "answer",
+        "expected_facts": [],
+        "label_reason": "This authored fixture describes a pre-race briefing with no winner announcement.",
+        "label_source": "authored_fixture",
+        "answer": "Maya won the race at 06:15.",
+        "case_id": "invented-winner"
+      },
+      "human_accept": false
+    },
+    {
+      "input": {
+        "question": "What happened at 06:15?",
+        "start": 300,
+        "end": 480,
+        "as_of": 480,
+        "answerability": "answerable",
+        "response_type": "abstain",
+        "expected_facts": [
+          "06:15: The speaker says runners must carry one litre of water."
+        ],
+        "label_reason": "The water requirement is explicit in the fixture.",
+        "label_source": "authored_fixture",
+        "answer": "There is not enough evidence to answer.",
+        "case_id": "unnecessary-refusal"
+      },
+      "human_accept": false
+    },
+    {
+      "input": {
+        "question": "What happened at 06:15?",
+        "start": 300,
+        "end": 480,
+        "as_of": 480,
+        "answerability": "answerable",
+        "response_type": "answer",
+        "expected_facts": [
+          "06:15: The speaker says runners must carry one litre of water."
+        ],
+        "label_reason": "The water requirement is explicit in the fixture.",
+        "label_source": "authored_fixture",
+        "answer": "At 06:15, the speaker says runners must carry one litre of water.",
+        "case_id": "supported-answer"
+      },
+      "human_accept": true
+    },
+    {
+      "input": {
+        "question": "Who won and what equipment was required?",
+        "start": 300,
+        "end": 480,
+        "as_of": 480,
+        "answerability": "partial",
+        "response_type": "partial",
+        "expected_facts": [
+          "06:15: The speaker says runners must carry one litre of water."
+        ],
+        "label_reason": "Water is specified; the winner is not.",
+        "label_source": "authored_fixture",
+        "answer": "At 06:15, one litre of water is required. This interval does not identify the winner.",
+        "case_id": "partial-answer"
+      },
+      "human_accept": true
+    }
+  ]
+}

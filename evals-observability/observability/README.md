@@ -65,3 +65,7 @@ Local evidence traces and video job/checkpoint data remain available independent
 ## Week 4 evaluation follow-through
 
 [Independent labels, judge calibration and controlled abstention experiments](https://github.com/sivalinb/racetime-copilot/blob/main/docs/week4-evaluation.md): the reviewer form and analysis tools now retain unanswerable cases, distinguish unnecessary refusals from unsupported answers, preserve review revisions and analyze paired 2×2 runs. Missing study evidence blocks readiness; complete inputs still require manual release review. Independent video labels, calibrated judge results and real interaction runs remain pending. Earlier feedback is not presented as a RaceTime experiment result.
+
+## Nebius judge and Week 5 demo
+
+[Nebius and Braintrust guide](https://github.com/sivalinb/racetime-copilot/blob/main/docs/nebius-braintrust.md): optional Nebius judge implemented and tested with five real provider calls (4/5 authored-fixture agreement; one disagreement retained). Braintrust parent/retrieval/Nebius spans were verified by server-side readback; [recorded proof](https://github.com/sivalinb/racetime-copilot/blob/main/evals-observability/observability/examples/braintrust-nebius-check.json). [Week 5 demonstration](https://github.com/sivalinb/racetime-copilot/blob/main/docs/week5-demonstration.md) includes the measured loss curve, five correct smoke examples, baseline comparisons and live local router. Independent judge calibration and custom submission remain pending.

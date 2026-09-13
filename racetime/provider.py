@@ -9,11 +9,10 @@ from typing import Literal
 
 from google import genai
 from google.genai import types
-from langsmith import get_current_run_tree
 from pydantic import BaseModel, ConfigDict, Field
 
 from .config import EMBED_MODEL, MODEL
-from .observability import metadata, observed, record
+from .observability import current_span, metadata, observed, record
 
 
 class Observation(BaseModel):
@@ -65,7 +64,7 @@ class Gemini:
 
     @observed("Gemini generation", "llm", ("purpose", "prompt"))
     def call(self, purpose, prompt, schema, parts=None):
-        trace = get_current_run_tree()
+        trace = current_span()
         metadata(
             trace, {"ls_provider": "google", "ls_model_name": MODEL, "purpose": purpose}
         )
@@ -184,7 +183,7 @@ class Gemini:
     )
     def embed(self, texts, query=False):
         metadata(
-            get_current_run_tree(),
+            current_span(),
             {"ls_provider": "google", "ls_model_name": EMBED_MODEL},
         )
         if not texts:

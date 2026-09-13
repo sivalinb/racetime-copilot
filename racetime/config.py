@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 
 ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT / ".env")
+if os.getenv("RACETIME_OBSERVABILITY", "langsmith").lower() != "langsmith":
+    os.environ["LANGSMITH_TRACING"] = "false"
 DATA = Path(os.environ.get("RACETIME_DATA_DIR", ROOT / ".runtime")).resolve()
 DATA.mkdir(parents=True, exist_ok=True, mode=0o700)
 MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
