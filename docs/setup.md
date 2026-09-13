@@ -35,7 +35,13 @@ Save a currently live public YouTube URL. Choose Capture a live stream. Enter th
 
 The worker captures continuously into 60-second segments while it analyzes completed segments. Live processing can lag behind capture. Only successfully processed windows can be queried. Offsets depend on the elapsed time entered at capture start; network/broadcast delays can affect alignment. Interrupted captures retain processed evidence and require a new capture with the current elapsed time. The app does not promise reconstruction of footage it never captured.
 
-## 5. LangSmith
+## 5. Observability
+
+For the demonstrated Braintrust setup and optional Nebius judge, follow [this guide](nebius-braintrust.md). Choose one hosted destination with `RACETIME_OBSERVABILITY`.
+
+### LangSmith alternative
+
+Set `RACETIME_OBSERVABILITY=langsmith` to use the settings below.
 
 Create a key at https://smith.langchain.com and add these values to `.env`:
 

@@ -14,7 +14,8 @@ Each tool has a product job. The capstone applies the course themes; it does not
 | Python LangGraph | Bounded model decisions and actual durable human interrupt/resume. |
 | SQLite | Persistent accounts, leased jobs, observations, vectors, checkpoints and usage budgets. |
 | FFmpeg + yt-dlp | Validate uploaded media and capture ordinary public live streams into bounded segments. |
-| LangSmith | Optional external graph traces; local traces remain available when its quota is exhausted. |
+| Braintrust / LangSmith | Selectable hosted job/model/tool traces. Braintrust is demonstrated; local traces persist independently. |
+| Nebius Token Factory | Optional Qwen judge of an answer against supplied facts; reports disagreements and remains uncalibrated. |
 | TypeScript + Zod + D1 | Original key-free evidence API with validated imports and session-scoped persistence. |
 | VTT/SRT/JSON + lexical/hashed ranking | Reproducible evidence-demo ingestion and retrieval without an API key. |
 | Byte-weighted LRU | Bound evidence-demo memory and invalidate results when source revisions change. |
@@ -28,9 +29,9 @@ Each tool has a product job. The capstone applies the course themes; it does not
 | 1: app | Streamlit workflow, accounts, persistence and background processing | Race-fan usability feedback |
 | 2: retrieval | Direct YouTube 05:00–08:00: seven observations, embeddings, retrieval and five cited sentences | Numeric targets, independent factual/timestamp labels and varied-source reliability |
 | 3: orchestration | Real model-selected summarization, pending review checkpoint; restart/error tests | Planner usefulness and user completion/time targets across reviewed cases |
-| 4: evaluation | 40 frozen synthetic cases, baseline comparison, local traces and real-review UI | Reviewed video golden cases, LangSmith case/model/tool traces and 3–4 measured improvements; 100 prompts remain untested |
-| 5: specialization | Custom BERT-tiny LoRA, 52.5% → 70%, merge and inference check | Training curve, custom-submission recording and measured business benefit; exact optional Qwen3 exercise remains separate |
+| 4: evaluation | 40 frozen synthetic cases, baseline comparison, verified Braintrust spans, Nebius 4/5 fixture agreement and real-review UI | Independent video golden cases, judge calibration and measured improvements; exact handout asks for LangSmith; 100 prompts remain untested |
+| 5: specialization | Custom BERT-tiny LoRA, 52.5% → 70%, 96-step curves, five smoke examples and recorded local inference | Attach/share the prepared recording; confirm custom submission format. Business benefit and exact Qwen3 exercise remain separate |
 
-The original evidence evaluation is **40/40**, versus **20/40** for naive overlap. The separate LoRA lab reached **70%**, versus **52.5%** for a frozen encoder with a trained head, on 144 training and 40 held-out authored examples. These synthetic results do not establish real-video quality. The trained classifier is not deployed.
+The original evidence evaluation is **40/40**, versus **20/40** for naive overlap. The separate LoRA lab reached **70%**, versus **52.5%** for a frozen encoder with a trained head, on 144 training and 40 held-out authored examples. These synthetic results do not establish real-video quality. The trained classifier runs in the separate local lab; it does not control the video agent.
 
 Siva's race experience motivates the problem. Time boundaries, traces, bounded memory and explicit failure connect it to his observability and systems background. Read [verification](../reports/verification.md) and [current status](product-status.md) before presenting validation claims.

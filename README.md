@@ -147,7 +147,9 @@ The evidence workflow passed **40/40** synthetic cases versus **20/40** for the 
 
 ## Week 1–5 coverage
 
-The working YouTube example demonstrates the app, RAG chain and agent review checkpoint. The separate evaluation pack and LoRA lab cover the other learning themes. **All five themes are mapped; full assignment completion is still partial**, especially reviewed video evaluations, verified LangSmith traces, measured improvements and submission recordings. [Learning walkthrough](docs/capstone-learning.md) · [Handout completion checklist](docs/course-completion-audit.md). Both appear in the Streamlit Week 1–5 panel.
+The working YouTube example demonstrates the app, RAG chain and agent review checkpoint. The separate evaluation pack and LoRA lab cover the other learning themes. **All five themes are mapped; full assignment completion is still partial.** The five-minute Safari recording is prepared, Braintrust hosted traces are demonstrated, and the custom LoRA lab includes its loss curve and five smoke examples. Independent video evaluations, calibrated judge results, measured improvements and the handout-specific LangSmith/submission requirements remain open. [Learning walkthrough](docs/capstone-learning.md) · [Handout completion checklist](docs/course-completion-audit.md). Both appear in the Streamlit Week 1–5 panel.
+
+**Submission package:** [Google Doc](https://docs.google.com/document/d/1ydt7QpdRq_rzFGqsOr2n1GnYuIbHeCK2TPiUQ9X-h6M/edit) · [latest demo evidence](reports/safari-demo.md) · [submission review and remaining items](reports/submission-review.md).
 
 ## Read next
 

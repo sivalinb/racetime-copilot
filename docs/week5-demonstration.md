@@ -11,7 +11,7 @@ The Week 5 handout teaches a focused LoRA router: labeled data → train an adap
 | Baseline comparison | Untrained head: 27.5%; trained head/frozen encoder: 52.5%; LoRA: 70%. Full per-class metrics, confusion matrices and held-out predictions are retained | [Results](../reports/router-evaluation.json) |
 | Demonstrate inference | Streamlit's Week 5 expander runs the merged model locally on a new question and shows the route | [Inference-only implementation](../training/predict.py), [demo panel](../demo/specialization.py) |
 | Explain substitutions and errors | The classifier replaces support-ticket categories with race intents. It still misroutes 12/40 held-out requests | This guide and the error table in Streamlit |
-| Package the custom submission | GitHub includes data, code, adapter and measured results. A local screen recording can demonstrate the workflow; the handout names Loom, so acceptance of a different video link is unconfirmed | [Training assets](../training), [adapter](../model/adapter) |
+| Package the custom submission | GitHub includes data, code, adapter and measured results. A completed [5:00 Safari recording](../reports/safari-demo.md) demonstrates the workflow; the handout names Loom, so acceptance of a different video link is unconfirmed | [Training assets](../training), [adapter](../model/adapter) |
 
 ![Measured training loss](../reports/week5-training-curve.png)
 

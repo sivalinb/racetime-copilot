@@ -178,7 +178,7 @@
 <text x="573" y="1426" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">40 synthetic evidence cases; 20 -&gt; 40 pass</text>
 <text x="573" y="1450" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">BERT-tiny + PEFT LoRA: 52.5% -&gt; 70%</text>
 <text x="573" y="1474" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Offline router; not deployed in this graph</text>
-<text x="573" y="1498" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Local traces; LangSmith quota blocked</text>
+<text x="573" y="1498" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="400" fill="#506176" text-anchor="start">Local traces; Braintrust demonstrated</text>
 <rect x="1070" y="1370" width="490" height="161" rx="10" fill="#f7e5df" stroke="#a04b3e" stroke-width="1.5"/>
 <rect x="1070" y="1382" width="4" height="137" rx="0" fill="#a04b3e" stroke="#a04b3e" stroke-width="1.5"/>
 <text x="1088" y="1400" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#1b293a" text-anchor="start">Prepared public deployment</text>

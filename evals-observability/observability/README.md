@@ -13,7 +13,7 @@ Evaluation asks whether a result meets an expectation. Observability records wha
 | Usage | Rolling 24-hour provider calls and generation input/output token counts | Video workspace sidebar after sign-in |
 | Human review | Durable checkpoint and resumed approve/reject decision | Jobs / results; persisted with SQLite/LangGraph |
 
-Evidence trace durations of zero can mean a step is not individually timed. Video graph traces currently do not contain per-node durations. Token counts are not a full billing ledger: upload/embedding charges may be additional, and provider billing is authoritative. There is no deployed Prometheus/Grafana dashboard, distributed metrics service or alerting pipeline.
+Evidence trace durations of zero can mean a step is not individually timed. The local result JSON does not contain per-node durations; hosted Braintrust spans add timing for the instrumented operations. Token counts are not a full billing ledger: upload/embedding charges may be additional, and provider billing is authoritative. There is no deployed Prometheus/Grafana dashboard, distributed metrics service or alerting pipeline.
 
 ## Included trace examples
 
@@ -33,11 +33,17 @@ Both video snapshots are saved integration records and have no cost/latency meas
 5. Approve/reject and open History & traces. This evidence-demo review is a saved decision; the video workspace has the actual durable LangGraph interruption.
 6. For an existing video result, open the exported JSON and explain `trace`, `gaps`, `limitations` and the selected evidence. Do not require a new provider call for the dependable demo.
 
+## Braintrust
+
+The recorded Safari demo uses Braintrust. It shows the real video job, nested Gemini generation/embedding spans and a duration of about 34 seconds. A separate authored-fixture trace verifies parent/retrieval/Nebius delivery by server-side readback. [Video demo evidence](../../reports/safari-demo.md) · [fixture receipt](examples/braintrust-nebius-check.json) · [configuration and judge guide](../../docs/nebius-braintrust.md). Hosted links require access to the owner’s Braintrust project.
+
+`BRAINTRUST_PROJECT_ID` takes precedence over `BRAINTRUST_PROJECT`. The supplied project ID is displayed as **My Project** in the hosted UI; `racetime-copilot` is the configured label, not a confirmed rename. A generated link alone is not delivery proof.
+
 ## LangSmith
 
-The video workflow now has explicit LangSmith instrumentation. Configure `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT=racetime-copilot` and `LANGSMITH_TRACING_SAMPLING_RATE=1.0` in the ignored `.env`, then restart the app and worker. Never put a key in this folder or a screenshot.
+LangSmith remains an alternative and the named tool in the Week 4 handout. Set `RACETIME_OBSERVABILITY=langsmith` before enabling it. Configure `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, `LANGSMITH_PROJECT=racetime-copilot` and `LANGSMITH_TRACING_SAMPLING_RATE=1.0` in the ignored `.env`, then restart the app and worker. Never put a key in this folder or a screenshot.
 
-**External check, 11 September 2026:** authentication and project creation succeeded, but a synchronous trace write returned **HTTP 429: monthly trace limit reached**. No hosted child-span or token readback is claimed. Local tests capture the actual SDK payloads from the real graph and verify nesting, four synthetic generation calls, token fields, sanitized failures and durable review. Restore account quota before repeating the hosted check; deleting old traces does not undo monthly ingestion usage.
+**Historical LangSmith check, 11 September 2026 (not rerun in this review):** authentication and project creation succeeded, but a synchronous trace write returned **HTTP 429: monthly trace limit reached**. No hosted child-span or token readback is claimed. Local tests capture the actual SDK payloads from the real graph and verify nesting, four synthetic generation calls, token fields, sanitized failures and durable review. Restore account quota before repeating the hosted check; deleting old traces does not undo monthly ingestion usage.
 
 | Span | What to inspect |
 |---|---|

@@ -27,7 +27,7 @@ The creative contribution is the combination of a specific audience, an explicit
 | Chosen interval, spoiler cutoff, evidence links and visible gaps | [Agent code](https://github.com/sivalinb/racetime-copilot/blob/main/racetime/agent.py), [product tests](https://github.com/sivalinb/racetime-copilot/blob/main/tests/product_test.py) | Implemented selection rules and tested failure paths; no guarantee that every model observation is correct. |
 | Saved work and a durable approve/reject checkpoint | [Service](https://github.com/sivalinb/racetime-copilot/blob/main/racetime/service.py), [agent](https://github.com/sivalinb/racetime-copilot/blob/main/racetime/agent.py) | A stateful workflow people can inspect and review. Review tooling does not mean a result has been approved. |
 | A working direct YouTube example | [05:00–08:00 report](https://github.com/sivalinb/racetime-copilot/blob/main/reports/youtube-interval-test.md) | Seven observations and a cited recap reached human review without an upload. One integration run is not broad video validation. |
-| Visible evaluation and observability artifacts | [Datasets, benchmarks and traces](https://github.com/sivalinb/racetime-copilot/tree/main/evals-observability) | Reproducible synthetic evidence tests and a local video trace. Independently reviewed video labels and verified external model/tool traces remain open. |
+| Visible evaluation and observability artifacts | [Datasets, benchmarks and traces](https://github.com/sivalinb/racetime-copilot/tree/main/evals-observability) | Reproducible synthetic tests, verified Braintrust spans and a Nebius judge smoke test. Independent video labels, judge calibration and measured quality improvements remain open. |
 
 ## Why this is a strong first step
 

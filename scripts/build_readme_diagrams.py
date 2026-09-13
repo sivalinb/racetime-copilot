@@ -127,7 +127,7 @@ def architecture() -> None:
     """Show the Python video workspace and distinguish its supporting labs."""
     d = Diagram(
         "RaceTime Copilot architecture overview",
-        "Video sources enter a Streamlit account-scoped job queue. A worker runs a bounded LangGraph agent that retrieves evidence, optionally inspects video with Gemini and generates a checked recap. SQLite persists jobs, observations and review checkpoints. Local traces and optional LangSmith support inspection; the TypeScript evidence demo and LoRA training lab are separate.",
+        "Video sources enter a Streamlit account-scoped job queue. A worker runs a bounded LangGraph agent that retrieves evidence, optionally inspects video with Gemini and generates a checked recap. SQLite persists jobs, observations and review checkpoints. Local traces and selectable Braintrust or LangSmith spans support inspection; the TypeScript evidence demo and LoRA training lab are separate.",
         1150,
     )
     d.text(40, 48, "RACETIME COPILOT  /  IMPLEMENTED VIDEO WORKSPACE", 18, TEAL, 700)
@@ -206,7 +206,7 @@ def architecture() -> None:
     d.text(544, 994, "Approval does not certify truth.", 20, MUTED)
     d.text(1024, 882, "Observability", 26, BLUE, 700)
     d.text(1024, 923, "Local traces and usage", 22)
-    d.text(1024, 958, "Optional LangSmith export", 22)
+    d.text(1024, 958, "Braintrust / LangSmith spans", 20)
     d.text(1024, 994, "Requires account and quota", 20, MUTED)
     d.text(40, 1073, "SEPARATE CAPSTONE COMPONENTS", 18, TEAL, 700)
     d.text(

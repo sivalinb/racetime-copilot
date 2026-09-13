@@ -36,11 +36,13 @@ BRAINTRUST_PROJECT=racetime-copilot
 BRAINTRUST_PROJECT_ID=your-project-id
 ```
 
+`BRAINTRUST_PROJECT_ID` overrides the project name. The supplied ID appears as **My Project** in Braintrust; setting `BRAINTRUST_PROJECT=racetime-copilot` does not rename it.
+
 Restart Streamlit and the worker after changing configuration. `RACETIME_OBSERVABILITY` selects one hosted destination: `braintrust`, `langsmith` or `none`. Native LangSmith tracing is disabled at startup when another destination is selected. Existing local result traces remain available.
 
 Braintrust spans explicitly record job, planner, retrieval, inspection, summary/verification, Gemini generation/embedding and Nebius evaluation. The Week 5 local classifier has its own demo span. Model usage metrics, errors, allowed inputs and outputs are recorded; API keys and raw media bytes are excluded. Telemetry failures do not turn a failed provider call into a success or stop a valid application result.
 
-A trace link can be constructed before delivery. It does not prove ingestion. Hosted parent/retrieval/Nebius spans are now verified by server-side readback. [Recorded proof](../evals-observability/observability/examples/braintrust-nebius-check.json) includes 294 input and 159 output tokens for the real judge request. [Open the verified trace](https://www.braintrust.dev/app/siva-project/object?object_type=project_logs&object_id=f1a828a0-8dd9-4519-9839-49740bc5523e&id=0eae6d55-ec00-46a5-a3e4-51e0f280363d). Dashboard screen recording remains pending native computer-use access and browser sign-in.
+A trace link can be constructed before delivery. It does not prove ingestion. Hosted parent/retrieval/Nebius spans are now verified by server-side readback. [Recorded proof](../evals-observability/observability/examples/braintrust-nebius-check.json) includes 294 input and 159 output tokens for the real judge request. [Open the verified trace](https://www.braintrust.dev/app/siva-project/object?object_type=project_logs&object_id=f1a828a0-8dd9-4519-9839-49740bc5523e&id=0eae6d55-ec00-46a5-a3e4-51e0f280363d). The completed five-minute Safari recording now demonstrates the hosted dashboard, the fresh video trace and this earlier judge fixture. [Demo evidence and local artifact details](../reports/safari-demo.md).
 
 ## Recording walkthrough
 

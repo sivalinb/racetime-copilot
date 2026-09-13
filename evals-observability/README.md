@@ -12,7 +12,8 @@ Start here to see **what we test, what the data contains, what passed, and how a
 | [Video integration record](observability/examples/video-integration-recorded.json) | Six-second red/blue clip, cited recap and review after restart | Real Gemini integration on synthetic video; not race accuracy |
 | [Direct YouTube interval test](../reports/youtube-interval-test.md) | 05:00–08:00; seven observations and cited recap awaiting review | Real public race-discussion video; integration only, no human accuracy score |
 | [Real-video evaluation process](datasets/README.md#real-video-ground-truth) | Annotation UI and aggregation implemented | No independently reviewed real-race benchmark published |
-| [External observability](observability/README.md#langsmith) | Explicit job/model/tool spans and Streamlit links; [instrumentation check](observability/langsmith-check.md) | Local SDK payload tests pass; hosted ingestion still blocked by monthly HTTP 429 |
+| [External observability](observability/README.md#braintrust) | Hosted parent/retrieval/Nebius readback and fresh Gemini video spans | Braintrust demonstrated; historical LangSmith quota failure was not retested. [Safari demo](../reports/safari-demo.md) |
+| [Nebius judge](benchmarks/nebius-judge-smoke-recorded.json) | Five real provider calls, 4/5 authored-fixture agreement | One false rejection retained; independent calibration pending |
 
 ## Run the golden benchmark
 
@@ -48,13 +49,13 @@ The original `npm run eval` remains available. It generates its cases from the o
 
 ## What the scores do not establish
 
-The 40 cases test deterministic evidence handling, not generated-summary factual accuracy. The routing lab uses one small synthetic split and one seed. Local millisecond timings exclude video processing and network calls. One direct YouTube interval passed integration; an earlier different URL and Files API processing failed. Active livestream validation is pending, and LangSmith quota was exhausted. See [current product status](../docs/product-status.md).
+The 40 cases test deterministic evidence handling, not generated-summary factual accuracy. The routing lab uses one small synthetic split and one seed. Local millisecond timings exclude video processing and network calls. One direct YouTube interval passed integration; an earlier different URL and Files API processing failed. Active livestream validation is pending. Braintrust hosted traces are demonstrated; the last saved LangSmith check failed on quota and has not been rerun. See [current product status](../docs/product-status.md).
 
 Private videos, accounts, credentials and runtime traces stay outside this folder. Only fictional data and already-public integration examples are committed.
 
 ## Course evidence
 
-See the [Week 1–5 handout audit](../docs/course-completion-audit.md) for the difference between demonstrated learning and completed assignments. Week 4 is partial: the frozen synthetic benchmark and local traces do not replace independently reviewed video cases, verified LangSmith model/tool child runs or 3–4 measured improvements. The 100 questions are candidate scenarios, not completed evals.
+See the [Week 1–5 handout audit](../docs/course-completion-audit.md) for the difference between demonstrated learning and completed assignments. Week 4 is partial: the synthetic benchmark and verified Braintrust traces do not replace independently reviewed video cases, calibrated judge results or 3–4 measured improvements. The exact handout specifically requests LangSmith evidence. The 100 questions are candidate scenarios, not completed evals.
 
 ## Week 4 evaluation follow-through
 

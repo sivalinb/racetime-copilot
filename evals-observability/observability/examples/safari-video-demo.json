@@ -1,0 +1,214 @@
+{
+  "scope": "Recorded Safari integration demo; not independently labeled video accuracy",
+  "application_commit": "57cdffdc3fc0e5c606b51b2da9b280a136f9a3b9",
+  "job_id": "6e0b33c0-4ccc-4b25-aa13-c11bad1a7625",
+  "status": "awaiting_review",
+  "source_url": "https://www.youtube.com/watch?v=S_9wb3g7jtY",
+  "result": {
+    "question": "What happened between 05:00 and 08:00? Summarize the main updates.",
+    "start": 300,
+    "end": 480,
+    "as_of": 480,
+    "coverage": [
+      [
+        300.0,
+        480.0
+      ]
+    ],
+    "gaps": [],
+    "limitations": [
+      "The video only shows a single speaker sitting at a desk with a laptop and microphone, so visual action is limited to his gestures and expressions."
+    ],
+    "selected": [
+      {
+        "start": 300.0,
+        "end": 333.0,
+        "text": "The speaker describes the Mingus Traverse 80 course, mentioning Jerome, Verde River, Dead Horse State Park, Tuzigoot National Monument, Lime Kiln Trail, Cottonwood, and Sedona.",
+        "kind": "commentary",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 333.0,
+        "provenance": "gemini_video",
+        "id": "V66a9e1a8de4b6bc1"
+      },
+      {
+        "start": 333.0,
+        "end": 353.0,
+        "text": "The speaker discusses the timing of the 250-mile race finish in Flagstaff and checks the live chat on his laptop.",
+        "kind": "commentary",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 353.0,
+        "provenance": "gemini_video",
+        "id": "V95f5f3c420183736"
+      },
+      {
+        "start": 353.0,
+        "end": 375.0,
+        "text": "The speaker invites questions from the audience and discusses the Bradshaw Brute race, noting its unique nature and registration capacity.",
+        "kind": "commentary",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 375.0,
+        "provenance": "gemini_video",
+        "id": "V1649f94b6983bad3"
+      },
+      {
+        "start": 375.0,
+        "end": 395.0,
+        "text": "The speaker details the Bradshaw Brute course and shares that 162 people registered for the Mingus Traverse within the first 26 minutes.",
+        "kind": "commentary",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 395.0,
+        "provenance": "gemini_video",
+        "id": "V4d43d5933d74903c"
+      },
+      {
+        "start": 395.0,
+        "end": 428.0,
+        "text": "The speaker explains how the Mingus Traverse serves as an excellent bridge distance and training run for longer races.",
+        "kind": "commentary",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 428.0,
+        "provenance": "gemini_video",
+        "id": "Ve65915f7da6efebc"
+      },
+      {
+        "start": 428.0,
+        "end": 451.0,
+        "text": "The speaker shares that 449 runners have registered for the Cocodona 250 and sneezes during the explanation.",
+        "kind": "commentary",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 451.0,
+        "provenance": "gemini_video",
+        "id": "Vb1f5bdddd6eaf0d6"
+      },
+      {
+        "start": 451.0,
+        "end": 476.0,
+        "text": "The speaker provides registration statistics for the Sedona Canyons 125, noting 485 registered runners and 394 on the waitlist.",
+        "kind": "commentary",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 476.0,
+        "provenance": "gemini_video",
+        "id": "V974a8d495959e4bb"
+      },
+      {
+        "start": 476.0,
+        "end": 480.0,
+        "text": "The speaker begins to introduce the final race distance as the video segment concludes.",
+        "kind": "commentary",
+        "runner": "",
+        "claimKey": "",
+        "claimValue": "",
+        "availableAt": 480.0,
+        "provenance": "gemini_video",
+        "id": "Vc23c0f674475912d"
+      }
+    ],
+    "action": "summarize",
+    "narrative": {
+      "sentences": [
+        {
+          "text": "The speaker described the Mingus Traverse 80 course, mentioning locations such as Jerome, Verde River, and Sedona, and explained how it serves as an excellent training run and bridge distance for longer races.",
+          "evidence_ids": [
+            "V66a9e1a8de4b6bc1",
+            "Ve65915f7da6efebc"
+          ]
+        },
+        {
+          "text": "He shared that 162 people registered for the Mingus Traverse within the first 26 minutes.",
+          "evidence_ids": [
+            "V4d43d5933d74903c"
+          ]
+        },
+        {
+          "text": "The speaker also discussed the timing of the 250-mile race finish in Flagstaff, checked his live chat, and invited audience questions while detailing the Bradshaw Brute race course and registration capacity.",
+          "evidence_ids": [
+            "V95f5f3c420183736",
+            "V1649f94b6983bad3",
+            "V4d43d5933d74903c"
+          ]
+        },
+        {
+          "text": "He reported that 449 runners registered for the Cocodona 250, and 485 registered for the Sedona Canyons 125, which has 394 people on its waitlist.",
+          "evidence_ids": [
+            "Vb1f5bdddd6eaf0d6",
+            "V974a8d495959e4bb"
+          ]
+        },
+        {
+          "text": "As the segment concluded, the speaker began to introduce the final race distance.",
+          "evidence_ids": [
+            "Vc23c0f674475912d"
+          ]
+        }
+      ]
+    },
+    "trace": [
+      {
+        "step": "plan",
+        "mode": "rule",
+        "action": "retrieve",
+        "reason": "Only legal action for the current evidence and budget."
+      },
+      {
+        "step": "retrieve",
+        "mode": "semantic",
+        "count": 0
+      },
+      {
+        "step": "plan",
+        "mode": "rule",
+        "action": "inspect",
+        "reason": "Only legal action for the current evidence and budget."
+      },
+      {
+        "step": "inspect",
+        "start": 300,
+        "end": 480
+      },
+      {
+        "step": "retrieve",
+        "mode": "semantic",
+        "count": 8
+      },
+      {
+        "step": "plan",
+        "mode": "llm",
+        "action": "summarize",
+        "reason": "The evidence covers the entire requested timeframe of 05:00 to 08:00 (300 to 480 seconds), allowing for a complete summary of the speaker's updates on the Mingus Traverse 80, Bradshaw Brute, Cocodona 250, and Sedona Canyons 125 races."
+      },
+      {
+        "step": "summarize",
+        "mode": "generated_verified"
+      }
+    ],
+    "observability": {
+      "run_id": "420bedb2-00f2-409a-b468-f384988375b5",
+      "provider": "braintrust",
+      "project": "racetime-copilot",
+      "status": "submitted; ingestion is not confirmed by the app",
+      "root_run_id": "420bedb2-00f2-409a-b468-f384988375b5",
+      "url": "https://www.braintrust.dev/app/siva-project/object?object_type=project_logs&object_id=f1a828a0-8dd9-4519-9839-49740bc5523e&id=420bedb2-00f2-409a-b468-f384988375b5"
+    }
+  },
+  "hosted_ui_observation": {
+    "method": "Inspected during the actual Safari screen recording",
+    "duration_seconds_displayed": 34.04,
+    "tokens_displayed": 25719,
+    "note": "Hosted aggregate token display is not a reconciled provider invoice; the local generation counter has a different scope.",
+    "project_display_name": "My Project"
+  }
+}

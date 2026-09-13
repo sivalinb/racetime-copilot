@@ -16,7 +16,7 @@ This is the first tab in Streamlit's **Technical architecture** panel. The origi
 
 ## Engineering plates
 
-These diagrams describe the implementation and validation status on **10 September 2026**. Blue marks application rules, amber model operations, green human review and results, and red blocked or unverified paths. Dashed connectors indicate conditional paths; labelled dashed boxes group components.
+These diagrams describe the implementation and validation status reviewed on **12 September 2026**. Blue marks application rules, amber model operations, green human review and results, and red blocked or unverified paths. Dashed connectors indicate conditional paths; labelled dashed boxes group components.
 
 ### I. System architecture
 
@@ -64,7 +64,7 @@ SQLite is intended for this single-host local product. The prepared public conta
 
 The original TypeScript workflow uses Zod contracts, VTT/SRT/JSON imports, lexical ranking and deterministic hashed vectors. Its D1 store and byte-weighted LRU remain separate from the video workspace. The cache holds 500 KB of serialized results for five minutes and includes source revision in its key. Manual live append invalidates old revisions. Its review records are ordinary saved decisions, unlike the video workspace's graph checkpoint.
 
-The BERT-tiny LoRA lab is a separate experiment, not the production planner. Local traces work without LangSmith; external traces need an account with available quota. See [status](product-status.md) for measured validation and blockers.
+The BERT-tiny LoRA lab is a separate experiment, not the production planner. The local classifier runs in its own Streamlit lab. Braintrust and LangSmith are selectable hosted trace destinations; the recorded demo uses Braintrust. Nebius is a separate optional evaluation judge, outside the production video graph. Local traces remain available independently. See [status](product-status.md) for measured validation and blockers.
 
 ## Recorded YouTube integration
 

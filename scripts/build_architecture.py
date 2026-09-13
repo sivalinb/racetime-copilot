@@ -425,7 +425,7 @@ p.card(
         "40 synthetic evidence cases; 20 -> 40 pass",
         "BERT-tiny + PEFT LoRA: 52.5% -> 70%",
         "Offline router; not deployed in this graph",
-        "Local traces; LangSmith quota blocked",
+        "Local traces; Braintrust demonstrated",
     ],
     size=16,
 )

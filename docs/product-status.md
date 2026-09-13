@@ -1,20 +1,22 @@
 # Product completion status
 
-The local implementation is ready for continued testing. **It is not yet a validated race-video product.** Checked on 10 September 2026.
+The local implementation is ready for continued testing. **It is not yet a validated race-video product.** Reviewed against the implementation and recorded demo on 12 September 2026. [Submission review](../reports/submission-review.md).
 
 | Capability | Working implementation | Verification / remaining work |
 |---|---|---|
 | Small uploaded MP4 | Inline Gemini video extraction, learned retrieval and cited recap | Real six-second red/blue clip passed; two correctly timestamped observations, generated recap and review after restart |
-| Recorded YouTube | Bounded direct URL analysis | `S_9wb3g7jtY` 05:00–08:00 passed: seven observations and cited recap awaiting review; no upload. One source/interval only; [test report](../reports/youtube-interval-test.md) |
+| Recorded YouTube | Bounded direct URL analysis | `S_9wb3g7jtY` 05:00–08:00 passed: seven observations and cited recap awaiting review; no upload. The later Safari demo returned eight observations on the same interval. These are separate runs on one source/window; [original test](../reports/youtube-interval-test.md), [demo rerun](../reports/safari-demo.md) |
 | Large upload | Files API processing path | Earlier processing returned HTTP 500; larger-upload end-to-end success remains unverified |
-| Agent decisions | Bounded Gemini retrieve/inspect/summarize/clarify graph, fallback and call budgets | Real small-video graph passed; 21 local product tests pass with provider fixtures |
+| Agent decisions | Bounded Gemini retrieve/inspect/summarize/clarify graph, fallback and call budgets | Real small-video graph passed; 38 Python tests pass across product, observability, evaluation, judge and Streamlit integration checks; provider responses are fixtures in these tests |
 | Summary grounding | Evidence IDs, separate model check, explicit extractive fallback | Integration passed; independent race factual review still needed |
 | Semantic retrieval | Learned Gemini Embedding 2 vectors and strict time filters | Real generation and 768-dimensional embedding checks passed |
 | Durable review | LangGraph interrupt and SQLite checkpoints | Automated and real-provider recap review resumed after restart |
 | Background jobs / accounts | Persistent local login, account isolation, leases, cancellation and recovery | Local contract and Streamlit tests pass |
 | Live capture | Continuous public YouTube segments, explicit coverage and last-15-minute query | Active race-stream test deferred at the user's request; clock alignment remains unmeasured |
 | Real evaluation | Human annotation screen and aggregation command | No independently reviewed race dataset yet; no real-race quality score claimed |
-| Tracing | Local traces plus LangSmith job, graph, retrieval, inspection, generation and embedding spans; Streamlit trace links | Nested SDK payloads/token fields tested locally. Project creation succeeded; 11 September hosted write still returned HTTP 429 (monthly limit). Hosted readback pending |
+| Tracing | Local traces and selectable Braintrust/LangSmith spans | Braintrust parent/retrieval/Nebius delivery was verified by server-side readback; the fresh Safari video trace was also inspected in the hosted UI. The last saved LangSmith check returned HTTP 429; it was not retested in this review. [Evidence](../reports/safari-demo.md) |
+| Nebius judge | Separate Qwen judge against supplied reference facts | Five real authored-fixture calls: 4/5 agreement, one disagreement retained. Independent human calibration remains pending |
+| Week 5 lab | Separate local LoRA intent classifier and Streamlit demo | 96-step loss curves, five correct merge smoke examples, 27.5% / 52.5% / 70% comparison; no production video-quality benefit claimed |
 | Public hosting | Docker/Caddy/OIDC configuration and backup script | Deferred: local product first. Container build and hosted authentication are unverified |
 
 The default generation model is `gemini-3.5-flash`. Small MP4s up to 12 MB use inline input; larger files use the provider Files API. An API key alone does not guarantee access to every model or video source. There is no automatic bypass of unavailable/restricted video.
@@ -26,7 +28,7 @@ The original evidence demo remains the dependable key-free presentation path: **
 1. Analyze short race MP4s and independently review at least 10 varied intervals in Evaluation.
 2. Expand the successful YouTube interval check to varied sources; recheck the earlier failed URL and Files API.
 3. Test a currently live public race stream when one is available.
-4. Restore LangSmith quota, restart with tracing enabled and confirm an external run.
+4. Build the reviewed video evaluation and calibrate the judge. Braintrust already demonstrates hosted delivery; obtain LangSmith-specific evidence if following that exact handout requirement.
 
 See [setup](setup.md) for exact account and launch steps, and [verification](../reports/verification.md) for test scope.
 

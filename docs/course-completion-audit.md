@@ -8,11 +8,11 @@ This is a project self-audit, not an instructor grade or confirmation of submiss
 
 | Week | Learning demonstrated | Completion status |
 |---|---|---|
-| 1 — AI-assisted app development | Streamlit app, a real user problem, iterative UX changes and published code | Core learning demonstrated through the custom-app path; development screenshots, Google Doc and ≤5-minute recording not verified |
+| 1 — AI-assisted app development | Streamlit app, a real user problem, iterative UX changes and published code | Core learning demonstrated through the custom-app path; Google Doc and 5:00 Safari demo prepared; development screenshots, coding-process explanation and final hand-in remain |
 | 2 — RAG | Video ingestion → observations → embeddings → SQLite → retrieval → cited recap | Core chain demonstrated on one YouTube interval; retrieval/answer quality, numeric targets and a broader evaluated question set remain open |
 | 3 — Agentic systems | Rules plus model decisions, tools, state, error recovery and durable review | Core workflow demonstrated; actual usefulness/time saved and submission materials remain unverified |
-| 4 — Evaluation | Frozen synthetic cases, baseline comparison, local traces and human-review tooling | Partial: the real video agent needs reviewed labels, verified LangSmith case/model/tool traces and measured improvements |
-| 5 — Fine-tuning | Separate LoRA training, held-out metrics, merge and inference checks | Core concepts demonstrated through a custom BERT-tiny experiment; exact Qwen3/LLaMA Factory exercise, cost/speed comparison and custom-submission recording not demonstrated |
+| 4 — Evaluation | Frozen synthetic cases, baseline comparison, Braintrust hosted traces, Nebius judge and human-review tooling | Partial: the real video agent needs reviewed labels, verified LangSmith case/model/tool traces and measured improvements |
+| 5 — Fine-tuning | Separate LoRA training, held-out metrics, merge and inference checks | Custom BERT-tiny experiment, loss curves, five smoke examples and recorded local inference demonstrated; exact Qwen3 exercise, business benefit and submission acceptance remain separate |
 
 **Status vocabulary:** Demonstrated = code plus a recorded run or relevant test. Partial = some evidence exists but a material requirement remains. Pending = no completed evidence identified. Adapted = the concept is implemented through a different method. Track-specific = belongs to an alternative example, not a universal requirement.
 
@@ -48,8 +48,9 @@ Source: **Week 1 Project Handout.pdf**, pp. 1–4. The handout explicitly permit
   - **Scope:** CSV charts are part of the sample workflow; Path B allows this different application. The architecture illustrations explain the design but are not measured analytics charts.
 - **W1.4 — Publish the code and explain how to run it: Demonstrated.**
   - **Proof:** public repository, [README](https://github.com/sivalinb/racetime-copilot/blob/main/README.md), [setup](https://github.com/sivalinb/racetime-copilot/blob/main/docs/setup.md), tests and CI.
-- **W1.5 — Google Doc, development screenshots and ≤5-minute demo: Pending verification.**
-  - **Remaining:** a Google Doc covering overview, data, actual coding prompts, iterations and lessons; screenshots of the process; a recording of the working app. No matching Google Doc link or finished demo recording has been supplied for this audit.
+- **W1.5 — Google Doc, development screenshots and ≤5-minute demo: Partial.**
+  - **Present:** [product Google Doc](https://docs.google.com/document/d/1ydt7QpdRq_rzFGqsOr2n1GnYuIbHeCK2TPiUQ9X-h6M/edit) and a prepared [5:00 Safari demo](../reports/safari-demo.md) of the working product.
+  - **Remaining:** attach/share the recording, add actual coding prompts, iterations, lessons and development screenshots, and complete the hand-in. The product recording does not show the AI-assisted development conversation.
 
 ## Week 2 — Retrieval-augmented generation
 
@@ -101,7 +102,7 @@ Source: **Week 3 Project Handout (Aug 2026).pdf**, pp. 1–2 and 6–9. A custom
   - **Proof:** the YouTube run reached `awaiting_review`; restart/resume is demonstrated by tests and the [separate synthetic-video integration](https://github.com/sivalinb/racetime-copilot/blob/main/reports/provider-integration.json). The YouTube result has not itself been human-approved.
 - **W3.7 — Documentation, code and ≤5-minute demonstration: Partial.**
   - **Proof:** public implementation and illustrated architecture are present.
-  - **Remaining:** documented success targets, Google Doc with coding iterations and actual working-demo recording. Instructor submission/acceptance is not verified. Multi-agent orchestration, voice and particular SaaS APIs are optional/track-specific here.
+  - **Remaining:** documented success targets, coding iterations/screenshots in the existing Google Doc, and final sharing/submission of the prepared working-demo recording. Instructor submission/acceptance is not verified. Multi-agent orchestration, voice and particular SaaS APIs are optional/track-specific here.
 
 ## Week 4 — Measure and improve the agent
 
@@ -114,13 +115,13 @@ Source: **Week 4 Project Handout (Aug 2026).pdf**, pp. 1–9. This audit follows
   - **Present:** [40 frozen synthetic evidence cases](https://github.com/sivalinb/racetime-copilot/blob/main/evals-observability/datasets/evidence-golden-v1.json), checksums and versioning. These test the separate evidence workflow.
   - **Remaining:** reviewed source facts or expected behavior for 30–50 video-agent cases spanning happy paths, edges, known failures and adversarial inputs. Prefer a 40-case pilot with 20/12/6/2 cases across those groups. This is a proposed dataset, not an executed benchmark. Model-generated notes and the 100 authored questions are not reviewed labels.
 - **W4.3 — Instrument case, model and tool traces: Partial.**
-  - **Present:** local agent steps, job IDs, coverage, limitations, usage records and LangSmith configuration.
-  - **Remaining:** verify actual LangSmith ingestion and one parent trace per evaluation case with model/tool child runs, versions, expected/predicted output, correctness, latency, errors and token metadata. Direct Gemini SDK calls do not yet demonstrate those child spans. The last external check hit quota HTTP 429; the successful YouTube run disabled external tracing.
+  - **Present:** local steps, job IDs, coverage, limitations and usage; [verified Braintrust fixture spans](../evals-observability/observability/examples/braintrust-nebius-check.json) and a [fresh video job inspected in Braintrust](../reports/safari-demo.md), including Gemini generation/embedding child spans.
+  - **Remaining:** the exact handout requests LangSmith case/model/tool traces and evaluation metadata. Its last saved check returned HTTP 429 and was not rerun here. Braintrust is a demonstrated alternative, not proof that the LangSmith-specific requirement is satisfied. A reviewed, traced video evaluation suite remains open.
 - **W4.4 — Execute a baseline with linked per-case results: Partial.**
   - **Present:** [40/40 versus 20/40](https://github.com/sivalinb/racetime-copilot/blob/main/evals-observability/benchmarks/evidence-latest.json) on fixed synthetic evidence IDs, plus local retry/cache traces.
   - **Remaining:** a baseline evaluation of the actual video agent on the reviewed video dataset, with per-case scores and trace links. The successful URL request alone is not that baseline.
 - **W4.5 — Judge quality and calibrate subjective scoring: Partial.**
-  - **Present:** code validation, a model grounding check and human annotation UI.
+  - **Present:** code validation, a model grounding check, human annotation UI and a separate Nebius judge. Five real authored-fixture requests agreed on 4/5 verdicts; the partial-answer disagreement is retained.
   - **Remaining:** human source review and reliability checks for subjective scores. If an LLM judge is used for evaluation, compare it against human labels; the current grounding check is not a calibrated independent judge.
 - **W4.6 — Cluster failures and quantify impact: Pending for the video evaluation.**
   - **Present:** source/provider errors and limitations are documented.
@@ -145,20 +146,20 @@ Source: **Week 5 Project Handout (Aug 2026).pdf**, pp. 1–4. The example uses Q
 - **W5.3 — Inspect training behavior: Demonstrated for the custom lab.**
   - **Proof:** all 96 per-step losses for both trained arms are saved in [the current report](../reports/router-evaluation.json), with an [actual loss curve](../reports/week5-training-curve.png) and a Streamlit demonstration panel. This is local custom training, not a LLaMA Board screenshot.
 - **W5.4 — Merge and smoke-test inference: Demonstrated.**
-  - **Proof:** [router-smoke.json](https://github.com/sivalinb/racetime-copilot/blob/main/reports/router-smoke.json) records four sample predictions and merge error `9.54e-7`, within `1e-5`. The custom lab now records five obvious race-intent examples, all correct, in the current report.
+  - **Proof:** [router-smoke.json](https://github.com/sivalinb/racetime-copilot/blob/main/reports/router-smoke.json) records five sample predictions, all correct, and merge error `9.54e-7`, within `1e-5`. These are smoke examples, separate from the 40 held-out cases.
 - **W5.5 — Compare baseline and adapted model: Demonstrated for classification; business benefit pending.**
   - **Proof:** held-out accuracy **52.5% → 70%**, macro F1 **0.522 → 0.709**, class metrics, confusion matrices and predictions in the [recorded report](https://github.com/sivalinb/racetime-copilot/blob/main/evals-observability/benchmarks/router-recorded.json).
   - **Scope:** both arms train a classifier head; only one trains adapters. This differs from the handout's untrained generative baseline. The adapter remains outside the live video graph; Streamlit now demonstrates inference separately. An additional seeded untrained-head arm scores 27.5%; it is not a generative zero-shot baseline. Reduced app latency, cost or improved video answers have not been established.
 - **W5.6 — Package and explain the custom result: Partial.**
   - **Present:** training/inference code, reproducibility instructions, data, adapter and reports are in GitHub.
-  - **Remaining:** the required custom-project recording/submission. [The demonstration guide](week5-demonstration.md) now explains substitutions and shows retained errors. A local screen recording may be used as an artifact, but the handout specifically names Loom. The exact notebook exercise remains separate. Week 5 is optional for the certificate; only the instructor can determine acceptance of the custom submission.
+  - **Remaining:** sharing and submitting the prepared custom-project recording. [The demonstration guide](week5-demonstration.md) explains substitutions and retained errors; [the Safari recording](../reports/safari-demo.md) demonstrates the loss curve and local inference. The handout specifically names Loom, so acceptance of the MP4 format is unconfirmed. The exact notebook exercise remains separate. Week 5 is optional for the certificate; only the instructor can determine acceptance of the custom submission.
 
 ## Practical completion order
 
-1. **Package the demonstrated work:** collect actual coding prompts/screenshots and record a ≤5-minute app walkthrough that shows the URL, 05:00–08:00 result, citations, trace and pending review. Add the Google Doc and recording links when available.
+1. **Package the demonstrated work:** add actual coding prompts/screenshots and lessons to the existing Google Doc. The five-minute Safari walkthrough already shows the URL, 05:00–08:00 result, citations, trace and pending review; attach or share that MP4 for the instructor.
 2. **Turn prompts into evaluations:** select varied questions, watch their source intervals and write expected facts independently. Start with a small pilot, then freeze the planned 40-case video dataset. The 100-question catalog is the starting pool, not the scorecard.
-3. **Complete Week 4:** define pass bars, restore and verify LangSmith traces including model/tool child spans, run a baseline, cluster failures and measure 3–4 targeted improvements on the same dataset.
-4. **Finish the Week 5 explanation:** include the training curve, a fifth clear smoke example if matching that check, and the custom-lab recording. Treat live-router deployment and cost/speed benefits as additional work until measured.
+3. **Complete Week 4:** define pass bars, independently label source intervals, calibrate the judge, run a baseline, cluster failures and measure 3–4 targeted improvements on the same dataset. Provide LangSmith evidence for the exact handout; Braintrust already demonstrates hosted tracing.
+4. **Finish the Week 5 explanation:** submit the existing loss curve, five correct smoke examples and custom-lab recording; confirm the permitted video format. Treat live-router deployment and cost/speed benefits as additional work until measured.
 
 Live-stream validation and large-upload reliability remain product gaps. They should be disclosed in the capstone, but they do not require abandoning the demonstrated recorded-video scope.
 

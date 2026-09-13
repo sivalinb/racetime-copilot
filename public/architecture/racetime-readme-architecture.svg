@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1150" viewBox="0 0 1440 1150" role="img" aria-labelledby="title desc">
-<title id="title">RaceTime Copilot architecture overview</title><desc id="desc">Video sources enter a Streamlit account-scoped job queue. A worker runs a bounded LangGraph agent that retrieves evidence, optionally inspects video with Gemini and generates a checked recap. SQLite persists jobs, observations and review checkpoints. Local traces and optional LangSmith support inspection; the TypeScript evidence demo and LoRA training lab are separate.</desc>
+<title id="title">RaceTime Copilot architecture overview</title><desc id="desc">Video sources enter a Streamlit account-scoped job queue. A worker runs a bounded LangGraph agent that retrieves evidence, optionally inspects video with Gemini and generates a checked recap. SQLite persists jobs, observations and review checkpoints. Local traces and selectable Braintrust or LangSmith spans support inspection; the TypeScript evidence demo and LoRA training lab are separate.</desc>
 <rect width="1440" height="1150" rx="24" fill="#f5f3eb"/>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10Z" fill="#6a8790"/></marker></defs>
 <text x="40" y="48" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#187b70">RACETIME COPILOT  /  IMPLEMENTED VIDEO WORKSPACE</text>
@@ -74,7 +74,7 @@
 <text x="544" y="994" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">Approval does not certify truth.</text>
 <text x="1024" y="882" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="700" fill="#396f9a">Observability</text>
 <text x="1024" y="923" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#203646">Local traces and usage</text>
-<text x="1024" y="958" font-family="DejaVu Sans, sans-serif" font-size="22" font-weight="400" fill="#203646">Optional LangSmith export</text>
+<text x="1024" y="958" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#203646">Braintrust / LangSmith spans</text>
 <text x="1024" y="994" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#526976">Requires account and quota</text>
 <text x="40" y="1073" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="700" fill="#187b70">SEPARATE CAPSTONE COMPONENTS</text>
 <text x="40" y="1111" font-family="DejaVu Sans, sans-serif" font-size="21" font-weight="400" fill="#526976">TypeScript evidence demo + D1/LRU   •   Evaluation pack   •   LoRA routing lab (not used by this agent)</text>

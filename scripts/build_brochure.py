@@ -79,7 +79,7 @@ def end():
     c.setStrokeColor(HexColor(LINE))
     c.line(42, 43, 750, 43)
     text(
-        "LOCAL CAPSTONE / Video + evidence workspaces / 10 SEP 2026",
+        "LOCAL CAPSTONE / Video + evidence workspaces / 12 SEP 2026",
         42,
         577,
         510,
@@ -240,8 +240,8 @@ rows(
         ),
         (
             "Week 4 / Evaluation",
-            "Unit tests, AppTest, traces and human labels.",
-            "Test restart and time rules. Real-race labels and external trace quota are still required.",
+            "Tests, Braintrust spans and a Nebius judge.",
+            "Hosted traces work. Independent video labels and judge calibration remain open.",
         ),
         (
             "Week 5 / LoRA",
@@ -269,7 +269,7 @@ start(
 )
 for i, (value, label) in enumerate(
     [
-        ("38 / 38", "17 evidence + 21 product tests"),
+        ("38 passed", "Python product + evaluation tests"),
         (f"{E['passed']} / {E['count']}", "Evidence cases"),
         ("Passed", "Streamlit + API flows"),
     ]
@@ -293,7 +293,7 @@ rows(
         (
             "Separate LoRA lab",
             "52.5% baseline -> 70% held-out accuracy.",
-            "144 training / 40 held-out examples. The app keeps the rule router; the trained adapter is not deployed.",
+            "144 training / 40 held-out examples. Separate local classifier; the video agent uses a bounded model planner.",
         ),
     ],
     285,
@@ -354,7 +354,7 @@ rows(
         (
             "Next",
             "Validate real race clips and an active stream.",
-            "Review timestamps and claims independently. Resolve provider access and external trace quota.",
+            "Review claims independently, calibrate the judge and measure quality on varied sources.",
         ),
         (
             "Then",

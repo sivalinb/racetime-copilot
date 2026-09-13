@@ -10,11 +10,11 @@ All five learning themes are represented. Remaining validation and submission it
 
 | Week | Concrete evidence | What is still needed |
 |---|---|---|
-| 1 — App | Streamlit URL/time/question flow, iterative UI and public code | Actual coding screenshots, Google Doc and ≤5-minute recording |
+| 1 — App | Streamlit URL/time/question flow, public code, product Google Doc and prepared 5:00 Safari demo | Attach/share the recording; add actual coding prompts, iterations, lessons and development screenshots |
 | 2 — RAG | 05:00–08:00 produced seven stored/retrieved observations and five cited sentences | Numeric quality/latency targets and independently evaluated video questions |
-| 3 — Agent | Real model chose `summarize`; graph paused for review; restart/error tests pass | User-outcome measurement and submission recording; YouTube review itself still pending |
-| 4 — Evals | 40 synthetic golden cases, 20/40 → 40/40 baseline comparison, local traces and annotation UI | Reviewed video-agent dataset, verified LangSmith child traces, failure analysis and 3–4 measured improvements |
-| 5 — LoRA | Separate router: 52.5% → 70%, held-out metrics, saved adapter and merge check | Explain custom BERT substitution; training curve and recording; no live-router cost/speed benefit established |
+| 3 — Agent | Model-selected summarization, review checkpoint and restart/error tests; fresh Safari demonstration | User-outcome measurement and final submission; the YouTube recap still awaits human review |
+| 4 — Evals | 40 synthetic golden cases, 20/40 → 40/40 comparison, Braintrust hosted traces, Nebius 4/5 fixture agreement and annotation UI | Independent video labels, judge calibration, failure analysis and 3–4 measured improvements; exact handout asks for LangSmith evidence |
+| 5 — LoRA | Separate router: 27.5% untrained head, 52.5% frozen encoder, 70% LoRA; 96-step curves, five smoke examples and live local inference | Submit the custom assets and recording; confirm non-Loom format acceptance. No production cost/speed benefit established |
 
 **All five themes are mapped; full assignment completion is not yet established.** This mapping uses your original project handouts, not a newer public course syllabus. Open the **Handout completion checklist** tab in this panel, or [read the requirement-by-requirement audit](https://github.com/sivalinb/racetime-copilot/blob/main/docs/course-completion-audit.md).
 
@@ -35,7 +35,7 @@ All five learning themes are represented. Remaining validation and submission it
 - **Iterate using structured prompts and feedback.**
   - **How it covers the learning:** your requests for simpler instructions, example questions and a collapsed learning map led to concrete interface changes.
   - **Follow through:** show one request from your development conversation and the resulting screen. Explain what was unclear before and how the change helps a user.
-  - **Submission evidence:** include actual prompts, iterations and screenshots in the development record, plus a short working-demo recording. Those submission materials are still to be completed.
+  - **Submission evidence:** include actual prompts, iterations and screenshots in the development record, plus a short working-demo recording. The product Google Doc and five-minute Safari demo are prepared. Actual development screenshots and the coding-process explanation still need to be attached; see [submission review](../reports/submission-review.md).
 
 - **Apply the course's custom-app path.**
   - **Why it fits:** Week 1 allows your own application and framework. RaceTime applies AI-assisted prototyping through Streamlit rather than reproducing the sample stock-portfolio CSV project.
@@ -114,12 +114,12 @@ All five learning themes are represented. Remaining validation and submission it
 - **Measure quality together with operating behavior.**
   - **How it works:** the synthetic report includes p50/p95 execution time and traces. Video jobs record provider calls and generation-token usage. Zero provider calls in the evidence benchmark describe that local extractive workflow only.
   - **Follow through:** inspect `p50Ms`/`p95Ms` in Evidence evaluation. In Video workspace, read the sidebar usage summary and a job's trace.
-  - **Limit:** local synthetic timings are not a production latency promise, and generation-token counts do not include all provider charges. External LangSmith trace verification is blocked by monthly quota.
+  - **Limit:** local synthetic timings are not a production latency promise, and generation-token counts do not include all provider charges. Braintrust hosted traces are demonstrated in [the Safari demo](../reports/safari-demo.md). The historical LangSmith quota failure is not evidence of current account quota; a new LangSmith readback has not been recorded.
 
 - **Collect human judgments for real footage.**
   - **How it works:** Evaluation records expected facts, supported-sentence percentage, missed events, spoiler leaks and largest timestamp error.
   - **Follow through:** independently watch the chosen interval, select its recap in Video workspace → Evaluation, enter your judgments and save them. Do not tick the reviewed checkbox without watching.
-  - **Next evidence:** aggregate saved reviews with the documented evaluation command. Reviewed race cases and verified LangSmith case/model/tool traces remain necessary before claiming full video-agent evaluation coverage. The 100 scenario prompts have `execution_status: not_run` and `ground_truth: null`; they are not 100 evaluated examples.
+  - **Next evidence:** aggregate saved reviews with the documented evaluation command. Reviewed race cases and calibrated judge results remain necessary for video-quality claims. Braintrust demonstrates the tracing concept; the exact Week 4 handout separately requests LangSmith case/model/tool evidence. The 100 scenario prompts have `execution_status: not_run` and `ground_truth: null`; they are not 100 evaluated examples.
 
 ## Week 5 — Train and evaluate a focused model with LoRA
 
@@ -140,12 +140,12 @@ All five learning themes are represented. Remaining validation and submission it
 
 - **Merge the adapter and smoke-test inference.**
   - **How it works:** `merge_and_unload()` folds the learned adapter into the base weights. The script compares model outputs before and after merging, then runs sample classifications.
-  - **Follow through:** open [router-smoke.json](https://github.com/sivalinb/racetime-copilot/blob/main/reports/router-smoke.json). Check the merge difference against the tolerance and inspect the four sample predictions.
+  - **Follow through:** open [router-smoke.json](https://github.com/sivalinb/racetime-copilot/blob/main/reports/router-smoke.json). Check the merge difference against the tolerance and inspect the five correct sample predictions.
   - **Evidence:** maximum output-logit difference was about `9.54e-7`, within the `1e-5` tolerance. [training/infer.py](https://github.com/sivalinb/racetime-copilot/blob/main/training/infer.py) implements this check.
 
 - **Explain the scope of the specialization honestly.**
   - **How it covers the learning:** labelled data → LoRA training → held-out evaluation → merge → inference are demonstrated in the race domain.
-  - **What it does not do:** this BERT encoder classifier is separate from the running app. It does not watch footage or generate recaps, and its predictions do not currently control the video agent.
+  - **What it does not do:** this BERT encoder classifier is exposed in a separate Streamlit lab and is not the production video planner. It does not watch footage or generate recaps, and its predictions do not currently control the video agent.
   - **Course distinction:** this is an adapted experiment, not the exact Qwen3/LLaMA Factory support-ticket exercise. Custom exploration is allowed by the handout; real-user quality, speed and cost benefits remain unproven.
 
 ## Your presentation in one sentence
